@@ -1,0 +1,27 @@
+Coloca aquí fotos .jpg con estos nombres (Unsplash/Pexels, licencia libre). Mientras falten, el sitio muestra un fondo lavanda.
+
+hero-1.jpg
+hero-2.jpg
+hero-3.jpg
+hero-4.jpg
+clinica-1.jpg
+clinica-2.jpg
+clinica-3.jpg
+clinica-4.jpg
+doctora-1.jpg
+antes.jpg
+despues.jpg
+equipo-1.jpg
+equipo-2.jpg
+equipo-3.jpg
+equipo-4.jpg
+equipo-5.jpg
+equipo-6.jpg
+servicio-implantes.jpg
+servicio-ortodoncia.jpg
+servicio-pediatrica.jpg
+servicio-endodoncia.jpg
+servicio-blanqueamiento.jpg
+servicio-diseno.jpg
+servicio-periodoncia.jpg
+servicio-general.jpg
