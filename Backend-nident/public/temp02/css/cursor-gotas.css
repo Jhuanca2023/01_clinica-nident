@@ -1,0 +1,97 @@
+/* Cursor "onda" (solo home). Las clases las pone cursor-gotas.js únicamente
+   en equipos con mouse y sin "reducir movimiento". */
+
+:root {
+    --cursor-onda-color: #C4A35A;   /* dorado Valento */
+    --cursor-onda-ring: rgba(231, 182, 105, 0.9);   /* #e7b669 */
+}
+
+/* Se oculta el cursor del sistema; en campos de texto se mantiene el de escritura */
+html.cursor-onda,
+html.cursor-onda body,
+html.cursor-onda body * {
+    cursor: none !important;
+}
+html.cursor-onda body input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html.cursor-onda body textarea,
+html.cursor-onda body [contenteditable="true"] {
+    cursor: text !important;
+}
+
+.cursor-onda__dot,
+.cursor-onda__ring,
+.cursor-onda__wave {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2147483000;
+    border-radius: 50%;
+}
+
+/* Punto: sigue al mouse exactamente */
+.cursor-onda__dot {
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+    background: var(--cursor-onda-color);
+    box-shadow: 0 0 6px rgba(196, 163, 90, 0.6);
+    opacity: 0;
+    transition: opacity .2s ease, width .2s ease, height .2s ease, margin .2s ease;
+}
+
+/* Aro: persigue al punto con retraso */
+.cursor-onda__ring {
+    width: 36px;
+    height: 36px;
+    margin: -18px 0 0 -18px;
+    border: 1.5px solid var(--cursor-onda-ring);
+    opacity: 0;
+    transition: opacity .2s ease, width .25s ease, height .25s ease, margin .25s ease,
+                background-color .25s ease, border-color .25s ease;
+}
+
+html.cursor-onda--visible .cursor-onda__dot,
+html.cursor-onda--visible .cursor-onda__ring {
+    opacity: 1;
+}
+
+/* Sobre enlaces y botones: el aro se agranda y se rellena apenas */
+html.cursor-onda--hover .cursor-onda__ring {
+    width: 56px;
+    height: 56px;
+    margin: -28px 0 0 -28px;
+    background-color: rgba(231, 182, 105, 0.14);
+}
+html.cursor-onda--hover .cursor-onda__dot {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+}
+
+/* Al presionar: el aro se contrae */
+html.cursor-onda--down .cursor-onda__ring {
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px;
+}
+
+/* En campos de texto solo queda el cursor de escritura */
+html.cursor-onda--text .cursor-onda__dot,
+html.cursor-onda--text .cursor-onda__ring {
+    opacity: 0;
+}
+
+/* Onda del clic */
+.cursor-onda__wave {
+    width: 36px;
+    height: 36px;
+    margin: -18px 0 0 -18px;
+    border: 2px solid var(--cursor-onda-ring);
+    animation: cursor-onda-wave .6s ease-out forwards;
+}
+
+@keyframes cursor-onda-wave {
+    from { transform: scale(0.4); opacity: 1; }
+    to   { transform: scale(2.6); opacity: 0; }
+}

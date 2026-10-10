@@ -1,0 +1,18 @@
+/* Guía de imágenes (herramienta interna para recortar y subir fotos) */
+body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #fff8f5; color: #2b1a1d; }
+.g-head { background: #a3131f; color: #fff; padding: 28px 24px; }
+.g-head h1 { margin: 0 0 8px; font-size: 26px; }
+.g-head p { margin: 4px 0; max-width: 900px; line-height: 1.5; }
+main { max-width: 1200px; margin: 0 auto; padding: 20px 24px 60px; }
+h2 { margin: 36px 0 12px; padding-bottom: 6px; border-bottom: 3px solid #d62839; color: #a3131f; }
+.g-page { display: grid; grid-template-columns: 220px 1fr; gap: 18px; background: #fff; border: 1px solid #f0dcdf; border-radius: 14px; padding: 14px; margin-bottom: 16px; }
+.g-ref img { width: 100%; border-radius: 8px; border: 1px solid #f0dcdf; }
+.g-ref-name { font-size: 12px; margin-top: 6px; word-break: break-all; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #f0dcdf; vertical-align: top; }
+th { background: #fdecee; color: #a3131f; }
+code { background: #f6eef0; padding: 2px 6px; border-radius: 5px; font-size: 12.5px; word-break: break-all; }
+.g-rev { color: #d62839; font-weight: 600; }
+.g-note { color: #7b6a6d; }
+small { color: #7b6a6d; }
+@media (max-width: 760px) { .g-page { grid-template-columns: 1fr; } .g-ref img { max-width: 220px; } }

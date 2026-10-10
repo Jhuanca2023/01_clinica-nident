@@ -1,0 +1,40 @@
+/* Detalles Rossety · Cursor personalizado (solo con mouse): punto + anillo, estados por contexto y corazones al hacer clic */
+.rs-cursor-on, .rs-cursor-on a, .rs-cursor-on button, .rs-cursor-on summary, .rs-cursor-on label, .rs-cursor-on select { cursor: none; }
+.rs-cursor-on input, .rs-cursor-on textarea { cursor: text; }
+
+.rs-cursor__dot, .rs-cursor__ring { position: fixed; left: 0; top: 0; z-index: 9999; pointer-events: none; opacity: 0; transition: opacity .25s; will-change: transform; }
+.rs-cursor--visible .rs-cursor__dot, .rs-cursor--visible .rs-cursor__ring { opacity: 1; }
+.rs-cursor__dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--rs-red); box-shadow: 0 0 10px rgba(214, 40, 57, .7); transition: opacity .25s, width .2s, height .2s, margin .2s, background .2s; }
+.rs-cursor__ring { width: 40px; height: 40px; margin: -20px 0 0 -20px; display: flex; align-items: center; justify-content: center; }
+.rs-cursor__ring::before { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid var(--rs-gold); background: rgba(242, 193, 64, 0); transition: transform .3s cubic-bezier(.2, .8, .3, 1.3), background .3s, border-color .3s, border-radius .3s; }
+.rs-cursor__label { position: relative; z-index: 1; font-size: 11px; font-weight: 600; letter-spacing: .5px; color: #fff; opacity: 0; transform: scale(.6); transition: opacity .2s, transform .25s; white-space: nowrap; }
+
+/* Sobre enlaces y botones: el anillo crece y se vuelve rojo suave */
+.rs-cursor--link .rs-cursor__ring::before { transform: scale(1.5); border-color: var(--rs-red); background: rgba(214, 40, 57, .12); }
+.rs-cursor--link .rs-cursor__dot { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; }
+/* Sobre productos y categorías: círculo lleno con la etiqueta "Ver" */
+.rs-cursor--card .rs-cursor__ring::before { transform: scale(1.9); border-color: transparent; background: var(--rs-red); box-shadow: 0 10px 26px rgba(214, 40, 57, .4); }
+.rs-cursor--card .rs-cursor__label { opacity: 1; transform: none; }
+.rs-cursor--card .rs-cursor__dot { opacity: 0; }
+/* Sobre texto editable: barra fina */
+.rs-cursor--text .rs-cursor__ring::before { transform: scaleX(.12) scaleY(.7); border-radius: 4px; background: var(--rs-red); border-color: var(--rs-red); }
+.rs-cursor--text .rs-cursor__dot { opacity: 0; }
+/* Al presionar */
+.rs-cursor--down .rs-cursor__ring::before { transform: scale(.7); background: rgba(242, 193, 64, .35); }
+.rs-cursor--down.rs-cursor--card .rs-cursor__ring::before { transform: scale(1.6); }
+/* Zonas oscuras (footer, bandas rojas): el anillo se aclara */
+.rs-cursor--dark .rs-cursor__ring::before { border-color: #fff; }
+.rs-cursor--dark .rs-cursor__dot { background: #fff; box-shadow: 0 0 10px rgba(255, 255, 255, .7); }
+
+/* Corazones que salen al hacer clic y estela suave */
+.rs-spark { position: fixed; left: 0; top: 0; z-index: 9998; pointer-events: none; font-size: 16px; line-height: 1; color: var(--rs-red); will-change: transform, opacity; animation: rs-spark 900ms cubic-bezier(.2, .7, .3, 1) forwards; }
+.rs-spark--gold { color: var(--rs-gold); }
+.rs-spark--trail { font-size: 10px; animation-duration: 700ms; }
+@keyframes rs-spark {
+    0% { opacity: 1; transform: translate(var(--x), var(--y)) scale(.4) rotate(0deg); }
+    100% { opacity: 0; transform: translate(calc(var(--x) + var(--dx)), calc(var(--y) + var(--dy))) scale(1.1) rotate(var(--r)); }
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+    .rs-cursor__dot, .rs-cursor__ring, .rs-spark { display: none !important; }
+}

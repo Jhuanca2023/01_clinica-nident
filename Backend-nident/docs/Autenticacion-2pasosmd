@@ -1,0 +1,383 @@
+# Autenticación multi-proveedor y 2FA — Documento de conversación
+
+> **Guía operativa actualizada:** [`AUTENTICACION_GUIA_COMPLETA.md`](./AUTENTICACION_GUIA_COMPLETA.md) (política por usuario, pasos de despliegue, credenciales de prueba).
+
+---
+
+Analiza mi proyecto a profundidad y evalua si es posible hacer la autenticacion, leugo creame un promp para la IA de que debo decir, este es la idea, refuerzalo de forma profesional y super y alta segura, aqui va mi propm, mejoralo: "¿Qué se necesita para iniciar sesión de forma permanente y segura en Laravel 10 usando autenticación con Google? ¿Es posible hacerlo en Laravel? También, ¿qué se necesita para implementar autenticación en dos pasos (2FA) para mi aplicativo? Necesito que mi aplicacion tenga la capacidad de autenticarme con los aplicativos en microsoft, o google u otros, entonces crearas una capa abstracta para hacer la activacion del aplicativo, para ello vas a crear sus tablas corresponientes si fuera necesario; por ahora activemos el de microsfot pero que haya la opcion google autenticaction, solo dos por ahora. Asi que empezar a desaroollar el aplicativo y todo el proceso de prueba que tiene laravel (Guiate del modulo de pasarela de pago que se tiene (PagoPasarelaController.php solo es un ejemplo de guia y su interfaz aqui:src\app\views\configuracion\pasarela\PasarelaIndexPage.jsx)- seun prpfesiona y aplica lo mas segruo pero empecesos con credenciales de prueba y dame los pasos de que sigue luego para hacer la pruebas. Aplicar y modificar el login si fuera posible. Adema si deseo no activar ningula de las dos, tambien debe haber un tercer card donde diga autenticacion normal y simple como lo estamos haciendo de forma de laravel simple, en total son 3 card: Uno laravel, microsof y google por ahora, por defecto mejora se que estea con laravel."
+
+
+
+---
+
+## Análisis del proyecto (solo lectura) — Viabilidad
+
+**Sí es viable** extender la autenticación en tu stack actual, con matices importantes por cómo está armado hoy el monorepo.
+
+### Lo que ya tienes
+
+1. **API (Laravel) + JWT**
+   - Rutas públicas `POST /api/login`, `register`, refresh, etc. (`routes/api.php`).
+   - `App\Http\Controllers\Api\AuthController` usa **Tymon JWT**, TTL de access token, **refresh tokens** y lógica pesada de **perfiles/roles/menús** vía SQL (`getPerfilData`).
+   - Cualquier login “social” o 2FA debe terminar emitiendo el **mismo contrato** que hoy devuelve el login (token + user + perfil + refresh, etc.) o tendrás que refactorizar el frontend y los guards.
+
+2. **Frontend React**
+   - `JWTAuthContext.jsx`: login por email/contraseña contra `/api/login`, almacenamiento de access token, interceptor con **refresh** en 401.
+   - El flujo “permanente” en la práctica ya es **refresh token + access token**; “más seguro” suele ir por **rotación de refresh**, listas de revocación, y/o cookies **HttpOnly** para el refresh (cambio de arquitectura).
+
+3. **Google en web (Blade)**
+   - En `routes/web.php` aparecen `auth/google` y callback; en vistas `login.blade.php` / `register.blade.php` hay botón Google.
+   - Eso es típicamente **OAuth por redirección del servidor (sesión web)**, **no** el mismo flujo que el **admin SPA** con JWT. Unificar SPA + Google/Microsoft implica **nuevos endpoints** (redirect URL, callback, intercambio por JWT) o un **BFF**; no basta con copiar solo las rutas web.
+
+4. **Socialite**
+   - Está registrado en `bootstrap/cache` (Google y fábrica Socialite). **Microsoft** se añade como otro driver (Azure AD / Microsoft Graph) con Socialite o paquete Microsoft-specific.
+
+5. **Referencia “pasarela”**
+   - `PagoPasarelaController` + modelos: listado de proveedores, `is_activo`, configs con **secretos enmascarados** — buen **patrón mental** para una capa “proveedor de identidad”: tabla de proveedores + configs cifradas + solo uno “activo” o flags por tenant.
+
+### Riesgos / decisiones de diseño
+
+- **OAuth + SPA + JWT:** hay que definir **PKCE**, **state**, redirect URIs exactas, y **dónde** se guarda el refresh (localStorage vs cookie HttpOnly).
+- **2FA:** el login actual es un solo paso; con TOTP/WebAuthn suele ser **login parcial → challenge 2FA → JWT final**. Hay que modelar estados y no emitir JWT hasta completar 2FA.
+- **Seguridad alta:** rate limiting, bloqueo de cuentas, auditoría de logins, vinculación cuenta social ↔ `users` (email verificado, merge de cuentas), revocación de tokens, CSP, etc.
+
+---
+
+## Prompt mejorado para la IA (copiar y usar en Agent mode)
+
+Puedes pegar esto tal cual (ajusta nombres de repo si quieres):
+
+### Contexto del repositorio
+
+Stack: **Laravel 10 (API)** con **JWT (`tymon/jwt-auth`)**, refresh tokens y `AuthController` API que arma perfil/roles/menús; **React (Vite)** con `JWTAuthContext.jsx` (login email/contraseña, Bearer, refresh en interceptor). En **web** ya existen rutas **Google OAuth** (Blade) vía Socialite, pero el **panel admin** usa solo JWT por API. Existe un módulo de referencia **pasarelas de pago**: `PagoPasarelaController.php` y `PasarelaIndexPage.jsx` (proveedores, `is_activo`, configs, secretos enmascarados).
+
+### Objetivo
+
+Diseñar e implementar una **capa abstracta de proveedores de autenticación** para el **login del aplicativo (SPA + API)** con **tres modos**, seleccionables por configuración (similar a pasarelas):
+
+1. **Autenticación local (Laravel/JWT actual)** — **por defecto activa**; sin OAuth.
+2. **Microsoft (Azure AD / Entra ID)** — implementar primero con **credenciales de prueba** (app registration sandbox).
+3. **Google** — preparar integración (OAuth 2.0) en código y UI, puede quedar “configurable” aunque el despliegue inicial sea Microsoft.
+
+Debe poder **desactivar** OAuth (solo tarjeta “local”) o activar solo uno de los externos, sin romper el flujo actual.
+
+### Requisitos de seguridad (obligatorios)
+
+- OAuth con **state** y **PKCE** donde aplique; redirect URIs explícitos; sin secretos en frontend.
+- Secretos de cliente en **BD cifrados** o `.env` solo en dev; en API listados **enmascarados** como en pasarela.
+- Tras OAuth exitoso, emitir sesión API **alineada con el login JWT actual** (mismo payload/contrato que espera el React o documentar y migrar endpoints).
+- **Refresh token**: rotación o invalidación; rate limit en login y callbacks.
+- **2FA (TOTP)** como fase 2: después de contraseña (y opcionalmente después de OAuth), exigir código TOTP antes de emitir JWT; tablas `user_2fa` o columnas en `users` con `secret` cifrado y `recovery_codes` hasheados.
+- Auditoría mínima: `auth_logs` (proveedor, user_id, IP, éxito/fallo).
+- Documentar **amenazas** (CSRF en callbacks web vs SPA, fixation, token en URL).
+
+### Entregables
+
+- Migraciones: tablas tipo `auth_identity_providers` (código: `local` | `microsoft` | `google`), `auth_identity_provider_configs` (clave/valor, `es_secreto`), `user_oauth_accounts` (provider, `provider_user_id`, `user_id`), opcional `auth_login_audit`.
+- Servicios/interfaces: `IdentityProviderInterface`, implementaciones `LocalJwtProvider`, `MicrosoftOAuthProvider`, `GoogleOAuthProvider`; **factory** según configuración activa.
+- API: endpoints para listar/activar proveedor (admin), iniciar OAuth (`GET .../redirect/{provider}`), `callback`, y `POST .../token` si hace falta intercambio para SPA.
+- Frontend: pantalla de login con **3 cards** (Local, Microsoft, Google) según flags del backend; por defecto resalta **Local**. Flujo de prueba documentado.
+- Tests: PHPUnit para reglas críticas; checklist manual OAuth en dev.
+
+### Fases
+
+1. Modelo de datos + admin UI (estilo Pasarela) + local por defecto.
+2. Microsoft OAuth → JWT + pruebas.
+3. Google OAuth → JWT.
+4. 2FA TOTP + flujo en React.
+
+### No hacer
+
+- No commitear client secrets.
+- No exponer refresh en query strings.
+- No duplicar lógica de perfil sin reutilizar `getPerfilData` o equivalente.
+
+**Al finalizar**, entregar: variables `.env` de ejemplo, URLs de redirect para Azure/Google, y pasos concretos para probar en local (orden: crear app en portal, configurar BD, login).
+
+---
+
+## Qué decirle a la IA en una frase (refuerzo corto)
+
+> “Implementa esto en **Agent mode** sobre mi repo real: respeta **JWT + AuthController** y **JWTAuthContext**; añade proveedores Microsoft/Google con capa tipo **Pasarela**, **local por defecto**, seguridad **OAuth + PKCE + state**, secretos enmascarados, y roadmap de **2FA** sin romper el contrato actual del login.”
+
+---
+
+*Nota de la conversación original:* Estoy en **Ask mode**: no puedo aplicar cambios en el código. Si quieres que la IA lo implemente en el proyecto, abre **Agent mode** y pega el prompt largo de arriba.
+
+---
+
+## Implementado
+
+Sí, quedó aplicado el prompt completo en el repositorio. Las tablas usan el prefijo **`seguridad_`** (criterio del proyecto).
+
+### Backend (`impacto-gigante-Backend`)
+
+- **Migración** `2026_05_20_100000_create_seguridad_auth_tables.php`:
+  - `seguridad_auth_proveedor`, `seguridad_auth_proveedor_config`
+  - `seguridad_usuario_oauth`, `seguridad_auth_oauth_sesion`
+  - `seguridad_auth_login_log`, `seguridad_usuario_2fa`
+  - columna `users.microsoft_id`
+- **Modelos + servicios**: `AuthOAuthService` (PKCE + state), `AuthProveedorConfigService`, `AuthTokenService`
+- **Controladores**: `SeguridadAuthProveedorController`, `SeguridadAuthOAuthController`
+- **Rutas API** públicas y admin; **seed** `SeguridadAuthProveedorSeeder` (local activo y predeterminado)
+- **Login local** con registro en `seguridad_auth_login_log`
+- **AuthController**: `buildLoginResponseForUser()` reutilizado por OAuth
+- **Docs**: `docs/AUTH_SETUP.md`, `docs/PROMPT_IA_AUTH.md`
+
+### Frontend (`impacto-gigante-Frontend`)
+
+- **Login** (`JwtLogin.jsx`): 3 tarjetas — Local, Microsoft, Google (según `GET /api/auth/metodos-login`)
+- **Callback OAuth**: `/session/oauth-callback` + `loginWithOAuthExchange` en `JWTAuthContext`
+- **Admin**: `/configuracion/auth-proveedor` — estilo pasarela (habilitar, predeterminado, credenciales enmascaradas)
+- **API**: `authProveedor.api.js`
+
+### Endpoints API principales
+
+| Método | Ruta | Auth |
+|--------|------|------|
+| GET | `/api/auth/metodos-login` | Público |
+| GET | `/api/auth/oauth/redirect/{microsoft\|google}` | Público |
+| GET | `/api/auth/oauth/callback/{proveedor}` | Público (navegador) |
+| POST | `/api/auth/oauth/exchange` | Público (código un solo uso) |
+| GET | `/api/auth-proveedor/listar` | JWT |
+| POST | `/api/auth-proveedor/habilitar` | JWT |
+| POST | `/api/auth-proveedor/predeterminado` | JWT |
+| POST | `/api/auth-proveedor/actualizar-config` | JWT |
+
+### Próximos pasos para probar
+
+1. **Migración** (si otro entorno):
+   ```bash
+   php artisan migrate --path=database/migrations/2026_05_20_100000_create_seguridad_auth_tables.php
+   php artisan db:seed --class=SeguridadAuthProveedorSeeder
+   ```
+
+2. **`.env`** (ver `docs/AUTH_SETUP.md`):
+   - `FRONTEND_URL=http://localhost:5173/admin`
+   - `APP_URL=http://localhost:8000`
+   - Redirect: `http://localhost:8000/api/auth/oauth/callback/microsoft` (y `/google`)
+
+3. **Azure**: registrar app → copiar Client ID/Secret/Tenant → panel **Configuración → Proveedores de autenticación** → Guardar → **Habilitar login** Microsoft.
+
+4. **Probar**: `/admin/session/signin` → tarjeta Microsoft → OAuth → vuelta al SPA con sesión JWT (igual que login local).
+
+### Pendiente (fase 2 del prompt)
+
+- **2FA TOTP** en React (tabla `seguridad_usuario_2fa` lista; falta UI y challenge post-login).
+
+### Prompt guardado en repo
+
+Texto reforzado para futuras sesiones: `impacto-gigante-Backend/docs/PROMPT_IA_AUTH.md`.  
+Guía operativa: `impacto-gigante-Backend/docs/AUTH_SETUP.md`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Aquí tienes el prompt exacto y autocontenido para pegarlo en Agent mode en otro proyecto (ajusta solo los valores entre «...»):
+
+# PROMPT ÚNICO — Autenticación multi-proveedor (Local + Microsoft + Google) + roadmap 2FA
+**Modo obligatorio:** Agent mode. **Implementa todo en el repositorio real.** No solo analices: entrega código, migraciones, rutas, UI, seed, y documentación `docs/AUTH_SETUP.md`. No preguntes de nuevo lo que este prompt ya define.
+---
+## 1) Descubrimiento inicial (hazlo tú en el repo)
+Antes de codificar, localiza y lee:
+- API Laravel: `routes/api.php`, controlador de login JWT (ej. `AuthController`), paquete JWT (`tymon/jwt-auth`), refresh tokens si existen.
+- SPA React: contexto de auth (ej. `JWTAuthContext.jsx`), pantalla de login (ej. `JwtLogin.jsx`), interceptor Bearer + refresh en 401.
+- Si hay OAuth web en Blade/Socialite: **no reutilizarlo tal cual** para el SPA; el admin/API debe tener flujo propio OAuth → JWT.
+- **Módulo de referencia obligatorio** (patrón UI + API de configuración):
+  - Backend: `«RUTA_BACKEND»/app/Http/Controllers/Api/«ModuloReferencia»Controller.php»` (ej. pasarela de pago: proveedores, `is_activo`, configs, secretos enmascarados `••••••••`).
+  - Frontend: `«RUTA_FRONTEND»/src/app/views/«ruta»/«ModuloReferencia»IndexPage.jsx»`.
+- Convención de tablas del proyecto: prefijo **`«PREFIJO_TABLAS»`** (ej. `seguridad_`). **Todas las tablas nuevas deben usar ese prefijo.**
+Confirma viabilidad en 3 líneas y **continúa implementando** sin pedir permiso para cada fase.
+---
+## 2) Objetivo de negocio
+Necesito autenticación **permanente y segura** en **Laravel 10+ (API)** + **React (Vite SPA)** con:
+1. **Autenticación local (Laravel/JWT actual)** — email/contraseña; **predeterminada y siempre disponible** (tercera tarjeta “normal”).
+2. **Microsoft (Azure AD / Entra ID)** — OAuth 2.0; implementar primero con **credenciales de prueba/sandbox**.
+3. **Google** — OAuth 2.0; código y UI listos; puede quedar deshabilitado hasta configurar credenciales.
+En el **login del SPA** deben verse **3 cards/tarjetas**: Local, Microsoft, Google (solo las **habilitadas** desde admin). Si desactivo Microsoft y Google, solo queda Local. **Por defecto** debe resaltarse **Local**.
+**Capa abstracta de proveedores** (como pasarelas de pago): activar/desactivar proveedor, guardar credenciales en BD, secretos enmascarados en listados admin.
+**No romper** el contrato actual del login JWT (`token`, `user`, `perfil`, `refreshToken`, flujo de selección de perfil si ya existe).
+**2FA (TOTP)** = **Fase 2** (preparar tablas; implementar challenge post-login si el tiempo alcanza).
+---
+## 3) Requisitos de seguridad (no negociables)
+- OAuth: **state** + **PKCE (S256)**; redirect URIs explícitas; **cero secretos en frontend**.
+- Secretos (`CLIENT_SECRET`, etc.): guardar **cifrados** en BD (`es_secreto=1`); en API admin devolver **`••••••••`** si no se actualizan.
+- Tras OAuth exitoso: **mismo payload** que `POST /api/login` (reutilizar método central tipo `buildLoginResponseForUser`; no duplicar lógica de perfiles/roles/menús).
+- **No JWT en query string.** Flujo SPA seguro:
+  1. `GET /api/auth/oauth/redirect/{microsoft|google}` → `{ authorization_url }`
+  2. Callback en **API** → genera **código de intercambio de un solo uso** (TTL corto)
+  3. Redirect al SPA: `«FRONTEND_BASE»/session/oauth-callback?code=...`
+  4. `POST /api/auth/oauth/exchange` con `{ code }` → respuesta idéntica a login
+- Rate limit: login + redirect + callback + exchange.
+- Auditoría: tabla de logs (proveedor, user_id, email, IP, éxito/fallo).
+- Documentar amenazas en `docs/AUTH_SETUP.md`: CSRF/state, fixation, token en URL, usuarios OAuth sin perfil asignado.
+---
+## 4) Modelo de datos (prefijo `«PREFIJO_TABLAS»`)
+Crear migraciones + modelos + seeder:
+| Tabla | Propósito |
+|-------|-----------|
+| `«PREFIJO»auth_proveedor` | `codigo`: `local`, `microsoft`, `google`; `is_habilitado`, `is_predeterminado`, `orden` |
+| `«PREFIJO»auth_proveedor_config` | `clave`, `valor`, `etiqueta`, `es_secreto` |
+| `«PREFIJO»usuario_oauth` | vínculo `proveedor` + `provider_user_id` → `users.id` |
+| `«PREFIJO»auth_oauth_sesion` | `state`, `code_verifier`, `exchange_code`, expiración |
+| `«PREFIJO»auth_login_log` | auditoría |
+| `«PREFIJO»usuario_2fa` | fase 2 TOTP (`secret_cifrado`, `recovery_codes_hash`) |
+En `users`: columnas `google_id`, `microsoft_id` si no existen.
+**Seed inicial:**
+- `local`: habilitado + predeterminado
+- `microsoft`, `google`: deshabilitados; configs vacías con `REDIRECT_URI` = `{APP_URL}/api/auth/oauth/callback/{codigo}`
+---
+## 5) Backend Laravel — entregables
+**Servicios:**
+- `AuthProveedorConfigService` (listar admin enmascarado, mapa config descifrada)
+- `AuthOAuthService` (PKCE, state, token exchange Microsoft/Google, resolver/crear usuario, vínculo OAuth)
+- Reutilizar emisión JWT desde `AuthController` (método público compartido local + OAuth)
+**Controladores + rutas:**
+| Método | Ruta | Auth |
+|--------|------|------|
+| GET | `/api/auth/metodos-login` | Público |
+| GET | `/api/auth/oauth/redirect/{microsoft\|google}` | Público + throttle |
+| GET | `/api/auth/oauth/callback/{proveedor}` | Público (browser redirect) |
+| POST | `/api/auth/oauth/exchange` | Público + throttle |
+| GET | `/api/auth-proveedor/listar` | JWT admin |
+| POST | `/api/auth-proveedor/habilitar` | JWT admin |
+| POST | `/api/auth-proveedor/predeterminado` | JWT admin |
+| POST | `/api/auth-proveedor/actualizar-config` | JWT admin |
+`local` no usa OAuth; no se puede deshabilitar.
+**Microsoft:** Graph `/v1.0/me` tras token. **Google:** `userinfo` endpoint.
+Registrar intentos en `«PREFIJO»auth_login_log` en login local y OAuth.
+---
+## 6) Frontend React — entregables
+**Login (`«PantallaLogin».jsx`):**
+- Al montar: `GET /api/auth/metodos-login`
+- 3 tarjetas clicables: Local (form email/password existente), Microsoft, Google (redirect a `authorization_url`)
+- Resaltar tarjeta `is_predeterminado` (default: local)
+**Nueva ruta:** `/session/oauth-callback`
+- Lee `?code=` o `?error=`
+- `POST /api/auth/oauth/exchange` → `loginWithOAuthExchange` en contexto auth (misma lógica que login local: tokens + dispatch + perfil)
+- Redirigir a `/session/signin` para flujo de perfil múltiple si aplica
+**Admin** (clonar patrón del módulo referencia pasarela):
+- Ruta: `«/configuracion/auth-proveedor»`
+- 3 cards: habilitar OAuth, marcar predeterminado, expandir configs, guardar (placeholder `••••••••` no sobrescribe secretos)
+**API client:** `authProveedor.api.js` (metodos públicos sin JWT + admin con JWT)
+---
+## 7) Fases de implementación (ejecutar en orden)
+1. Migración + modelos + seeder + `docs/AUTH_SETUP.md` (`.env` ejemplo, Azure, Google, pasos de prueba local)
+2. Servicios OAuth + rutas públicas + exchange code
+3. Admin UI estilo pasarela
+4. Login 3 tarjetas + OAuth callback + contexto auth
+5. (Opcional fase 2) 2FA TOTP: enrolamiento + challenge antes de emitir JWT
+---
+## 8) Variables `.env` de ejemplo (incluir en docs)
+```env
+APP_URL=http://localhost:8000
+FRONTEND_URL=http://localhost:5173/«BASE_SPA»   # ej. /admin
+MICROSOFT_CLIENT_ID=
+MICROSOFT_CLIENT_SECRET=
+MICROSOFT_TENANT_ID=common
+MICROSOFT_REDIRECT_URI=http://localhost:8000/api/auth/oauth/callback/microsoft
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_REDIRECT_URI=http://localhost:8000/api/auth/oauth/callback/google
+Prioridad de config: BD (panel admin) > .env fallback en desarrollo.
+
+9) Checklist de prueba (documentar)
+php artisan migrate (solo migración auth si el proyecto tiene migraciones viejas rotas)
+php artisan db:seed --class=«SeguridadAuthProveedorSeeder»
+Login local sigue funcionando
+Azure App Registration → redirect URI exacta → panel admin → habilitar Microsoft
+Login SPA → Microsoft → callback → sesión JWT + sidebar
+Deshabilitar Google/Microsoft en admin → solo card Local
+Verificar logs en «PREFIJO»auth_login_log
+10) Prohibido
+Commitear secrets reales
+JWT/refresh en URL
+Duplicar getPerfilData / permisos en otro sitio
+SP-only OAuth sin alinear contrato JWT del SPA
+Preguntarme de nuevo “¿quieres que implemente?” — implementa
+11) Texto original del requerimiento (contexto)
+Inicio de sesión permanente y seguro en Laravel con Google/Microsoft; 2FA para el aplicativo; capa abstracta para activar proveedores; tablas si hace falta; por ahora Microsoft activable y Google como opción; guiarse del módulo de pasarela de pago (controller + IndexPage); máxima seguridad con credenciales de prueba; pasos para probar después; modificar login; 3 cards: Laravel simple (local), Microsoft, Google; por defecto Laravel/local.
+
+Al terminar: resumen de archivos creados, comandos migrate/seed, rutas nuevas, y enlace a docs/AUTH_SETUP.md.
+
+---
+## Valores que debes reemplazar una sola vez
+| Placeholder | Ejemplo valentostile |
+|-------------|-------------------------|
+| `«PREFIJO_TABLAS»` / `«PREFIJO»` | `seguridad_` |
+| `«RUTA_BACKEND»` | `impacto-gigante-Backend` |
+| `«RUTA_FRONTEND»` | `impacto-gigante-Frontend` |
+| `«ModuloReferencia»` | `PagoPasarela` / `pasarela` |
+| `«PantallaLogin»` | `JwtLogin` |
+| `«BASE_SPA»` | `admin` |
+| `«FRONTEND_BASE»` | `http://localhost:5173/admin` |
+---
+## Versión ultra-corta (si el chat tiene poco contexto)
+Pega esto **después** del bloque largo si hace falta:
+> Implementa en Agent mode autenticación multi-proveedor (local JWT + Microsoft + Google) para Laravel API + React SPA: tablas con prefijo `«PREFIJO»`, patrón admin como `«ModuloReferencia»Controller` + `«ModuloReferencia»IndexPage`, OAuth PKCE+state, exchange code sin JWT en URL, login con 3 cards (local predeterminado), `docs/AUTH_SETUP.md`, sin romper contrato `/api/login`. Fase 2: 2FA TOTP. **Implementa completo, no solo analices.**
+---
+Copia el bloque del **apartado 1** (entre las líneas de código markdown) en un archivo tipo `PROMPT_AUTH_MULTI_PROVEEDOR.md` en el nuevo proyecto. Si quieres que lo guarde yo en el repo actual, cambia a **Agent mode** y pídemelo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

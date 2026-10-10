@@ -1,0 +1,68 @@
+/* =============================================
+   Tipografía de títulos - Valento
+   Fuente display: Cinzel Decorative (local, /fonts)
+   Se enlaza al final del <head> de cada página para
+   prevalecer sobre los estilos propios de cada sección.
+
+   Uso: solo títulos (h1 de página y h2 de sección).
+   Textos, formularios, precios y nombres de producto
+   se mantienen en Montserrat por legibilidad.
+   ============================================= */
+
+@font-face {
+    font-family: 'Cinzel Decorative';
+    src: url('../fonts/CinzelDecorative-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Cinzel Decorative';
+    src: url('../fonts/CinzelDecorative-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Cinzel Decorative';
+    src: url('../fonts/CinzelDecorative-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --lv-font-display: 'Cinzel Decorative', Georgia, 'Times New Roman', serif;
+}
+
+/* ── Títulos de sección (fondo claro): Regular ── */
+.lv-categories-title,                       /* index: Categorías */
+.lv-section-title h2,                       /* index: Colección, Ofertas, Liquidaciones, #Valento */
+.lookbok-left .section-title h2,            /* index: lookbook */
+.lv-footer-banner__title,                   /* banner previo al footer */
+.ab-section__title,                         /* about */
+.ab-cta__title,
+.cat-title,                                 /* categories */
+.co-page__title,                            /* check-out */
+.ct-form-title,                             /* contact */
+.ct-map-header h2,
+.doc-title,                                 /* privacidad / terminos */
+.lr-header h1,                              /* reclamaciones */
+.sd-related__title,                         /* shop-detail */
+.sc-page__title,                            /* shopping-cart */
+.auth-panel-title {                         /* login */
+    font-family: var(--lv-font-display);
+    font-style: normal;
+    font-weight: 400;
+    text-transform: none;
+}
+
+/* ── Títulos sobre imagen: Bold para mantener contraste ── */
+.ab-hero__title,                            /* about */
+.ct-hero__title,                            /* contact */
+.ty-hero__title {                           /* thank-you */
+    font-family: var(--lv-font-display);
+    font-style: normal;
+    font-weight: 700;
+    text-transform: none;
+}

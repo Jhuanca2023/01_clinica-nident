@@ -1,0 +1,86 @@
+/* =============================================
+   Topbar Redes Sociales - Valento
+   ============================================= */
+
+.lv-topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    background: #cccccc;
+    height: 36px;
+    display: flex;
+    align-items: center;
+}
+
+.lv-topbar__inner {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lv-topbar__left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.lv-topbar__left span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: #000000;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.lv-topbar__left span i {
+    color: #e7b669;
+    font-size: 11px;
+}
+
+.lv-topbar__right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lv-topbar__social-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: #000000;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-right: 4px;
+}
+
+.lv-topbar__right a {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid #bbb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-size: 12px;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.lv-topbar__right a:hover {
+    background: #e7b669;
+    border-color: #e7b669;
+    color: #fff;
+}
+
+@media (max-width: 767px) {
+    .lv-topbar { height: 30px; }
+    .lv-topbar__inner { padding: 0 16px; }
+    .lv-topbar__left { display: none; }
+}

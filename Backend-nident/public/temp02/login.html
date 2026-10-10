@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>Valento | Iniciar Sesión</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header-custom.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/footer-luxe.css">
+    <link rel="stylesheet" href="css/scrolltop.css">
+    <link rel="stylesheet" href="css/whatsapp.css">
+    <link rel="stylesheet" href="css/cart-modal.css">
+    <style>
+    /* ── Auth page ────────────────────────────── */
+    .auth-page {
+        min-height: calc(100vh - 300px);
+        display: flex;
+        align-items: center;
+        padding: 50px 0 60px;
+        background: #f7f7f7;
+    }
+
+    /* Tabs login / registro */
+    .auth-tabs {
+        display: flex;
+        margin-bottom: 0;
+        border-bottom: 2px solid #e0e0e0;
+    }
+    .auth-tab {
+        flex: 1;
+        padding: 14px;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #aaa;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -2px;
+        transition: color .2s, border-color .2s;
+        user-select: none;
+    }
+    .auth-tab.active { color: #1a1a1a; border-bottom-color: #8C6B2E; }
+    .auth-tab:hover { color: #555; }
+
+    /* Card */
+    .auth-card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 30px rgba(0,0,0,.09);
+        overflow: hidden;
+        width: 100%;
+        max-width: 440px;
+        margin: 0 auto;
+    }
+
+    /* Panel */
+    .auth-panel { display: none; padding: 36px 36px 30px; }
+    .auth-panel.active { display: block; }
+
+    /* Logo centrado */
+    .auth-logo {
+        text-align: center;
+        margin-bottom: 28px;
+    }
+    .auth-logo img { height: 78px; width: auto; max-width: 100%; object-fit: contain; }
+    .auth-logo span {
+        display: block;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 18px;
+        font-weight: 500;
+        font-style: italic;
+        letter-spacing: .4px;
+        color: #8C6B2E;
+        text-transform: none;
+        margin-top: 4px;
+    }
+
+    /* Título panel */
+    .auth-panel-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: #1a1a1a;
+        letter-spacing: 1px;
+        margin-bottom: 24px;
+        text-align: center;
+    }
+
+    /* Fields */
+    .auth-field { margin-bottom: 18px; }
+    .auth-label {
+        display: block;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #555;
+        margin-bottom: 6px;
+    }
+    .auth-input-wrap { position: relative; }
+    .auth-input {
+        width: 100%;
+        border: 1.5px solid #e0e0e0;
+        border-radius: 4px;
+        padding: 11px 42px 11px 14px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 13px;
+        color: #333;
+        outline: none;
+        transition: border-color .2s, box-shadow .2s;
+        background: #fafafa;
+    }
+    .auth-input::placeholder { color: #bbb; }
+    .auth-input:focus {
+        border-color: #8C6B2E;
+        box-shadow: 0 0 0 3px rgba(192,57,43,.07);
+        background: #fff;
+    }
+    .auth-input.valid  { border-color: #27ae60; }
+    .auth-input.error  { border-color: #8C6B2E; }
+    .auth-input-icon {
+        position: absolute;
+        right: 13px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #bbb;
+        font-size: 14px;
+        cursor: pointer;
+        transition: color .2s;
+    }
+    .auth-input-icon:hover { color: #555; }
+
+    /* Fila recordar + olvidé */
+    .auth-row-extra {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 22px;
+    }
+    .auth-check {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        color: #666;
+        cursor: pointer;
+    }
+    .auth-check input { accent-color: #8C6B2E; cursor: pointer; }
+    .auth-forgot {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        color: #8C6B2E;
+        text-decoration: none;
+        font-weight: 600;
+        transition: opacity .2s;
+    }
+    .auth-forgot:hover { opacity: .75; text-decoration: underline; color: #8C6B2E; }
+
+    /* Botón principal */
+    .auth-btn {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        background: #172144;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background .2s, transform .15s;
+        margin-bottom: 18px;
+        position: relative;
+        overflow: hidden;
+    }
+    .auth-btn:hover,
+    .auth-btn:focus,
+    .auth-btn:active {
+        background: #C4A35A;
+        color: #fff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(196, 163, 90, 0.4);
+    }
+    .auth-btn:active { transform: translateY(0); }
+
+    /* Divisor OR */
+    .auth-or {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    .auth-or span {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: #bbb;
+        flex-shrink: 0;
+    }
+    .auth-or::before, .auth-or::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: #e8e8e8;
+    }
+
+    /* Social buttons */
+    .auth-social { display: flex; gap: 10px; margin-bottom: 20px; }
+    .auth-social-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px;
+        border: 1.5px solid #e0e0e0;
+        border-radius: 4px;
+        background: #fff;
+        cursor: pointer;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        color: #444;
+        transition: border-color .2s, background .2s;
+        text-decoration: none;
+    }
+    .auth-social-btn:hover { border-color: #8C6B2E; background: #fff8f7; color: #444; text-decoration: none; }
+    .auth-social-btn i { font-size: 16px; }
+    .auth-social-btn.google i { color: #ea4335; }
+    .auth-social-btn.facebook i { color: #1877f2; }
+    .auth-social-btn.whatsapp i { color: #25d366; }
+
+    /* Pie del panel */
+    .auth-footer {
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        color: #888;
+        padding-top: 18px;
+        border-top: 1px solid #f0f0f0;
+    }
+    .auth-footer a { color: #8C6B2E; font-weight: 700; text-decoration: none; }
+    .auth-footer a:hover { text-decoration: underline; }
+
+    /* Error message */
+    .auth-error {
+        display: none;
+        background: #fff0ee;
+        border: 1px solid #f5c6c6;
+        border-radius: 4px;
+        padding: 10px 14px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        color: #8C6B2E;
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
+    .auth-error.show { display: flex; align-items: center; gap: 8px; }
+
+    /* Success */
+    .auth-success {
+        display: none;
+        background: #e8f5e9;
+        border: 1px solid #a5d6a7;
+        border-radius: 4px;
+        padding: 10px 14px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        color: #2e7d32;
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
+    .auth-success.show { display: flex; align-items: center; gap: 8px; }
+
+    /* Strength bar */
+    .auth-strength { margin-top: 6px; height: 3px; background: #eee; border-radius: 2px; overflow: hidden; }
+    .auth-strength-fill { height: 100%; width: 0; border-radius: 2px; transition: width .3s, background .3s; }
+
+    /* Nombre fila */
+    .auth-row-2 { display: flex; gap: 12px; }
+    .auth-row-2 .auth-field { flex: 1; }
+
+    @media (max-width: 480px) {
+        .auth-panel { padding: 24px 20px 20px; }
+        .auth-row-2 { flex-direction: column; gap: 0; }
+    }
+    </style>
+    <link rel="stylesheet" href="css/fonts.css" type="text/css">
+</head>
+<body>
+
+<!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader">
+            <img src="img/inicio/logo-principal.png" alt="Valento" class="loader-logo">
+            <div class="loader-ring"></div>
+            <span class="loader-tag">Semplicemente Valento</span>
+        </div>
+    </div>
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form"><input type="text" id="search-input" placeholder="Buscar uniforme, polo, talla…"></form>
+    </div>
+</div>
+
+    <!-- Topbar Begin -->
+    <div class="vl-topbar">
+        <div class="vl-topbar__inner">
+            <ul class="vl-topbar__info">
+                <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+51964381275">+51 964 381 275</a></li>
+                <li class="vl-topbar__mail"><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:ventas@rossety.pe">ventas@rossety.pe</a></li>
+                <li class="vl-topbar__hours"><i class="fa fa-clock-o" aria-hidden="true"></i>Lun – Sáb: 9:00 – 18:00</li>
+            </ul>
+            <div class="vl-topbar__right">
+                <span class="vl-topbar__label">Síguenos</span>
+                <ul class="vl-topbar__social">
+                    <li><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa fa-music" aria-hidden="true"></i></a></li>
+                    <li><a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                </ul>
+                <a class="vl-topbar__cta" href="https://wa.me/51964381275" target="_blank" rel="noopener"><i class="fa fa-whatsapp" aria-hidden="true"></i><span>Cotiza por WhatsApp</span></a>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Header Section Begin -->
+    <header class="lv-header" id="lv-header">
+        <div class="lv-header__inner">
+            <a href="index.html" class="lv-header__logo" aria-label="Valento - Inicio">
+                <img src="img/inicio/logo-principal.png" alt="Valento — Semplicemente Valento">
+                
+            </a>
+
+            <nav class="lv-header__nav" id="lv-main-nav" aria-label="Navegación principal">
+                <ul class="lv-header__nav-list">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li class="has-sub">
+                        <a href="categories.html">Tienda</a>
+                        <ul class="lv-sub-menu">
+                            <li><a href="shop-detail.html">Productos</a></li>
+                            <li><a href="shopping-cart.html">Carrito</a></li>
+                            <li><a href="check-out.html">Pagar</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html">Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                    <li class="lv-nav-access"><a href="login.html">Registrarse</a> / <a href="login.html" class="in">Iniciar sesión</a></li>
+                </ul>
+            </nav>
+
+            <div class="lv-header__access">
+                <a href="login.html">Registrarse</a><span>/</span><a href="login.html" class="in">Iniciar sesión</a>
+            </div>
+
+            <div class="lv-header__icons">
+                <button type="button" class="lv-icon-btn lv-search-trigger" aria-label="Buscar">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </button>
+                <a href="login.html" class="lv-icon-btn lv-account-btn" aria-label="Mi cuenta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </a>
+                <a href="#" class="lv-cart-link" id="lv-cart-icon" aria-label="Carrito de compras">
+                    <span class="lv-cart-badge" id="lv-cart-count" style="display:none;">0</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                </a>
+                <button type="button" class="lv-burger" id="lv-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="lv-main-nav">
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Info Begin -->
+    <div class="lv-header-info">
+        <div class="lv-header-info__inner">
+            <div class="lv-header-info__item">
+                <img src="img/icons/delivery.png" alt="">
+                <p>Venta mayorista para profesionales</p>
+            </div>
+            <div class="lv-header-info__item">
+                <img src="img/icons/voucher.png" alt="">
+                <p>Stock permanente y despacho ágil</p>
+            </div>
+            <div class="lv-header-info__item">
+                <img src="img/icons/sales.png" alt="">
+                <p>Personaliza con el logo de tu empresa</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header Info End -->
+    <!-- Header End -->
+
+<!-- STICKY -->
+<div class="lv-sticky-bar" id="lv-sticky-bar">
+    <div class="lv-sticky-bar__inner">
+        <a href="index.html" class="lv-sticky-bar__logo" aria-label="Valento"><img src="img/inicio/logo-principal.png" alt="Valento"></a>
+        <nav class="lv-sticky-bar__nav"><ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categories.html">Tienda</a></li>
+            <li><a href="about.html">Nosotros</a></li>
+            <li><a href="contact.html">Contacto</a></li>
+        </ul></nav>
+        <div class="lv-sticky-bar__icons">
+                <a href="login.html" class="lv-icon-btn lv-account-btn" aria-label="Mi cuenta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </a>
+                <a href="#" class="lv-cart-link" id="lv-cart-icon-sticky" aria-label="Carrito de compras">
+                    <span class="lv-cart-badge lv-cart-badge-sticky" id="lv-cart-count-sticky" style="display:none;">0</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                </a>
+            </div>
+    </div>
+</div>
+
+<!-- ══ AUTH PAGE ══ -->
+<main class="auth-page">
+    <div class="container">
+        <div class="auth-card">
+
+            <!-- Tabs -->
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-panel="login">Iniciar Sesión</div>
+                <div class="auth-tab" data-panel="register">Crear Cuenta</div>
+            </div>
+
+            <!-- ══ PANEL LOGIN ══ -->
+            <div class="auth-panel active" id="panel-login">
+
+                <div class="auth-logo">
+                    <img src="img/inicio/logo-principal.png" alt="Valento">
+                    <span>Semplicemente Valento</span>
+                </div>
+
+                <p class="auth-panel-title">Bienvenido de vuelta</p>
+
+                <div class="auth-error" id="login-error">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span id="login-error-msg">Correo o contraseña incorrectos.</span>
+                </div>
+
+                <form id="login-form" novalidate>
+                    <div class="auth-field">
+                        <label class="auth-label" for="login-email">Correo electrónico</label>
+                        <div class="auth-input-wrap">
+                            <input type="email" id="login-email" class="auth-input" placeholder="correo@ejemplo.com" autocomplete="email">
+                            <i class="fa fa-envelope-o auth-input-icon"></i>
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label class="auth-label" for="login-pass">Contraseña</label>
+                        <div class="auth-input-wrap">
+                            <input type="password" id="login-pass" class="auth-input" placeholder="••••••••" autocomplete="current-password">
+                            <i class="fa fa-eye auth-input-icon" id="toggle-login-pass"></i>
+                        </div>
+                    </div>
+                    <div class="auth-row-extra">
+                        <label class="auth-check">
+                            <input type="checkbox" id="remember"> Recordarme
+                        </label>
+                        <a href="#" class="auth-forgot" id="show-forgot">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <button type="submit" class="auth-btn" id="login-btn">
+                        <i class="fa fa-sign-in"></i> &nbsp;Ingresar
+                    </button>
+                </form>
+
+                <div class="auth-or"><span>o continúa con</span></div>
+                <div class="auth-social">
+                    <a href="#" class="auth-social-btn google"><i class="fa fa-google"></i> Google</a>
+                     
+                </div>
+
+                <div class="auth-footer">
+                    ¿No tienes cuenta? <a href="#" class="switch-tab" data-target="register">Regístrate gratis</a>
+                </div>
+            </div>
+
+            <!-- ══ PANEL REGISTRO ══ -->
+            <div class="auth-panel" id="panel-register">
+
+                <div class="auth-logo">
+                    <img src="img/inicio/logo-principal.png" alt="Valento">
+                    <span>Semplicemente Valento</span>
+                </div>
+
+                <p class="auth-panel-title">Crea tu cuenta</p>
+
+                <div class="auth-success" id="reg-success">
+                    <i class="fa fa-check-circle"></i>
+                    <span>¡Cuenta creada! Redirigiendo...</span>
+                </div>
+                <div class="auth-error" id="reg-error">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span id="reg-error-msg">Por favor completa todos los campos.</span>
+                </div>
+
+                <form id="reg-form" novalidate>
+                    <div class="auth-row-2">
+                        <div class="auth-field">
+                            <label class="auth-label" for="reg-nombre">Nombre</label>
+                            <div class="auth-input-wrap">
+                                <input type="text" id="reg-nombre" class="auth-input" placeholder="Tu nombre" autocomplete="given-name">
+                                <i class="fa fa-user-o auth-input-icon"></i>
+                            </div>
+                        </div>
+                        <div class="auth-field">
+                            <label class="auth-label" for="reg-apellido">Apellido</label>
+                            <div class="auth-input-wrap">
+                                <input type="text" id="reg-apellido" class="auth-input" placeholder="Tu apellido" autocomplete="family-name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label class="auth-label" for="reg-email">Correo electrónico</label>
+                        <div class="auth-input-wrap">
+                            <input type="email" id="reg-email" class="auth-input" placeholder="correo@ejemplo.com" autocomplete="email">
+                            <i class="fa fa-envelope-o auth-input-icon"></i>
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label class="auth-label" for="reg-tel">Teléfono / WhatsApp</label>
+                        <div class="auth-input-wrap">
+                            <input type="tel" id="reg-tel" class="auth-input" placeholder="+51 9XX XXX XXX" autocomplete="tel">
+                            <i class="fa fa-phone auth-input-icon"></i>
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label class="auth-label" for="reg-pass">Contraseña</label>
+                        <div class="auth-input-wrap">
+                            <input type="password" id="reg-pass" class="auth-input" placeholder="Mínimo 8 caracteres" autocomplete="new-password">
+                            <i class="fa fa-eye auth-input-icon" id="toggle-reg-pass"></i>
+                        </div>
+                        <div class="auth-strength"><div class="auth-strength-fill" id="strength-bar"></div></div>
+                    </div>
+                    <div class="auth-field">
+                        <label class="auth-label" for="reg-pass2">Confirmar contraseña</label>
+                        <div class="auth-input-wrap">
+                            <input type="password" id="reg-pass2" class="auth-input" placeholder="Repite tu contraseña" autocomplete="new-password">
+                            <i class="fa fa-eye auth-input-icon" id="toggle-reg-pass2"></i>
+                        </div>
+                    </div>
+                    <div class="auth-field" style="margin-bottom:22px;">
+                        <label class="auth-check">
+                            <input type="checkbox" id="reg-terms">
+                            Acepto los <a href="terminos.html" target="_blank" style="color:#8C6B2E;">Términos y Condiciones</a> y la <a href="privacidad.html" target="_blank" style="color:#8C6B2E;">Política de Privacidad</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="auth-btn" id="reg-btn">
+                        <i class="fa fa-user-plus"></i> &nbsp;Crear Cuenta
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    ¿Ya tienes cuenta? <a href="#" class="switch-tab" data-target="login">Inicia sesión</a>
+                </div>
+            </div>
+
+            <!-- ══ PANEL RECUPERAR ══ -->
+            <div class="auth-panel" id="panel-forgot">
+                <div class="auth-logo">
+                    <img src="img/inicio/logo-principal.png" alt="Valento">
+                </div>
+                <p class="auth-panel-title">Recuperar contraseña</p>
+                <div class="auth-success" id="forgot-success" style="display:none;">
+                    <i class="fa fa-check-circle"></i>
+                    <span>¡Enviamos un enlace a tu correo!</span>
+                </div>
+                <form id="forgot-form">
+                    <div class="auth-field">
+                        <label class="auth-label">Correo electrónico</label>
+                        <div class="auth-input-wrap">
+                            <input type="email" id="forgot-email" class="auth-input" placeholder="correo@ejemplo.com">
+                            <i class="fa fa-envelope-o auth-input-icon"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="auth-btn"><i class="fa fa-paper-plane"></i> &nbsp;Enviar enlace</button>
+                </form>
+                <div class="auth-footer">
+                    <a href="#" class="switch-tab" data-target="login">&larr; Volver al inicio de sesión</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<!-- FOOTER -->
+    <footer class="vf" aria-label="Pie de página Valento">
+
+        <!-- Línea dorada superior con monograma -->
+        <div class="vf-rule" aria-hidden="true"><span class="vf-rule__mark">V</span></div>
+
+        <div class="vf-wrap">
+
+            <!-- Marca centrada -->
+            <div class="vf-brand">
+                <a href="index.html" class="vf-brand__logo"><img src="img/inicio/logo-principal.png" alt="Valento"></a>
+                <p class="vf-brand__desc">Ropa laboral, textil promocional y vestuario deportivo para empresas y colectividades. Stock permanente y prendas listas para personalizar.</p>
+                <ul class="vf-social" aria-label="Redes sociales">
+                    <li><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg></a></li>
+                    <li><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V10H6.5v3.5H9V21h3.5v-7.5H15l.5-3.5h-3V7a1 1 0 0 1 1-1H15z"/></svg></a></li>
+                    <li><a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.2 4.4 5 4.7"/></svg></a></li>
+                    <li><a href="https://wa.me/51964381275" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M4 20l1.2-4A8 8 0 1 1 8 18.8z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2z"/></svg></a></li>
+                    <li><a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.5 9.5v5l4-2.5z"/></svg></a></li>
+                </ul>
+            </div>
+
+            <!-- Columnas con divisores verticales -->
+            <div class="vf-grid">
+
+                <nav class="vf-col" aria-label="Tienda">
+                    <h5 class="vf-col__title"><span>01</span>Tienda</h5>
+                    <ul class="vf-links">
+                        <li><a href="categories.html">Ropa laboral</a></li>
+                        <li><a href="categories.html">Textil promocional</a></li>
+                        <li><a href="categories.html">Vestuario deportivo</a></li>
+                        <li><a href="categories.html">Protección personal</a></li>
+                        <li><a href="categories.html">Uniformes</a></li>
+                        <li><a href="shop-detail.html">Guía de tallas</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="vf-col" aria-label="Legales">
+                    <h5 class="vf-col__title"><span>02</span>Legales</h5>
+                    <ul class="vf-links">
+                        <li><a href="terminos.html">Términos y condiciones</a></li>
+                        <li><a href="privacidad.html">Políticas de privacidad</a></li>
+                        <li><a href="reclamaciones.html">Libro de reclamaciones</a></li>
+                    </ul>
+                    <a href="reclamaciones.html" class="vf-libro">
+                        <img src="img/icons/libro-reclamaciones.png" alt="" width="40" height="15">
+                        <span>Libro de<br>Reclamaciones</span>
+                    </a>
+                </nav>
+
+                <div class="vf-col">
+                    <h5 class="vf-col__title"><span>03</span>Contacto</h5>
+                    <ul class="vf-contact">
+                        <li>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.2-4A8 8 0 1 1 8 18.8z"/></svg>
+                            <a href="https://wa.me/51964381275" target="_blank" rel="noopener">+51 964 381 275</a>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6l8.5 7 8.5-7"/></svg>
+                            <a href="mailto:ventas@rossety.pe">ventas@rossety.pe</a>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>
+                            <span>La Victoria, Lima</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="vf-col">
+                    <h5 class="vf-col__title"><span>04</span>Horarios</h5>
+                    <dl class="vf-hours">
+                        <div><dt>Lunes — Viernes</dt><dd>8:30 am – 6:30 pm</dd></div>
+                        <div><dt>Sábado</dt><dd>9:00 am – 1:00 pm</dd></div>
+                        <div><dt>Domingo</dt><dd class="is-closed">Cerrado</dd></div>
+                    </dl>
+                </div>
+
+            </div>
+
+            <!-- Separador V + barra inferior -->
+            <div class="vf-bottom">
+                <div class="vf-sep" aria-hidden="true">
+                    <span class="vf-sep__line"></span>
+                    <svg class="vf-sep__v" viewBox="0 0 40 24"><path d="M4 2l16 20L36 2"/><path d="M11 2l9 11"/></svg>
+                    <span class="vf-sep__line"></span>
+                </div>
+                <div class="vf-bottom__row">
+                    <p class="vf-copy">&copy; <span class="vf-year">2026</span> <strong>Valento</strong>. Todos los derechos reservados.</p>
+                    <div class="vf-pay" aria-label="Métodos de pago">
+                        <span>Visa</span><span>Mastercard</span><span>Yape</span><span>Plin</span><span>BCP</span>
+                    </div>
+                    <p class="vf-bottom__tag">Semplicemente Valento <span>·</span> Zaragoza 1994</p>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+        (function () {
+            var y = document.querySelector('.vf-year');
+            if (y) y.textContent = new Date().getFullYear();
+        })();
+        </script>
+    </footer>
+
+<button type="button" class="lv-scrolltop" id="lv-scrolltop" aria-label="Volver arriba">
+        <svg class="lv-scrolltop__ring" viewBox="0 0 48 48" aria-hidden="true">
+            <circle class="lv-scrolltop__track" cx="24" cy="24" r="21" pathLength="100"/>
+            <circle class="lv-scrolltop__bar" cx="24" cy="24" r="21" pathLength="100"/>
+        </svg>
+        <span class="lv-scrolltop__pct" aria-hidden="true">0%</span>
+        <i class="fa fa-arrow-up lv-scrolltop__arrow" aria-hidden="true"></i>
+    </button>
+<div class="lv-cart-overlay" id="lv-cart-overlay"></div>
+<div class="lv-cart-sidebar" id="lv-cart-sidebar">
+    <div class="lv-cart-sidebar__head"><i class="fa fa-shopping-bag"></i><h3>Carrito</h3><button class="lv-cart-sidebar__close" id="lv-cart-close">&times;</button></div>
+    <div class="lv-cart-sidebar__body" id="lv-cart-body"><div class="lv-cart-empty"><i class="fa fa-shopping-bag"></i><span>Tu carrito está vacío</span></div></div>
+    <div class="lv-cart-sidebar__foot" id="lv-cart-foot" style="display:none;">
+        <div class="lv-cart-subtotal-row"><span class="lv-subtotal-label">Subtotal</span><span class="lv-subtotal-value" id="lv-cart-subtotal">S/ 0.00</span></div>
+        <a href="shopping-cart.html" class="lv-cart-btn-primary">Ir Al Carrito</a>
+    </div>
+</div>
+<div class="lv-wa-wrap">
+    <span class="lv-wa-pulse lv-wa-pulse--1"></span><span class="lv-wa-pulse lv-wa-pulse--2"></span>
+    <div class="lv-wa-bubble"><button class="lv-wa-close-btn">&times;</button><div class="lv-wa-bubble-header"><div class="lv-wa-bubble-avatar"><i class="fa fa-whatsapp"></i></div><div><strong>Valento</strong><span><i class="lv-wa-dot"></i> En línea ahora</span></div></div><div class="lv-wa-bubble-msg"><p>¡Hola! 👋 ¿Podemos ayudarte?</p></div><a href="https://wa.me/51964381275" target="_blank" rel="noopener" class="lv-wa-bubble-btn">Iniciar conversación <i class="fa fa-arrow-right"></i></a></div>
+    <a href="https://wa.me/51964381275" target="_blank" rel="noopener" class="lv-wa-btn"><i class="fa fa-whatsapp lv-wa-icon"></i><span class="lv-wa-label">WhatsApp</span></a>
+</div>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+(function(){
+    /* ── Tabs ── */
+    function showPanel(name) {
+        document.querySelectorAll('.auth-tab').forEach(function(t){ t.classList.toggle('active', t.dataset.panel === name); });
+        document.querySelectorAll('.auth-panel').forEach(function(p){ p.classList.remove('active'); });
+        var panel = document.getElementById('panel-' + name);
+        if (panel) panel.classList.add('active');
+    }
+    document.querySelectorAll('.auth-tab').forEach(function(t){
+        t.addEventListener('click', function(){ showPanel(this.dataset.panel); });
+    });
+    document.querySelectorAll('.switch-tab').forEach(function(a){
+        a.addEventListener('click', function(e){ e.preventDefault(); showPanel(this.dataset.target); });
+    });
+    document.getElementById('show-forgot').addEventListener('click', function(e){ e.preventDefault(); showPanel('forgot'); });
+
+    /* ── Mostrar/ocultar contraseña ── */
+    function togglePass(inputId, iconId) {
+        var inp = document.getElementById(inputId);
+        var ico = document.getElementById(iconId);
+        if (!inp || !ico) return;
+        ico.addEventListener('click', function(){
+            inp.type = inp.type === 'password' ? 'text' : 'password';
+            ico.classList.toggle('fa-eye'); ico.classList.toggle('fa-eye-slash');
+        });
+    }
+    togglePass('login-pass','toggle-login-pass');
+    togglePass('reg-pass','toggle-reg-pass');
+    togglePass('reg-pass2','toggle-reg-pass2');
+
+    /* ── Fuerza de contraseña ── */
+    document.getElementById('reg-pass').addEventListener('input', function(){
+        var v = this.value, s = 0, bar = document.getElementById('strength-bar');
+        if (v.length >= 8) s++;
+        if (/[A-Z]/.test(v)) s++;
+        if (/[0-9]/.test(v)) s++;
+        if (/[^A-Za-z0-9]/.test(v)) s++;
+        var colors = ['#e74c3c','#e67e22','#f1c40f','#27ae60'];
+        bar.style.width = (s * 25) + '%';
+        bar.style.background = colors[s-1] || '#eee';
+    });
+
+    /* ── Validación en tiempo real ── */
+    document.querySelectorAll('.auth-input').forEach(function(inp){
+        inp.addEventListener('blur', function(){
+            if (!this.value.trim()) { this.classList.add('error'); this.classList.remove('valid'); return; }
+            if (this.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) {
+                this.classList.add('error'); this.classList.remove('valid'); return;
+            }
+            this.classList.remove('error'); this.classList.add('valid');
+        });
+    });
+
+    /* ── Login submit ── */
+    document.getElementById('login-form').addEventListener('submit', function(e){
+        e.preventDefault();
+        var email = document.getElementById('login-email').value.trim();
+        var pass  = document.getElementById('login-pass').value;
+        var err   = document.getElementById('login-error');
+        err.classList.remove('show');
+        if (!email || !pass) { document.getElementById('login-error-msg').textContent = 'Por favor completa todos los campos.'; err.classList.add('show'); return; }
+        var btn = document.getElementById('login-btn');
+        btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Verificando...';
+        btn.disabled = true;
+        setTimeout(function(){
+            // Demo: cualquier email/pass válidos ingresan
+            if (email && pass.length >= 4) {
+                btn.innerHTML = '<i class="fa fa-check"></i> ¡Bienvenido!';
+                btn.style.background = '#27ae60';
+                setTimeout(function(){ window.location.href = 'index.html'; }, 1200);
+            } else {
+                document.getElementById('login-error-msg').textContent = 'Correo o contraseña incorrectos.';
+                err.classList.add('show');
+                btn.innerHTML = '<i class="fa fa-sign-in"></i> &nbsp;Ingresar';
+                btn.style.background = '';
+                btn.disabled = false;
+            }
+        }, 1200);
+    });
+
+    /* ── Registro submit ── */
+    document.getElementById('reg-form').addEventListener('submit', function(e){
+        e.preventDefault();
+        var nombre = document.getElementById('reg-nombre').value.trim();
+        var email  = document.getElementById('reg-email').value.trim();
+        var pass   = document.getElementById('reg-pass').value;
+        var pass2  = document.getElementById('reg-pass2').value;
+        var terms  = document.getElementById('reg-terms').checked;
+        var err    = document.getElementById('reg-error');
+        err.classList.remove('show');
+        if (!nombre || !email || !pass) { document.getElementById('reg-error-msg').textContent = 'Por favor completa todos los campos.'; err.classList.add('show'); return; }
+        if (pass !== pass2) { document.getElementById('reg-error-msg').textContent = 'Las contraseñas no coinciden.'; err.classList.add('show'); return; }
+        if (pass.length < 8) { document.getElementById('reg-error-msg').textContent = 'La contraseña debe tener al menos 8 caracteres.'; err.classList.add('show'); return; }
+        if (!terms) { document.getElementById('reg-error-msg').textContent = 'Debes aceptar los términos y condiciones.'; err.classList.add('show'); return; }
+        var btn = document.getElementById('reg-btn');
+        btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Creando cuenta...';
+        btn.disabled = true;
+        setTimeout(function(){
+            document.getElementById('reg-success').classList.add('show');
+            btn.innerHTML = '<i class="fa fa-check"></i> ¡Cuenta creada!';
+            btn.style.background = '#27ae60';
+            setTimeout(function(){ window.location.href = 'index.html'; }, 2000);
+        }, 1400);
+    });
+
+    /* ── Recuperar contraseña ── */
+    document.getElementById('forgot-form').addEventListener('submit', function(e){
+        e.preventDefault();
+        document.getElementById('forgot-success').style.display = 'flex';
+        this.querySelector('button').innerHTML = '<i class="fa fa-check"></i> Enviado';
+        this.querySelector('button').style.background = '#27ae60';
+        this.querySelector('button').disabled = true;
+    });
+
+    /* ── Sticky + scroll ── */
+    (function(){var sb=document.getElementById('lv-sticky-bar');function s(){var y=window.scrollY>120;document.body.classList.toggle('body-scrolled',y);if(sb)sb.classList.toggle('visible',y);}window.addEventListener('scroll',s,{passive:true});s();})();
+    
+})();
+</script>
+    <script src="js/scrolltop.js"></script>
+</body>
+</html>
+
+
+
+

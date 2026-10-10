@@ -1,0 +1,106 @@
+/* Detalles Rossety · Base: variables, reset y tipografía */
+:root {
+    --rs-red: #d62839;
+    --rs-red-dark: #a3131f;
+    --rs-red-soft: #fdecee;
+    --rs-gold: #f2c140;
+    --rs-gold-dark: #c99a1b;
+    --rs-cream: #fff8f5;
+    --rs-white: #ffffff;
+    --rs-ink: #2b1a1d;
+    --rs-muted: #7b6a6d;
+    --rs-line: #f0dcdf;
+    --rs-wa: #25d366;
+    --rs-radius: 16px;
+    --rs-radius-sm: 10px;
+    --rs-shadow: 0 6px 24px rgba(163, 19, 31, 0.10);
+    --rs-shadow-lg: 0 18px 48px rgba(163, 19, 31, 0.18);
+    --rs-font: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --rs-font-display: 'Cormorant Garamond', Georgia, serif;
+    --rs-container: 1920px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    font-family: var(--rs-font);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--rs-ink);
+    background: var(--rs-white);
+    -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+ul { list-style: none; margin: 0; padding: 0; }
+h1, h2, h3, h4, p { margin: 0; }
+h1, h2, h3 { font-family: var(--rs-font-display); line-height: 1.15; font-weight: 600; }
+
+.rs-container { width: 100%; max-width: var(--rs-container); margin: 0 auto; padding-left: clamp(16px, 5.2vw, 100px); padding-right: clamp(16px, 5.2vw, 100px); }
+.rs-section { padding: 64px 0; }
+.rs-section--cream { background: var(--rs-cream); }
+.rs-section--red { background: linear-gradient(120deg, var(--rs-red) 0%, var(--rs-red-dark) 100%); color: #fff; }
+.rs-hidden { display: none !important; }
+.rs-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.rs-no-scroll { overflow: hidden; }
+
+/* Botones */
+.rs-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 24px; border-radius: 999px; border: 1.5px solid transparent;
+    font-weight: 600; font-size: 14px; letter-spacing: .2px; line-height: 1.2;
+    transition: background .2s, color .2s, border-color .2s, transform .2s, box-shadow .2s;
+}
+.rs-btn:hover { transform: translateY(-2px); }
+.rs-btn--primary { background: var(--rs-red); color: #fff; box-shadow: 0 6px 18px rgba(214, 40, 57, .35); }
+.rs-btn--primary:hover { background: var(--rs-red-dark); }
+.rs-btn--ghost { background: #fff; color: var(--rs-red); border-color: var(--rs-red); }
+.rs-btn--ghost:hover { background: var(--rs-red); color: #fff; }
+.rs-btn--wa { background: var(--rs-wa); color: #fff; }
+.rs-btn--wa:hover { background: #1ebe5a; }
+.rs-btn--gold { background: var(--rs-gold); color: var(--rs-ink); }
+.rs-btn--gold:hover { background: var(--rs-gold-dark); color: #fff; }
+.rs-btn--light { background: #fff; color: var(--rs-red-dark); }
+.rs-btn--sm { padding: 9px 16px; font-size: 13px; }
+.rs-btn--block { width: 100%; }
+
+/* Encabezados de sección */
+.rs-head { text-align: center; max-width: 640px; margin: 0 auto 36px; }
+.rs-head__eyebrow { display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--rs-red); margin-bottom: 8px; }
+.rs-head__title { font-size: clamp(32px, 4.6vw, 46px); font-weight: 600; }
+.rs-head__text { color: var(--rs-muted); margin-top: 10px; }
+.rs-head--left { text-align: left; margin-left: 0; }
+.rs-head--light .rs-head__eyebrow, .rs-head--light .rs-head__text { color: rgba(255, 255, 255, .85); }
+
+/* Títulos de sección dinámicos: líneas laterales, divisor con corazón y animación al aparecer */
+.rs-head__eyebrow::before, .rs-head__eyebrow::after { content: ''; display: inline-block; width: 28px; height: 1.5px; margin: 0 12px; vertical-align: middle; background: currentColor; opacity: .55; transition: width .4s; }
+.rs-head:hover .rs-head__eyebrow::before, .rs-head:hover .rs-head__eyebrow::after { width: 44px; }
+.rs-head--left .rs-head__eyebrow::before { display: none; }
+.rs-head__title { position: relative; padding-bottom: 6px; }
+.rs-head__title::after { content: '\2665'; display: block; width: 170px; margin: 14px auto 0; font-size: 16px; line-height: 14px; text-align: center; color: var(--rs-red);
+    background: linear-gradient(90deg, transparent, var(--rs-red)) left center / 66px 2px no-repeat, linear-gradient(270deg, transparent, var(--rs-red)) right center / 66px 2px no-repeat; }
+.rs-head--left .rs-head__title::after { margin-left: 0; }
+.rs-head:hover .rs-head__title::after { animation: rs-head-beat .9s ease; }
+@keyframes rs-head-beat { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.18); } 70% { transform: scale(.96); } }
+.rs-head--light .rs-head__title::after, .rs-section--red .rs-head__title::after { color: var(--rs-gold); background: linear-gradient(90deg, transparent, var(--rs-gold)) left center / 66px 2px no-repeat, linear-gradient(270deg, transparent, var(--rs-gold)) right center / 66px 2px no-repeat; }
+.rs-section--red .rs-head__eyebrow, .rs-race .rs-head__eyebrow { color: var(--rs-gold); }
+@keyframes rs-beat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.35); } 60% { transform: scale(.95); } }
+
+/* Aparición al hacer scroll (la clase la agrega core.js) */
+.rs-head--anim .rs-head__eyebrow { opacity: 0; transform: translateY(-10px); transition: opacity .6s, transform .6s; }
+.rs-head--anim .rs-head__title { opacity: 0; transform: translateY(18px); transition: opacity .7s .12s, transform .7s .12s; }
+.rs-head--anim .rs-head__title::after { background-size: 0 2px, 0 2px; transition: background-size .8s .5s; }
+.rs-head--anim .rs-head__text { opacity: 0; transition: opacity .7s .3s; }
+.rs-head--in .rs-head__eyebrow, .rs-head--in .rs-head__title, .rs-head--in .rs-head__text { opacity: 1; transform: none; }
+.rs-head--in .rs-head__title::after { background-size: 66px 2px, 66px 2px; }
+@media (prefers-reduced-motion: reduce) {
+    .rs-head--anim .rs-head__eyebrow, .rs-head--anim .rs-head__title, .rs-head--anim .rs-head__text { opacity: 1; transform: none; transition: none; }
+    .rs-head--anim .rs-head__title::after { background-size: 66px 2px, 66px 2px; transition: none; }
+}
+
+@media (max-width: 768px) { .rs-section { padding: 44px 0; } }
+
+/* AOS: sin movimiento si el usuario lo pidió */
+@media (prefers-reduced-motion: reduce) { [data-aos] { opacity: 1 !important; transform: none !important; transition: none !important; } }

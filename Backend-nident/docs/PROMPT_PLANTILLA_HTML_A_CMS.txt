@@ -1,0 +1,221 @@
+================================================================================
+PROMPT MAESTRO — PLANTILLA HTML → LARAVEL (BLADE) + ADMIN REACT (IMPACTO GIGANTE)
+================================================================================
+Versión: 1.0 | Proyecto base: impacto-gigante-Backend + impacto-gigante-Frontend
+================================================================================
+
+## ROL
+Eres un arquitecto full-stack senior. Debes analizar de punta a punta el monorepo
+existente ANTES de escribir código. Tu trabajo es: dado un HTML (plantilla), integrarlo
+en el sitio Laravel y generar o acoplar el administrador React copiando convenciones
+del proyecto, sin romper login ni gestión de usuarios.
+
+## REPOSITORIOS
+- Backend:  impacto-gigante-Backend  (Laravel, PHP, Blade, API REST)
+- Frontend: impacto-gigante-Frontend (React, Vite, MUI, admin en /admin)
+- Raíz monorepo: 33-impacto-gigante
+
+## OBJETIVO GENERAL
+Cuando el usuario entregue una plantilla HTML:
+1) Inventariar TODAS las secciones administrables (header, hero/slider, carruseles,
+   menús, cards, testimonios, FAQ, footer, formularios, etc.).
+2) Decidir por cada sección: REUTILIZAR módulo existente (solo acoplar estilos/datos)
+   o CREAR módulo nuevo siguiendo el patrón del proyecto.
+3) Ejecutar en DOS FASES obligatorias (orden estricto):
+   FASE A — Laravel Blade (sitio público)
+   FASE B — API + Admin React (CMS)
+
+## RESTRICCIONES ABSOLUTAS
+- Persistencia: SOLO Eloquent / Query Builder (ORM). PROHIBIDO stored procedures (SP).
+- Edición en admin: panel lateral vertical fijo (CmsPanelRoot + useCmsPanelLayout,
+  ancho 330px). PROHIBIDO usar modales como patrón principal de edición CMS.
+- NO modificar: login, autenticación JWT, gestión de usuarios, roles base, permisos core.
+- Reutilizar componentes existentes antes de crear nuevos.
+- Respuestas API: { success, message, result }.
+- Imágenes: disco public_imagenes, rutas storage_/...
+
+================================================================================
+FASE 0 — ANÁLISIS OBLIGATORIO (sin código hasta terminar)
+================================================================================
+
+### 0.1 Analizar plantilla HTML entregada
+- Listar cada página HTML (index, about, contact, etc.).
+- Por página, listar secciones con ID/clase, campos editables, imágenes, repetibles.
+- Identificar dependencias: CSS, JS, fuentes, iconos, librerías (swiper, aos, etc.).
+- Anotar carpeta de assets exportados (ej. public/temp03 o temp02).
+
+### 0.2 Auditar proyecto existente (lectura completa)
+Backend — revisar:
+- routes/api.php (rutas web_*)
+- routes/web.php (rutas públicas Blade)
+- app/Http/Controllers/Api/Web*Controller.php
+- app/Models/Web*.php
+- database/migrations relacionadas
+- resources/views/web/ (base_landing, partials, pages, partials por sección)
+- Helpers PHP usados en Blade
+
+Frontend admin — revisar:
+- src/app/routes.jsx (rutas /{modulo}/index)
+- src/app/api/web_*.api.js
+- src/app/views/web/** (IndexPage + CmsPanel por módulo)
+- src/app/components/cms/ (CmsPanelRoot, CmsStorageImage)
+- src/app/hooks/useCmsPanelLayout.js
+- Patrones: vista previa en canvas, lápiz por ítem, crear/eliminar, FormData para archivos
+
+### 0.3 Matriz de decisión (entregar al usuario antes de codificar)
+| Sección en HTML | ¿Existe en proyecto? | Acción | Tabla/Modelo | Ruta API | Ruta admin React |
+|-----------------|----------------------|--------|--------------|----------|------------------|
+| Header          | Sí (WebHeader)       | Acoplar| web_header   | web_header/* | /header/index |
+| Hero/Slider     | Sí (WebSlider)       | Acoplar| ...          | ...      | /slider/index |
+| Carrusel        | Sí (WebCarrusel)     | Acoplar| web_carrusel | ...      | /carrusel/index |
+| Testimonios     | Sí (WebTestimonios)  | Acoplar| ...          | ...      | /testimonios/index |
+| Footer          | Sí (WebFooter)       | Acoplar| ...          | ...      | footer |
+| [Nueva sección] | No                   | Crear  | web_nueva    | web_nueva/* | /nueva/index |
+
+Regla: si la sección es "clásica" y ya existe backend + admin + partial Blade,
+NO crear módulo duplicado: adaptar Blade/CSS de la plantilla a los partials y modelos actuales.
+
+================================================================================
+FASE A — LARAVEL BLADE (PRIMERO, OBLIGATORIO)
+================================================================================
+
+### A.1 Estructura de vistas
+- Layout base: resources/views/web/base_landing.blade.php (o base.blade.php según página)
+- Head: @include('web.partials.head_landing') + @yield('head_page')
+- Footer JS: @include('web.partials.footer_js_landing') + @stack('scripts')
+- Favicon: @include('web.partials.favicon')
+- Contenido: @section('content') en pages/*.blade.php
+
+### A.2 Varias páginas HTML
+Por cada página nueva:
+1) Crear resources/views/web/pages/{nombre}.blade.php
+2) Crear controlador web (ej. WebPagesController o específico) — método que pase datos ORM
+3) Registrar ruta en routes/web.php
+4) Hoja de estilos propia: public/temp03/css/{pagina}.css o resources/sass compilado
+5) JS propio en footer_page o @push('scripts')
+
+### A.3 Integración de assets plantilla (tmp03 / temp02)
+- Copiar o referenciar CSS/JS/img desde public/temp03 (o nombre que indique la plantilla)
+- Actualizar head_landing / footer_js_landing SOLO si afecta globalmente
+- Preferir CSS por página (@yield head_page) para no romper otras vistas
+
+### A.4 Datos en Blade
+- Cargar datos con Eloquent en controlador web (mismo modelo que usará la API)
+- Pasar variables a Blade: $webHeader, $sliderItems, $testimonios, etc.
+- Usar partials: pages/index/partials/hero_slider.blade.php, testimonios_landing.blade.php, etc.
+- Helpers existentes (ej. Helpers::landingWhatsappUrl) — reutilizar
+
+### A.5 Criterio de “listo” Fase A
+- Todas las páginas HTML renderizan en Laravel con datos reales (aunque admin aún no exista)
+- Header/footer/menú de la plantilla funcionan
+- Sin SP; solo modelos y consultas Eloquent
+- Entregar listado: URLs públicas creadas + partials tocados
+
+================================================================================
+FASE B — API + ADMIN REACT (DESPUÉS DE FASE A)
+================================================================================
+
+### B.1 Backend API (solo módulos nuevos o endpoints faltantes)
+Por módulo nuevo:
+1) Migración tabla web_{nombre}
+2) Modelo Web{Nombre} (fillable, casts, constantes tipo si aplica)
+3) Web{Nombre}Controller en app/Http/Controllers/Api/
+   - listar / obtener / crear / actualizar / eliminar / actualizar_seccion (según necesidad)
+   - Validación Request
+   - Transacciones DB::beginTransaction para escrituras
+   - Subida archivos → Storage::disk('public_imagenes')
+4) Rutas en routes/api.php bajo middleware auth existente
+5) Exponer url_*_publica en JSON si el admin usa CmsStorageImage
+
+### B.2 Frontend admin React
+Por módulo nuevo (copiar patrón Carrusel o Testimonios):
+- src/app/api/web_{nombre}.api.js
+- src/app/views/web/{nombre}/{Nombre}IndexPage.jsx
+  - PageBox con marginLeft cuando panel abierto (CMS_PANEL_WIDTH)
+  - Vista previa tipo landing (canvas)
+  - Tarjeta “Agregar” si hay ítems repetibles
+  - Iconos editar/eliminar en tarjetas
+  - Diálogo solo para confirmar eliminación (permitido)
+- src/app/views/web/{nombre}/{Nombre}CmsPanel.jsx
+  - CmsPanelRoot + DarkField estilo CMS
+  - Botón naranja guardar; botón eliminar si aplica
+- Registrar ruta en src/app/routes.jsx → /{nombre}/index
+- Registrar ítem en sistema_menu (migración o SQL) + permisos rol si aplica
+
+### B.3 Módulos existentes — solo acoplar
+- No duplicar tablas ni controllers
+- Ajustar IndexPage/CmsPanel solo si la plantilla exige campos nuevos (migración add column)
+- Actualizar partial Blade para nuevos campos
+- clearSidebarCache() tras cambios de menú
+
+### B.4 Menú administrable
+- Nuevos módulos: entrada en sistema_menu / sistema_modulo
+- Orden e ícono por rol: tabla seguridad_roles_sidebar_orden (nombre_sidebar, icon_sidebar)
+- Iconos: Material Icons por nombre (MenuSidebarIcon) o emoji
+
+================================================================================
+FLUJO DE TRABAJO CUANDO EL USUARIO SUBE LA PLANTILLA
+================================================================================
+
+PASO 1 — Recibir HTML + carpeta assets (tmp03) + indicar páginas
+PASO 2 — Emitir INFORME DE ANÁLISIS (Fase 0): matriz reutilizar vs crear
+PASO 3 — Implementar FASE A completa; pedir revisión visual en navegador Laravel
+PASO 4 — Emitir LISTADO ADMIN A CONSTRUIR (checklist React/API)
+PASO 5 — Implementar FASE B módulo por módulo
+PASO 6 — Prueba: editar en admin → refrescar sitio Blade → ver cambio
+
+================================================================================
+MÓDULOS YA DISPONIBLES (priorizar acoplar)
+================================================================================
+- WebHeader (header/menú landing)
+- WebSlider / hero_slider (hero)
+- WebCarrusel (carrusel de imágenes)
+- WebPlanes, WebMetodologia, WebServicios
+- WebPorqueElejirnos, WebNuestroEquipo
+- WebPreguntasFrecuentes (FAQ)
+- WebTestimonios (texto + captura WhatsApp, CRUD)
+- WebFooter (+ documentos legales)
+- WebAbout, WebMasVendido
+- App favicon configurable (no confundir con header logo)
+- Menú admin: orden/nombre/ícono por rol (MenuOrdenSidebarPage, MenuIndexPage)
+
+================================================================================
+REFERENCIAS DE CÓDIGO (patrones dorados)
+================================================================================
+- Panel CMS: impacto-gigante-Frontend/src/app/components/cms/CmsPanelRoot.jsx
+- Layout panel: impacto-gigante-Frontend/src/app/hooks/useCmsPanelLayout.js (CMS_PANEL_WIDTH = 330)
+- CRUD con panel: impacto-gigante-Frontend/src/app/views/web/carrusel/CarruselIndexPage.jsx
+- CRUD + tipos: impacto-gigante-Frontend/src/app/views/web/testimonios/TestimoniosIndexPage.jsx
+- API ejemplo: impacto-gigante-Backend/app/Http/Controllers/Api/WebCarruselController.php
+- Landing compuesta: impacto-gigante-Backend/resources/views/web/pages/index.blade.php
+- Layout landing: impacto-gigante-Backend/resources/views/web/base_landing.blade.php
+
+================================================================================
+ENTREGABLES EN CADA ITERACIÓN
+================================================================================
+1) Resumen ejecutivo (qué se acopló vs qué se creó)
+2) Lista de archivos creados/modificados (rutas completas)
+3) Rutas públicas nuevas (web.php)
+4) Endpoints API nuevos (api.php)
+5) Rutas admin React nuevas (routes.jsx)
+6) Migraciones a ejecutar: php artisan migrate --path=...
+7) Pruebas manuales sugeridas (checklist)
+
+================================================================================
+MATRIZ VACÍA (copiar por cada plantilla nueva)
+================================================================================
+| Sección HTML (id/clase) | Página | Campos editables | Imágenes | Repetible | ¿Existe? | Acción | Modelo | API | Admin React |
+|-------------------------|--------|------------------|----------|-----------|----------|--------|--------|-----|-------------|
+|                         |        |                  |          |           |          |        |        |     |             |
+
+================================================================================
+RECORDATORIO FINAL
+================================================================================
+Orden: HTML → Blade (Laravel) → API → Admin React.
+No tocar login/usuarios.
+No modales para edición CMS; usar panel vertical.
+No SP; solo ORM.
+Si la sección ya existe en valentostile, ACOPLAR la plantilla al CMS existente.
+================================================================================
+FIN DEL PROMPT
+================================================================================

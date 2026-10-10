@@ -1,0 +1,321 @@
+/* =============================================
+   Shopping Cart Page — Valento
+   ============================================= */
+
+/* ── Layout general ──────────────────────── */
+.sc-page {
+    padding: 30px 0 60px;
+}
+.sc-page__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #efefef;
+}
+
+/* ── Grid: tabla izquierda + resumen derecha ─ */
+.sc-layout {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+}
+.sc-layout__main  { flex: 1; min-width: 0; }
+.sc-layout__aside { width: 320px; flex-shrink: 0; }
+
+/* ── Tabla de productos ───────────────────── */
+.sc-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.sc-table thead tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+.sc-table thead th {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888;
+    padding: 10px 12px;
+    text-align: left;
+}
+.sc-table thead th.th-price,
+.sc-table thead th.th-qty,
+.sc-table thead th.th-total { text-align: center; }
+
+/* Fila de producto */
+.sc-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+.sc-table tbody tr:last-child { border-bottom: none; }
+
+.sc-table td { padding: 18px 12px; vertical-align: middle; }
+
+/* Celda producto */
+.sc-prod-cell {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.sc-prod-img {
+    width: 80px;
+    height: 90px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #f5f5f5;
+}
+.sc-prod-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+}
+
+/* Celda precio */
+.sc-price-cell { text-align: center; }
+.sc-price-old {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: #bbb;
+    text-decoration: line-through;
+    display: block;
+}
+.sc-price-from { font-family: 'Montserrat', sans-serif; font-size: 11px; color: #999; }
+.sc-price-por  { font-family: 'Montserrat', sans-serif; font-size: 11px; color: #999; }
+.sc-price-new {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    display: block;
+}
+
+/* Celda cantidad */
+.sc-qty-cell { text-align: center; }
+.sc-qty-ctrl {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.sc-qty-ctrl button {
+    width: 32px;
+    height: 32px;
+    background: #f5f5f5;
+    border: none;
+    font-size: 16px;
+    font-weight: 300;
+    cursor: pointer;
+    color: #444;
+    transition: background .15s;
+}
+.sc-qty-ctrl button:hover { background: #e8e8e8; }
+.sc-qty-ctrl span {
+    width: 38px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    line-height: 32px;
+}
+
+/* Celda total */
+.sc-total-cell {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+/* Celda eliminar */
+.sc-del-cell { text-align: center; }
+.sc-del-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ccc;
+    font-size: 17px;
+    transition: color .2s;
+    padding: 4px;
+}
+.sc-del-btn:hover { color: #8C6B2E; }
+
+/* Estado vacío */
+.sc-empty {
+    text-align: center;
+    padding: 60px 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #bbb;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+.sc-empty i { font-size: 48px; display: block; margin-bottom: 16px; }
+
+/* ── Panel derecho (resumen) ─────────────── */
+.sc-aside-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+    padding: 0 0 4px;
+}
+
+/* Botón cupón */
+.sc-coupon-btn {
+    display: block;
+    width: calc(100% - 32px);
+    margin: 18px 16px 20px;
+    padding: 11px 16px;
+    background: #fff;
+    border: 2px solid #8C6B2E;
+    border-radius: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #8C6B2E;
+    cursor: pointer;
+    text-align: center;
+    transition: background .2s, color .2s;
+}
+.sc-coupon-btn:hover { background: #8C6B2E; color: #fff; }
+
+/* Línea separadora */
+.sc-aside-divider {
+    border: none;
+    border-top: 1px solid #efefef;
+    margin: 0 0 18px;
+}
+
+/* Título resumen */
+.sc-summary-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #1a1a1a;
+    margin: 0 16px 18px;
+}
+
+/* Filas subtotal/total */
+.sc-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: #555;
+}
+.sc-summary-row .label { font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; }
+.sc-summary-row .value { font-weight: 600; color: #1a1a1a; }
+.sc-summary-row.total-row .label,
+.sc-summary-row.total-row .value { font-weight: 700; font-size: 14px; color: #1a1a1a; }
+.sc-summary-row.total-row { margin-top: 4px; border-top: 1px solid #efefef; padding-top: 14px; }
+
+/* Nota importante */
+.sc-important-note {
+    margin: 16px 16px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: #666;
+    line-height: 1.6;
+}
+.sc-important-note strong { color: #1a1a1a; }
+
+/* Botón Continuar */
+.sc-continue-btn {
+    display: block;
+    margin: 0 16px 12px;
+    width: calc(100% - 32px);
+    padding: 15px;
+    background: #172144;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    transition: background .25s ease, color .25s ease, transform .15s ease, box-shadow .25s ease;
+    text-decoration: none;
+}
+.sc-continue-btn:hover,
+.sc-continue-btn:active { background: #8C6B2E; color: #fff; text-decoration: none; box-shadow: 0 4px 14px rgba(140, 107, 46, 0.35); }
+
+/* Seguir comprando */
+.sc-keep-shopping {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #8C6B2E;
+    text-decoration: none;
+    padding: 6px 16px 12px;
+    transition: opacity .2s, color .2s;
+}
+.sc-keep-shopping:hover { opacity: .75; color: #172144; text-decoration: none; }
+
+/* ── Cupón (input oculto que aparece) ──── */
+.sc-coupon-wrap {
+    display: none;
+    padding: 0 16px 16px;
+}
+.sc-coupon-wrap.open { display: flex; gap: 8px; }
+.sc-coupon-input {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 9px 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    outline: none;
+}
+.sc-coupon-apply {
+    padding: 9px 16px;
+    background: #172144;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    letter-spacing: 1px;
+    transition: background .25s ease;
+}
+.sc-coupon-apply:hover { background: #8C6B2E; }
+
+/* ── Responsive ───────────────────────── */
+@media (max-width: 991px) {
+    .sc-layout { flex-direction: column; }
+    .sc-layout__aside { width: 100%; }
+}
+@media (max-width: 575px) {
+    .sc-table thead th.th-price,
+    .sc-table thead th.th-qty { display: none; }
+    .sc-table td.td-price,
+    .sc-table td.td-qty { display: none; }
+    .sc-total-cell { font-size: 12px; }
+}

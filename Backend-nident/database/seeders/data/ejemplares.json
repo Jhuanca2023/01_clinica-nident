@@ -1,0 +1,388 @@
+{
+  "secciones": [
+    {
+      "slug": "pagina_web",
+      "anchor_id": "ejemplares",
+      "etiqueta": "Ejemplares",
+      "titulo": "Página web",
+      "titulo_destacado": "profesional",
+      "subtitulo": "Quince ejemplos reales de páginas web profesionales listas para tu negocio.",
+      "conteo_nav": 15,
+      "orden": 1
+    },
+    {
+      "slug": "landing_page",
+      "anchor_id": "ejemplares-landing",
+      "etiqueta": "Ejemplares",
+      "titulo": "Landing page",
+      "titulo_destacado": "profesional",
+      "subtitulo": "Siete landing pages enfocadas en conversión para campañas, lanzamientos y captación de clientes.",
+      "conteo_nav": 7,
+      "orden": 2
+    },
+    {
+      "slug": "tienda_virtual",
+      "anchor_id": "ejemplares-tienda",
+      "etiqueta": "Ejemplares",
+      "titulo": "Tienda",
+      "titulo_destacado": "virtual",
+      "subtitulo": "Diez tiendas virtuales con catálogo, carrito y pagos listas para vender en línea.",
+      "conteo_nav": 10,
+      "orden": 3
+    }
+  ],
+  "items": [
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "arkitektur",
+      "nombre": "Arkitektur",
+      "descripcion": "Sitio corporativo para estudios de arquitectura: portafolio de proyectos, servicios de diseño interior y contacto profesional.",
+      "url_imagen": "img/ejemplares/pagina_web/01-arkitektur.png",
+      "numero_badge": "01",
+      "overlay_texto": "Arquitectura e interiorismo",
+      "url_demo": "sites/pagina_web/1-arkitektur/index.html",
+      "orden": 1
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "cakezone",
+      "nombre": "CakeZone",
+      "descripcion": "Web gastronómica con catálogo de tortas, menú de productos, promociones y sección para pedidos o reservas.",
+      "url_imagen": "img/ejemplares/pagina_web/02-cakezone.png",
+      "numero_badge": "02",
+      "overlay_texto": "Pastelería y repostería",
+      "url_demo": "sites/pagina_web/2-cakezone/index.html",
+      "orden": 2
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "carbook",
+      "nombre": "Carbook",
+      "descripcion": "Plataforma de renta de autos con formulario de reserva, flota disponible, precios y contacto para agencias de alquiler.",
+      "url_imagen": "img/ejemplares/pagina_web/03-carbook.png",
+      "numero_badge": "03",
+      "overlay_texto": "Alquiler de vehículos",
+      "url_demo": "sites/pagina_web/3-carbook/index.html",
+      "orden": 3
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "carserv",
+      "nombre": "CarServ",
+      "descripcion": "Página para talleres automotrices: servicios de reparación, mantenimiento, citas en línea y confianza para tus clientes.",
+      "url_imagen": "img/ejemplares/pagina_web/04-carserv.png",
+      "numero_badge": "04",
+      "overlay_texto": "Taller y lavado de autos",
+      "url_demo": "sites/pagina_web/4-carserv/index.html",
+      "orden": 4
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "clinic",
+      "nombre": "Clinic",
+      "descripcion": "Centro médico con servicios, especialidades, citas en línea y equipo de profesionales de la salud.",
+      "url_imagen": "img/ejemplares/pagina_web/05-clinic.png",
+      "numero_badge": "05",
+      "overlay_texto": "Clínica y salud",
+      "url_demo": "sites/pagina_web/5-Clinic/index.html",
+      "orden": 5
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "constra",
+      "nombre": "Constra",
+      "descripcion": "Empresa constructora con portafolio de proyectos, servicios de ingeniería y formulario de contacto.",
+      "url_imagen": "img/ejemplares/pagina_web/06-constra.png",
+      "numero_badge": "06",
+      "overlay_texto": "Construcción y obras",
+      "url_demo": "sites/pagina_web/6-constra/index.html",
+      "orden": 6
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "elearning",
+      "nombre": "eLEARNING",
+      "descripcion": "Plataforma de cursos en línea con clases, instructores, inscripciones y certificaciones digitales.",
+      "url_imagen": "img/ejemplares/pagina_web/07-elearning.png",
+      "numero_badge": "07",
+      "overlay_texto": "Educación online",
+      "url_demo": "sites/pagina_web/7-elearning/index.html",
+      "orden": 7
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "fitnessclub",
+      "nombre": "Fitness Club",
+      "descripcion": "Web para gimnasios con planes de membresía, clases, entrenadores y promociones de bienestar.",
+      "url_imagen": "img/ejemplares/pagina_web/08-fitnessclub.png",
+      "numero_badge": "08",
+      "overlay_texto": "Gimnasio y fitness",
+      "url_demo": "sites/pagina_web/8-fitnessclub/index.html",
+      "orden": 8
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "healthcoach",
+      "nombre": "Health Coach",
+      "descripcion": "Sitio para coaches de salud con programas, nutricion, testimonios y reserva de consultas.",
+      "url_imagen": "img/ejemplares/pagina_web/09-healthcoach.png",
+      "numero_badge": "09",
+      "overlay_texto": "Salud y bienestar",
+      "url_demo": "sites/pagina_web/9-healthcoach/index.html",
+      "orden": 9
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "makan",
+      "nombre": "Makaan",
+      "descripcion": "Portal inmobiliario con listado de propiedades, agentes, búsqueda y formulario de contacto.",
+      "url_imagen": "img/ejemplares/pagina_web/10-makan.png",
+      "numero_badge": "10",
+      "overlay_texto": "Inmobiliaria",
+      "url_demo": "sites/pagina_web/10-makan/index.html",
+      "orden": 10
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "kider",
+      "nombre": "Kider",
+      "descripcion": "Guardería y preescolar con información de programas, docentes, actividades y admisiones.",
+      "url_imagen": "img/ejemplares/pagina_web/11-kider.png",
+      "numero_badge": "11",
+      "overlay_texto": "Educación infantil",
+      "url_demo": "sites/pagina_web/11-kider/index.html",
+      "orden": 11
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "wilcon",
+      "nombre": "Wilcon",
+      "descripcion": "Constructora con servicios de calidad, proyectos realizados y presencia corporativa profesional.",
+      "url_imagen": "img/ejemplares/pagina_web/12-wilcon.png",
+      "numero_badge": "12",
+      "overlay_texto": "Empresa constructora",
+      "url_demo": "sites/pagina_web/12-wilcon/index.html",
+      "orden": 12
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "plumberz",
+      "nombre": "Plumberz",
+      "descripcion": "Servicios de plomería con emergencias 24/7, tarifas, galería de trabajos y solicitud de visita.",
+      "url_imagen": "img/ejemplares/pagina_web/13-plumberz.png",
+      "numero_badge": "13",
+      "overlay_texto": "Plomería y gasfitería",
+      "url_demo": "sites/pagina_web/13-Plumberz/index.html",
+      "orden": 13
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "smartedu",
+      "nombre": "SmartEdu",
+      "descripcion": "Academia digital con cursos, docentes, eventos y recursos para estudiantes en línea.",
+      "url_imagen": "img/ejemplares/pagina_web/14-smartedu.png",
+      "numero_badge": "14",
+      "overlay_texto": "Cursos y formación",
+      "url_demo": "sites/pagina_web/14-smartedu/index.html",
+      "orden": 14
+    },
+    {
+      "seccion_slug": "pagina_web",
+      "slug": "kiddos",
+      "nombre": "Kiddos",
+      "descripcion": "Centro infantil con actividades, horarios, equipo docente y sección para padres de familia.",
+      "url_imagen": "img/ejemplares/pagina_web/15-kiddos.png",
+      "numero_badge": "15",
+      "overlay_texto": "Guardería infantil",
+      "url_demo": "sites/pagina_web/15-kiddos/index.html",
+      "orden": 15
+    },
+    {
+      "seccion_slug": "landing_page",
+      "slug": "lp-autoroad",
+      "nombre": "Autoroad",
+      "descripcion": "Landing de renta de vehículos con reserva rápida, flota destacada y llamados a la acción claros.",
+      "url_imagen": "img/ejemplares/landing_page/01-autoroad.png",
+      "numero_badge": "01",
+      "overlay_texto": "Alquiler de autos",
+      "url_demo": "sites/landing_page/1-autoroad/index.html",
+      "orden": 1
+    },
+    {
+      "seccion_slug": "landing_page",
+      "slug": "lp-bustraveller",
+      "nombre": "BusTraveller",
+      "descripcion": "Página de conversión para agencias de buses: rutas, paquetes turísticos y reserva de viajes.",
+      "url_imagen": "img/ejemplares/landing_page/02-bustraveller.png",
+      "numero_badge": "02",
+      "overlay_texto": "Viajes en bus",
+      "url_demo": "sites/landing_page/2-BusTraveller/index.html",
+      "orden": 2
+    },
+    {
+      "seccion_slug": "landing_page",
+      "slug": "lp-cental",
+      "nombre": "Cental",
+      "descripcion": "Landing automotriz con catálogo de autos, formulario de alquiler y diseño orientado a ventas.",
+      "url_imagen": "img/ejemplares/landing_page/03-cental.png",
+      "numero_badge": "03",
+      "overlay_texto": "Renta de vehículos",
+      "url_demo": "sites/landing_page/3-Cental/index.html",
+      "orden": 3
+    },
+    {
+      "seccion_slug": "landing_page",
+      "slug": "lp-hexashop",
+      "nombre": "HexaShop",
+      "descripcion": "Landing e-commerce para lanzar productos, promociones y captar clientes desde campañas digitales.",
+      "url_imagen": "img/ejemplares/landing_page/04-hexashop.png",
+      "numero_badge": "04",
+      "overlay_texto": "Tienda online",
+      "url_demo": "sites/landing_page/5-hexashop/index.html",
+      "orden": 4
+    },
+    {
+      "seccion_slug": "landing_page",
+      "slug": "lp-hvac",
+      "nombre": "HVAC",
+      "descripcion": "Landing de servicios HVAC: instalación, mantenimiento y citas con enfoque en generar contactos.",
+      "url_imagen": "img/ejemplares/landing_page/05-hvac.png",
+      "numero_badge": "05",
+      "overlay_texto": "Climatización",
+      "url_demo": "sites/landing_page/6-hvac-new/index.html",
+      "orden": 5
+    },
+    {
+      "seccion_slug": "landing_page",
+      "slug": "lp-medilab",
+      "nombre": "MediLab",
+      "descripcion": "Landing de salud para laboratorios y clínicas: servicios, confianza y solicitud de citas en un solo scroll.",
+      "url_imagen": "img/ejemplares/landing_page/06-medilab.png",
+      "numero_badge": "06",
+      "overlay_texto": "Laboratorio médico",
+      "url_demo": "sites/landing_page/7-MediLab/index.html",
+      "orden": 6
+    },
+    {
+      "seccion_slug": "landing_page",
+      "slug": "lp-waterland",
+      "nombre": "WaterLand",
+      "descripcion": "Landing recreativa para parques y diversión: atracciones, entradas y reservas para familias.",
+      "url_imagen": "img/ejemplares/landing_page/07-waterland.png",
+      "numero_badge": "07",
+      "overlay_texto": "Parque acuático",
+      "url_demo": "sites/landing_page/8-WaterLand/index.html",
+      "orden": 7
+    },
+    {
+      "seccion_slug": "tienda_virtual",
+      "slug": "tv-feane",
+      "nombre": "Feane",
+      "descripcion": "Tienda virtual gastronómica con menú, carrito de pedidos, reservas y delivery para restaurantes.",
+      "url_imagen": "img/ejemplares/tienda_virtual/01-feane.png",
+      "numero_badge": "01",
+      "overlay_texto": "Restaurante y delivery",
+      "url_demo": "sites/tienda_virtual/1-feane/index.html",
+      "orden": 1
+    },
+    {
+      "seccion_slug": "tienda_virtual",
+      "slug": "tv-freshcart",
+      "nombre": "FreshCart",
+      "descripcion": "E-commerce de abarrotes con categorías, productos, ofertas y carrito para compras del hogar.",
+      "url_imagen": "img/ejemplares/tienda_virtual/02-freshcart.png",
+      "numero_badge": "02",
+      "overlay_texto": "Supermercado online",
+      "url_demo": "sites/tienda_virtual/2-freshcart/index.html",
+      "orden": 2
+    },
+    {
+      "seccion_slug": "tienda_virtual",
+      "slug": "tv-hvac-tv",
+      "nombre": "Auto Shop",
+      "descripcion": "Tienda de autos con catálogo, comparación de modelos, cotización y formulario de contacto.",
+      "url_imagen": "img/ejemplares/tienda_virtual/03-hvac.png",
+      "numero_badge": "03",
+      "overlay_texto": "Venta de vehículos",
+      "url_demo": "sites/tienda_virtual/3-hvac/index.html",
+      "orden": 3
+    },
+    {
+      "seccion_slug": "tienda_virtual",
+      "slug": "tv-vaultedge",
+      "nombre": "VaultEdge",
+      "descripcion": "Tienda de servicios financieros con planes, asesoría, testimonios y captación de clientes online.",
+      "url_imagen": "img/ejemplares/tienda_virtual/04-vaultedge.png",
+      "numero_badge": "04",
+      "overlay_texto": "Servicios premium",
+      "url_demo": "sites/tienda_virtual/4-vaultedge/index.html",
+      "orden": 4
+    },
+    {
+      "seccion_slug": "tienda_virtual",
+      "slug": "tv-waggy",
+      "nombre": "Waggy",
+      "descripcion": "E-commerce para mascotas: productos, categorías, ofertas y checkout para pet shops.",
+      "url_imagen": "img/ejemplares/tienda_virtual/05-waggy.png",
+      "numero_badge": "05",
+      "overlay_texto": "Mascotas y accesorios",
+      "url_demo": "sites/tienda_virtual/5-waggy/index.html",
+      "orden": 5
+    },
+    {
+      "seccion_slug": "tienda_virtual",
+      "slug": "tv-cupcakes-sweet-jumpseller",
+      "nombre": "Cupcakes Sweet",
+      "descripcion": "Tienda demo sobre Jumpseller (tema Sweet): categorías de dulces, carrito multi-moneda y blog como referencia para pastelerías.",
+      "url_imagen": "img/ejemplares/cupcakes-sweet.png",
+      "numero_badge": "06",
+      "overlay_texto": "Jumpseller · dulcería online",
+      "url_demo": "https://cupcakes-sweet.jumpseller.com",
+      "orden": 6
+    },
+    {
+      "seccion_slug": "tienda_virtual",
+      "slug": "tv-hly",
+      "nombre": "HLY",
+      "descripcion": "Catálogo de bordadoras tubulares y cama plana con fichas técnicas, cotización y contacto para producción textil industrial.",
+      "url_imagen": "img/ejemplares/hly.png",
+      "numero_badge": "07",
+      "overlay_texto": "Máquinas de bordado",
+      "url_demo": "https://hly.pe/",
+      "orden": 7
+    },
+    {
+      "seccion_slug": "tienda_virtual",
+      "slug": "tv-capre",
+      "nombre": "Capre Perú",
+      "descripcion": "Tienda online de sillas ergonómicas, mochilas y productos para hogar con ofertas, carrito y envíos a todo el Perú.",
+      "url_imagen": "img/ejemplares/capre.png",
+      "numero_badge": "08",
+      "overlay_texto": "Hogar y ergonomía",
+      "url_demo": "https://capre.pe/",
+      "orden": 8
+    },
+    {
+      "seccion_slug": "tienda_virtual",
+      "slug": "tv-prestomart",
+      "nombre": "PrestoMart",
+      "descripcion": "Supermercado virtual con abarrotes, bebidas, limpieza y ofertas del día; carrito, Yape y delivery a domicilio.",
+      "url_imagen": "img/ejemplares/prestomart.png",
+      "numero_badge": "09",
+      "overlay_texto": "Minimarket online",
+      "url_demo": "https://prestomartperu.com/",
+      "orden": 9
+    },
+    {
+      "seccion_slug": "tienda_virtual",
+      "slug": "tv-kristec",
+      "nombre": "Kristec Autoparts",
+      "descripcion": "E-commerce de repuestos Hilux, sensores 4x4 y accesorios de diagnóstico automotriz con checkout en soles.",
+      "url_imagen": "img/ejemplares/kristec.png",
+      "numero_badge": "10",
+      "overlay_texto": "Repuestos automotrices",
+      "url_demo": "https://kristecautoparts.com/",
+      "orden": 10
+    }
+  ]
+}

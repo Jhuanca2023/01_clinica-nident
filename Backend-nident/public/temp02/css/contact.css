@@ -1,0 +1,466 @@
+/* =============================================
+   Contact Page — Valento
+   ============================================= */
+
+/* ── Hero compacto ───────────────────────── */
+.ct-hero {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ct-hero__bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1600&q=80') center/cover no-repeat;
+    transform: scale(1.06);
+    transition: transform 5s ease;
+}
+.ct-hero__bg.zoomed { transform: scale(1); }
+.ct-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,.75) 0%, rgba(30,30,30,.5) 100%);
+}
+.ct-hero__content {
+    position: relative;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .8s ease .2s, transform .8s ease .2s;
+}
+.ct-hero__content.visible { opacity: 1; transform: translateY(0); }
+.ct-hero__tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.65);
+    display: block;
+    margin-bottom: 12px;
+}
+.ct-hero__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.ct-hero__title span { color: #e7b669; }
+.ct-hero__sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,.75);
+}
+
+/* ── Sección principal ───────────────────── */
+.ct-main { padding: 60px 0 0; }
+
+/* ── Info cards fila ─────────────────────── */
+.ct-info-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 60px;
+}
+.ct-info-card {
+    background: #fff;
+    border: 1px solid #efefef;
+    border-radius: 8px;
+    padding: 30px 22px;
+    text-align: center;
+    transition: transform .3s, box-shadow .3s, border-color .3s;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .5s ease, transform .5s ease, box-shadow .3s, border-color .3s;
+}
+.ct-info-card.visible { opacity: 1; transform: translateY(0); }
+.ct-info-card:hover {
+    box-shadow: 0 12px 32px rgba(0,0,0,.09);
+    border-color: #8C6B2E;
+}
+.ct-info-card__icon {
+    width: 56px;
+    height: 56px;
+    background: #fff0ee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 22px;
+    color: #8C6B2E;
+    transition: background .3s;
+}
+.ct-info-card:hover .ct-info-card__icon { background: #8C6B2E; color: #fff; }
+.ct-info-card__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+.ct-info-card__text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: #777;
+    line-height: 1.7;
+}
+.ct-info-card__text a {
+    color: #8C6B2E;
+    text-decoration: none;
+    font-weight: 600;
+}
+.ct-info-card__text a:hover { text-decoration: underline; }
+
+/* ── Layout formulario + extra ───────────── */
+.ct-form-layout {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 50px;
+    margin-bottom: 0;
+    align-items: flex-start;
+}
+
+/* ── Formulario ──────────────────────────── */
+.ct-form-wrap {
+    background: #fff;
+    border: 1px solid #efefef;
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.05);
+}
+.ct-form-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: #1a1a1a;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+.ct-form-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 28px;
+}
+
+.ct-row { display: flex; gap: 16px; margin-bottom: 18px; }
+.ct-row.single { flex-direction: column; }
+.ct-field { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.ct-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #555;
+}
+.ct-input,
+.ct-textarea,
+.ct-select {
+    width: 100%;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 11px 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: #333;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    background: #fafafa;
+    appearance: none;
+}
+.ct-input::placeholder,
+.ct-textarea::placeholder { color: #bbb; }
+.ct-input:focus,
+.ct-textarea:focus,
+.ct-select:focus {
+    border-color: #8C6B2E;
+    box-shadow: 0 0 0 3px rgba(192,57,43,.08);
+    background: #fff;
+}
+.ct-textarea { resize: vertical; min-height: 130px; }
+
+/* Selector asunto */
+.ct-select-wrap { position: relative; }
+.ct-select-wrap::after {
+    content: '\f107';
+    font-family: FontAwesome;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none;
+}
+
+/* Checkbox términos */
+.ct-check-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: #666;
+    line-height: 1.5;
+}
+.ct-check-row input { accent-color: #8C6B2E; margin-top: 2px; flex-shrink: 0; }
+.ct-check-row a { color: #8C6B2E; text-decoration: underline; }
+
+/* Botón enviar */
+.ct-submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px;
+    background: #172144;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .25s ease, transform .15s ease, box-shadow .25s ease;
+    position: relative;
+    overflow: hidden;
+}
+.ct-submit-btn:hover { background: #8C6B2E; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(140, 107, 46, 0.35); }
+.ct-submit-btn:active { transform: translateY(0); }
+
+/* Ripple effect */
+.ct-submit-btn::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,.3);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width .4s ease, height .4s ease, opacity .4s ease;
+    opacity: 0;
+}
+.ct-submit-btn:active::after { width: 300px; height: 300px; opacity: 1; }
+
+/* Mensaje de éxito */
+.ct-success-msg {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    border-radius: 6px;
+    margin-top: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: #2e7d32;
+    font-weight: 600;
+}
+.ct-success-msg i { font-size: 20px; display: block; margin-bottom: 8px; }
+
+/* ── Panel derecho ───────────────────────── */
+.ct-side-panel { display: flex; flex-direction: column; gap: 20px; }
+
+/* WhatsApp directo */
+.ct-wa-card {
+    background: linear-gradient(135deg, #1a5c3a, #0d3d27);
+    border-radius: 8px;
+    padding: 28px 24px;
+    color: #fff;
+    text-align: center;
+}
+.ct-wa-card i { font-size: 36px; color: #25d366; margin-bottom: 12px; display: block; }
+.ct-wa-card h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.ct-wa-card p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,.75);
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+.ct-wa-btn {
+    display: block;
+    padding: 12px;
+    background: #25d366;
+    color: #fff;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    text-decoration: none;
+    transition: background .2s;
+}
+.ct-wa-btn:hover { background: #1da851; color: #fff; text-decoration: none; }
+
+/* Redes sociales */
+.ct-social-card {
+    background: #fff;
+    border: 1px solid #efefef;
+    border-radius: 8px;
+    padding: 24px;
+}
+.ct-social-card h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+    text-align: center;
+}
+.ct-social-list {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.ct-social-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    transition: transform .2s, opacity .2s;
+}
+.ct-social-btn:hover { transform: scale(1.12); opacity: .9; text-decoration: none; color: #fff; }
+.ct-social-btn.fb  { background: #1877f2; }
+.ct-social-btn.ig  { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.ct-social-btn.tt  { background: #010101; }
+.ct-social-btn.wa  { background: #25d366; }
+.ct-social-btn.yt  { background: #ff0000; }
+
+/* Horario */
+.ct-hours-card {
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 22px 24px;
+}
+.ct-hours-card h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin-bottom: 14px;
+}
+.ct-hours-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+.ct-hours-row:last-child { border-bottom: none; }
+.ct-hours-row .day { font-weight: 600; color: #1a1a1a; }
+.ct-hours-row .time { color: #8C6B2E; font-weight: 600; }
+
+/* ── Mapa ────────────────────────────────── */
+.ct-map-section {
+    margin-top: 60px;
+    position: relative;
+}
+.ct-map-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+.ct-map-header span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #8C6B2E;
+    display: block;
+    margin-bottom: 8px;
+}
+.ct-map-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #1a1a1a;
+    letter-spacing: 1px;
+}
+.ct-map-wrap {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,.12);
+}
+.ct-map-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+/* Overlay info sobre el mapa */
+.ct-map-info {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: rgba(255,255,255,.97);
+    border-radius: 8px;
+    padding: 18px 22px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.15);
+    min-width: 220px;
+}
+.ct-map-info h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+}
+.ct-map-info p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+.ct-map-info p i { color: #8C6B2E; margin-right: 5px; }
+
+/* ── Responsive ──────────────────────────── */
+@media (max-width: 991px) {
+    .ct-info-row { grid-template-columns: repeat(2, 1fr); }
+    .ct-form-layout { grid-template-columns: 1fr; }
+    .ct-side-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .ct-wa-card { grid-column: 1 / -1; }
+}
+@media (max-width: 575px) {
+    .ct-row { flex-direction: column; }
+    .ct-info-row { grid-template-columns: 1fr 1fr; }
+    .ct-form-wrap { padding: 24px 18px; }
+    .ct-side-panel { grid-template-columns: 1fr; }
+    .ct-map-wrap { height: 300px; }
+}

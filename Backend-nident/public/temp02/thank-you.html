@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>Valento | Pedido Confirmado</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header-custom.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/footer-luxe.css">
+    <link rel="stylesheet" href="css/scrolltop.css">
+    <link rel="stylesheet" href="css/whatsapp.css">
+    <link rel="stylesheet" href="css/cart-modal.css">
+    <style>
+    /* ══ Thank You Page ══ */
+    .ty-page { padding: 50px 0 70px; background: #f7f7f7; min-height: calc(100vh - 260px); }
+
+    /* ── Hero éxito ── */
+    .ty-hero {
+        text-align: center;
+        padding: 40px 20px 36px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 24px rgba(0,0,0,.07);
+        margin-bottom: 28px;
+        position: relative;
+        overflow: hidden;
+    }
+    .ty-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #27ae60, #2ecc71);
+    }
+    .ty-check-circle {
+        width: 80px; height: 80px;
+        background: linear-gradient(135deg, #27ae60, #2ecc71);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 20px;
+        box-shadow: 0 8px 24px rgba(39,174,96,.35);
+        animation: popIn .5s cubic-bezier(.175,.885,.32,1.275) both;
+    }
+    @keyframes popIn { 0%{transform:scale(0);opacity:0} 100%{transform:scale(1);opacity:1} }
+    .ty-check-circle i { font-size: 36px; color: #fff; }
+    .ty-hero__title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 26px;
+        font-weight: 800;
+        color: #1a1a1a;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+    .ty-hero__sub {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 13px;
+        color: #777;
+        margin-bottom: 18px;
+        line-height: 1.6;
+    }
+    .ty-order-badge {
+        display: inline-block;
+        background: #f0f7f0;
+        border: 1.5px solid #a5d6a7;
+        color: #2e7d32;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 7px 20px;
+        border-radius: 20px;
+        letter-spacing: 1px;
+    }
+
+    /* ── Layout 2 cols ── */
+    .ty-layout {
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 24px;
+        align-items: flex-start;
+    }
+
+    /* ── Card genérica ── */
+    .ty-card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 14px rgba(0,0,0,.06);
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+    .ty-card__head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 20px;
+        border-bottom: 1px solid #f0f0f0;
+        background: #fafafa;
+    }
+    .ty-card__head i { color: #8C6B2E; font-size: 16px; }
+    .ty-card__head h3 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #1a1a1a;
+        margin: 0;
+    }
+    .ty-card__body { padding: 20px; }
+
+    /* ── Tabla datos ── */
+    .ty-data-table { width: 100%; }
+    .ty-data-table tr td {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        padding: 7px 0;
+        border-bottom: 1px solid #f5f5f5;
+        line-height: 1.5;
+    }
+    .ty-data-table tr:last-child td { border-bottom: none; }
+    .ty-data-table td:first-child { color: #999; font-weight: 600; letter-spacing: 0.5px; width: 140px; }
+    .ty-data-table td:last-child { color: #1a1a1a; font-weight: 600; }
+
+    /* ── Productos del pedido ── */
+    .ty-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .ty-item:last-child { border-bottom: none; }
+    .ty-item__img { width: 60px; height: 68px; object-fit: cover; border-radius: 4px; background: #f5f5f5; flex-shrink: 0; }
+    .ty-item__info { flex: 1; }
+    .ty-item__name {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        color: #1a1a1a;
+        letter-spacing: 0.5px;
+        margin-bottom: 3px;
+    }
+    .ty-item__meta { font-family: 'Montserrat', sans-serif; font-size: 11px; color: #999; }
+    .ty-item__price {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: #8C6B2E;
+        white-space: nowrap;
+    }
+
+    /* ── Resumen ── */
+    .ty-summary-row {
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        padding: 7px 0;
+        border-bottom: 1px solid #f0f0f0;
+        color: #555;
+    }
+    .ty-summary-row:last-child { border-bottom: none; }
+    .ty-summary-row .label { font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; font-size: 11px; }
+    .ty-summary-row .value { font-weight: 600; color: #1a1a1a; }
+    .ty-summary-row.total .label,
+    .ty-summary-row.total .value { font-size: 15px; font-weight: 800; color: #1a1a1a; }
+    .ty-summary-row.total { border-top: 2px solid #efefef; padding-top: 12px; margin-top: 4px; }
+
+    /* ── Botones acción ── */
+    .ty-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 0;
+    }
+    .ty-btn-primary {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        padding: 14px;
+        background: #8C6B2E;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background .2s;
+    }
+    .ty-btn-primary:hover { background: #a93226; color: #fff; text-decoration: none; }
+    .ty-btn-secondary {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        padding: 13px;
+        background: #fff;
+        color: #1a1a1a;
+        border: 1.5px solid #ddd;
+        border-radius: 4px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        text-decoration: none;
+        transition: border-color .2s, color .2s;
+    }
+    .ty-btn-secondary:hover { border-color: #1a1a1a; color: #1a1a1a; text-decoration: none; }
+
+    /* WA card */
+    .ty-wa-card {
+        background: linear-gradient(135deg, #1a5c3a, #0d3d27);
+        border-radius: 8px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+    .ty-wa-card i { font-size: 30px; color: #25d366; flex-shrink: 0; }
+    .ty-wa-card div { flex: 1; }
+    .ty-wa-card h4 { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .ty-wa-card p { font-family: 'Montserrat', sans-serif; font-size: 11px; color: rgba(255,255,255,.7); margin: 0; }
+    .ty-wa-card a {
+        flex-shrink: 0;
+        padding: 9px 16px;
+        background: #25d366;
+        color: #fff;
+        border-radius: 4px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background .2s;
+    }
+    .ty-wa-card a:hover { background: #1da851; color: #fff; text-decoration: none; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+        .ty-layout { grid-template-columns: 1fr; }
+    }
+    </style>
+    <link rel="stylesheet" href="css/fonts.css" type="text/css">
+</head>
+<body>
+
+<!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader">
+            <img src="img/inicio/logo-principal.png" alt="Valento" class="loader-logo">
+            <div class="loader-ring"></div>
+            <span class="loader-tag">Semplicemente Valento</span>
+        </div>
+    </div>
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form"><input type="text" id="search-input" placeholder="Buscar uniforme, polo, talla…"></form>
+    </div>
+</div>
+
+    <!-- Topbar Begin -->
+    <div class="vl-topbar">
+        <div class="vl-topbar__inner">
+            <ul class="vl-topbar__info">
+                <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+51964381275">+51 964 381 275</a></li>
+                <li class="vl-topbar__mail"><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:ventas@rossety.pe">ventas@rossety.pe</a></li>
+                <li class="vl-topbar__hours"><i class="fa fa-clock-o" aria-hidden="true"></i>Lun – Sáb: 9:00 – 18:00</li>
+            </ul>
+            <div class="vl-topbar__right">
+                <span class="vl-topbar__label">Síguenos</span>
+                <ul class="vl-topbar__social">
+                    <li><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa fa-music" aria-hidden="true"></i></a></li>
+                    <li><a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                </ul>
+                <a class="vl-topbar__cta" href="https://wa.me/51964381275" target="_blank" rel="noopener"><i class="fa fa-whatsapp" aria-hidden="true"></i><span>Cotiza por WhatsApp</span></a>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Header Section Begin -->
+    <header class="lv-header" id="lv-header">
+        <div class="lv-header__inner">
+            <a href="index.html" class="lv-header__logo" aria-label="Valento - Inicio">
+                <img src="img/inicio/logo-principal.png" alt="Valento — Semplicemente Valento">
+                
+            </a>
+
+            <nav class="lv-header__nav" id="lv-main-nav" aria-label="Navegación principal">
+                <ul class="lv-header__nav-list">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li class="has-sub">
+                        <a href="categories.html">Tienda</a>
+                        <ul class="lv-sub-menu">
+                            <li><a href="shop-detail.html">Productos</a></li>
+                            <li><a href="shopping-cart.html">Carrito</a></li>
+                            <li><a href="check-out.html">Pagar</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html">Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                    <li class="lv-nav-access"><a href="login.html">Registrarse</a> / <a href="login.html" class="in">Iniciar sesión</a></li>
+                </ul>
+            </nav>
+
+            <div class="lv-header__access">
+                <a href="login.html">Registrarse</a><span>/</span><a href="login.html" class="in">Iniciar sesión</a>
+            </div>
+
+            <div class="lv-header__icons">
+                <button type="button" class="lv-icon-btn lv-search-trigger" aria-label="Buscar">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </button>
+                <a href="login.html" class="lv-icon-btn lv-account-btn" aria-label="Mi cuenta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </a>
+                <a href="#" class="lv-cart-link" id="lv-cart-icon" aria-label="Carrito de compras">
+                    <span class="lv-cart-badge" id="lv-cart-count" style="display:none;">0</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                </a>
+                <button type="button" class="lv-burger" id="lv-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="lv-main-nav">
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Info Begin -->
+    <div class="lv-header-info">
+        <div class="lv-header-info__inner">
+            <div class="lv-header-info__item">
+                <img src="img/icons/delivery.png" alt="">
+                <p>Venta mayorista para profesionales</p>
+            </div>
+            <div class="lv-header-info__item">
+                <img src="img/icons/voucher.png" alt="">
+                <p>Stock permanente y despacho ágil</p>
+            </div>
+            <div class="lv-header-info__item">
+                <img src="img/icons/sales.png" alt="">
+                <p>Personaliza con el logo de tu empresa</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header Info End -->
+    <!-- Header End -->
+
+<div class="lv-sticky-bar" id="lv-sticky-bar">
+    <div class="lv-sticky-bar__inner">
+        <a href="index.html" class="lv-sticky-bar__logo" aria-label="Valento"><img src="img/inicio/logo-principal.png" alt="Valento"></a>
+        <nav class="lv-sticky-bar__nav"><ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categories.html">Tienda</a></li>
+            <li><a href="about.html">Nosotros</a></li>
+            <li><a href="contact.html">Contacto</a></li>
+        </ul></nav>
+        <div class="lv-sticky-bar__icons">
+                <a href="login.html" class="lv-icon-btn lv-account-btn" aria-label="Mi cuenta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </a>
+                <a href="#" class="lv-cart-link" id="lv-cart-icon-sticky" aria-label="Carrito de compras">
+                    <span class="lv-cart-badge lv-cart-badge-sticky" id="lv-cart-count-sticky" style="display:none;">0</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                </a>
+            </div>
+    </div>
+</div>
+
+<!-- ══ CONTENIDO ══ -->
+<main class="ty-page">
+    <div class="container">
+
+        <!-- Hero éxito -->
+        <div class="ty-hero">
+            <div class="ty-check-circle"><i class="fa fa-check"></i></div>
+            <h1 class="ty-hero__title">¡Pedido confirmado!</h1>
+            <p class="ty-hero__sub">
+                Gracias por tu compra. Hemos recibido tu pedido y lo estamos procesando.<br>
+                Recibirás un correo de confirmación en breve.
+            </p>
+            <span class="ty-order-badge">
+                <i class="fa fa-hashtag"></i> N° de pedido: <strong id="ty-order-num">LV-000000</strong>
+            </span>
+        </div>
+
+        <!-- WhatsApp banner -->
+        <div class="ty-wa-card">
+            <i class="fa fa-whatsapp"></i>
+            <div>
+                <h4>¿Tienes dudas sobre tu pedido?</h4>
+                <p>Contáctanos por WhatsApp y te ayudamos al instante.</p>
+            </div>
+            <a href="https://wa.me/51964381275?text=Hola%2C%20hice%20un%20pedido%20y%20quisiera%20información." target="_blank" rel="noopener">
+                Escribir ahora
+            </a>
+        </div>
+
+        <div class="ty-layout">
+
+            <!-- ── Columna izquierda ── -->
+            <div>
+
+                <!-- Productos -->
+                <div class="ty-card">
+                    <div class="ty-card__head">
+                        <i class="fa fa-shopping-bag"></i>
+                        <h3>Productos del pedido</h3>
+                    </div>
+                    <div class="ty-card__body" id="ty-items">
+                        <!-- JS renderiza -->
+                    </div>
+                </div>
+
+                <!-- Datos del cliente -->
+                <div class="ty-card">
+                    <div class="ty-card__head">
+                        <i class="fa fa-user-o"></i>
+                        <h3>Datos del cliente</h3>
+                    </div>
+                    <div class="ty-card__body">
+                        <table class="ty-data-table">
+                            <tr><td>Nombre</td><td id="ty-nombre">—</td></tr>
+                            <tr><td>Correo</td><td id="ty-email">—</td></tr>
+                            <tr><td>Teléfono</td><td id="ty-telefono">—</td></tr>
+                            <tr><td>Documento</td><td id="ty-documento">—</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Envío -->
+                <div class="ty-card">
+                    <div class="ty-card__head">
+                        <i class="fa fa-truck"></i>
+                        <h3>Información de envío</h3>
+                    </div>
+                    <div class="ty-card__body">
+                        <table class="ty-data-table">
+                            <tr><td>Dirección</td><td id="ty-direccion">—</td></tr>
+                            <tr><td>Distrito</td><td id="ty-distrito">—</td></tr>
+                            <tr><td>Tiempo estimado</td><td><span style="color:#27ae60;font-weight:700;">2–4 días hábiles</span></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Método de pago -->
+                <div class="ty-card">
+                    <div class="ty-card__head">
+                        <i class="fa fa-credit-card"></i>
+                        <h3>Método de pago</h3>
+                    </div>
+                    <div class="ty-card__body">
+                        <table class="ty-data-table">
+                            <tr><td>Método</td><td id="ty-pago">—</td></tr>
+                            <tr><td>Estado</td><td><span style="background:#fff8e1;color:#f57f17;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;">En verificación</span></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ── Columna derecha ── -->
+            <div>
+
+                <!-- Resumen de costos -->
+                <div class="ty-card" style="margin-bottom:16px;">
+                    <div class="ty-card__head">
+                        <i class="fa fa-file-text-o"></i>
+                        <h3>Resumen de compra</h3>
+                    </div>
+                    <div class="ty-card__body">
+                        <div class="ty-summary-row">
+                            <span class="label">Subtotal</span>
+                            <span class="value" id="ty-subtotal">S/ 0.00</span>
+                        </div>
+                        <div class="ty-summary-row">
+                            <span class="label">Envío</span>
+                            <span class="value" style="color:#27ae60;">Gratis</span>
+                        </div>
+                        <div class="ty-summary-row total">
+                            <span class="label">Total pagado</span>
+                            <span class="value" id="ty-total">S/ 0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acciones -->
+                <div class="ty-actions">
+                    <a href="categories.html" class="ty-btn-primary">
+                        <i class="fa fa-shopping-bag"></i> Seguir comprando
+                    </a>
+                    <a href="index.html" class="ty-btn-secondary">
+                        <i class="fa fa-home"></i> Volver al inicio
+                    </a>
+                </div>
+
+                <!-- Info entrega -->
+                <div style="margin-top:20px;padding:16px;background:#f0f7f0;border-radius:6px;border:1px solid #c8e6c9;">
+                    <p style="font-family:'Montserrat',sans-serif;font-size:11px;color:#2e7d32;font-weight:600;margin:0 0 6px;"><i class="fa fa-check-circle"></i> &nbsp;Tu pedido está siendo procesado</p>
+                    <p style="font-family:'Montserrat',sans-serif;font-size:11px;color:#555;margin:0;line-height:1.6;">Recibirás actualizaciones del estado de tu envío por correo y WhatsApp. Para consultas, comunícate con nosotros.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<!-- FOOTER -->
+    <footer class="vf" aria-label="Pie de página Valento">
+
+        <!-- Línea dorada superior con monograma -->
+        <div class="vf-rule" aria-hidden="true"><span class="vf-rule__mark">V</span></div>
+
+        <div class="vf-wrap">
+
+            <!-- Marca centrada -->
+            <div class="vf-brand">
+                <a href="index.html" class="vf-brand__logo"><img src="img/inicio/logo-principal.png" alt="Valento"></a>
+                <p class="vf-brand__desc">Ropa laboral, textil promocional y vestuario deportivo para empresas y colectividades. Stock permanente y prendas listas para personalizar.</p>
+                <ul class="vf-social" aria-label="Redes sociales">
+                    <li><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg></a></li>
+                    <li><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V10H6.5v3.5H9V21h3.5v-7.5H15l.5-3.5h-3V7a1 1 0 0 1 1-1H15z"/></svg></a></li>
+                    <li><a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.2 4.4 5 4.7"/></svg></a></li>
+                    <li><a href="https://wa.me/51964381275" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M4 20l1.2-4A8 8 0 1 1 8 18.8z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2z"/></svg></a></li>
+                    <li><a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.5 9.5v5l4-2.5z"/></svg></a></li>
+                </ul>
+            </div>
+
+            <!-- Columnas con divisores verticales -->
+            <div class="vf-grid">
+
+                <nav class="vf-col" aria-label="Tienda">
+                    <h5 class="vf-col__title"><span>01</span>Tienda</h5>
+                    <ul class="vf-links">
+                        <li><a href="categories.html">Ropa laboral</a></li>
+                        <li><a href="categories.html">Textil promocional</a></li>
+                        <li><a href="categories.html">Vestuario deportivo</a></li>
+                        <li><a href="categories.html">Protección personal</a></li>
+                        <li><a href="categories.html">Uniformes</a></li>
+                        <li><a href="shop-detail.html">Guía de tallas</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="vf-col" aria-label="Legales">
+                    <h5 class="vf-col__title"><span>02</span>Legales</h5>
+                    <ul class="vf-links">
+                        <li><a href="terminos.html">Términos y condiciones</a></li>
+                        <li><a href="privacidad.html">Políticas de privacidad</a></li>
+                        <li><a href="reclamaciones.html">Libro de reclamaciones</a></li>
+                    </ul>
+                    <a href="reclamaciones.html" class="vf-libro">
+                        <img src="img/icons/libro-reclamaciones.png" alt="" width="40" height="15">
+                        <span>Libro de<br>Reclamaciones</span>
+                    </a>
+                </nav>
+
+                <div class="vf-col">
+                    <h5 class="vf-col__title"><span>03</span>Contacto</h5>
+                    <ul class="vf-contact">
+                        <li>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.2-4A8 8 0 1 1 8 18.8z"/></svg>
+                            <a href="https://wa.me/51964381275" target="_blank" rel="noopener">+51 964 381 275</a>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6l8.5 7 8.5-7"/></svg>
+                            <a href="mailto:ventas@rossety.pe">ventas@rossety.pe</a>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>
+                            <span>La Victoria, Lima</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="vf-col">
+                    <h5 class="vf-col__title"><span>04</span>Horarios</h5>
+                    <dl class="vf-hours">
+                        <div><dt>Lunes — Viernes</dt><dd>8:30 am – 6:30 pm</dd></div>
+                        <div><dt>Sábado</dt><dd>9:00 am – 1:00 pm</dd></div>
+                        <div><dt>Domingo</dt><dd class="is-closed">Cerrado</dd></div>
+                    </dl>
+                </div>
+
+            </div>
+
+            <!-- Separador V + barra inferior -->
+            <div class="vf-bottom">
+                <div class="vf-sep" aria-hidden="true">
+                    <span class="vf-sep__line"></span>
+                    <svg class="vf-sep__v" viewBox="0 0 40 24"><path d="M4 2l16 20L36 2"/><path d="M11 2l9 11"/></svg>
+                    <span class="vf-sep__line"></span>
+                </div>
+                <div class="vf-bottom__row">
+                    <p class="vf-copy">&copy; <span class="vf-year">2026</span> <strong>Valento</strong>. Todos los derechos reservados.</p>
+                    <div class="vf-pay" aria-label="Métodos de pago">
+                        <span>Visa</span><span>Mastercard</span><span>Yape</span><span>Plin</span><span>BCP</span>
+                    </div>
+                    <p class="vf-bottom__tag">Semplicemente Valento <span>·</span> Zaragoza 1994</p>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+        (function () {
+            var y = document.querySelector('.vf-year');
+            if (y) y.textContent = new Date().getFullYear();
+        })();
+        </script>
+    </footer>
+
+<button type="button" class="lv-scrolltop" id="lv-scrolltop" aria-label="Volver arriba">
+        <svg class="lv-scrolltop__ring" viewBox="0 0 48 48" aria-hidden="true">
+            <circle class="lv-scrolltop__track" cx="24" cy="24" r="21" pathLength="100"/>
+            <circle class="lv-scrolltop__bar" cx="24" cy="24" r="21" pathLength="100"/>
+        </svg>
+        <span class="lv-scrolltop__pct" aria-hidden="true">0%</span>
+        <i class="fa fa-arrow-up lv-scrolltop__arrow" aria-hidden="true"></i>
+    </button>
+<div class="lv-cart-overlay" id="lv-cart-overlay"></div>
+<div class="lv-cart-sidebar" id="lv-cart-sidebar">
+    <div class="lv-cart-sidebar__head"><i class="fa fa-shopping-bag"></i><h3>Carrito</h3><button class="lv-cart-sidebar__close" id="lv-cart-close">&times;</button></div>
+    <div class="lv-cart-sidebar__body" id="lv-cart-body"><div class="lv-cart-empty"><i class="fa fa-shopping-bag"></i><span>Tu carrito está vacío</span></div></div>
+    <div class="lv-cart-sidebar__foot" id="lv-cart-foot" style="display:none;">
+        <div class="lv-cart-subtotal-row"><span class="lv-subtotal-label">Subtotal</span><span class="lv-subtotal-value" id="lv-cart-subtotal">S/ 0.00</span></div>
+        <a href="shopping-cart.html" class="lv-cart-btn-primary">Ir Al Carrito</a>
+    </div>
+</div>
+<div class="lv-wa-wrap">
+    <span class="lv-wa-pulse lv-wa-pulse--1"></span><span class="lv-wa-pulse lv-wa-pulse--2"></span>
+    <div class="lv-wa-bubble"><button class="lv-wa-close-btn">&times;</button><div class="lv-wa-bubble-header"><div class="lv-wa-bubble-avatar"><i class="fa fa-whatsapp"></i></div><div><strong>Valento</strong><span><i class="lv-wa-dot"></i> En línea ahora</span></div></div><div class="lv-wa-bubble-msg"><p>¡Hola! 👋 ¿Podemos ayudarte?</p></div><a href="https://wa.me/51964381275" target="_blank" rel="noopener" class="lv-wa-bubble-btn">Iniciar conversación <i class="fa fa-arrow-right"></i></a></div>
+    <a href="https://wa.me/51964381275" target="_blank" rel="noopener" class="lv-wa-btn"><i class="fa fa-whatsapp lv-wa-icon"></i><span class="lv-wa-label">WhatsApp</span></a>
+</div>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+(function(){
+    /* ── Cargar datos del pedido desde sessionStorage ── */
+    function getOrder() {
+        try { return JSON.parse(sessionStorage.getItem('lv_order')) || {}; } catch(e){ return {}; }
+    }
+    function getCart() {
+        try { return JSON.parse(localStorage.getItem('lv_cart')) || []; } catch(e){ return []; }
+    }
+
+    var order = getOrder();
+    var cart  = getCart();
+
+    /* Número de pedido */
+    var num = 'LV-' + Math.floor(100000 + Math.random()*900000);
+    document.getElementById('ty-order-num').textContent = num;
+
+    /* Datos cliente */
+    if (order.nombre)    document.getElementById('ty-nombre').textContent    = order.nombre + ' ' + (order.apellido||'');
+    if (order.email)     document.getElementById('ty-email').textContent     = order.email;
+    if (order.telefono)  document.getElementById('ty-telefono').textContent  = order.telefono;
+    if (order.documento) document.getElementById('ty-documento').textContent = (order.tipoDoc||'DNI') + ': ' + order.documento;
+    if (order.direccion) document.getElementById('ty-direccion').textContent = order.direccion;
+    if (order.distrito)  document.getElementById('ty-distrito').textContent  = order.distrito;
+    if (order.pago)      document.getElementById('ty-pago').textContent      = order.pago;
+
+    /* Productos */
+    var $items = document.getElementById('ty-items');
+    var subtotal = 0;
+    if (cart.length > 0) {
+        var html = '';
+        cart.forEach(function(item){
+            var line = parseFloat(item.price) * parseInt(item.qty);
+            subtotal += line;
+            html += '<div class="ty-item">' +
+                '<img class="ty-item__img" src="' + item.img + '" alt="' + item.name + '">' +
+                '<div class="ty-item__info">' +
+                    '<p class="ty-item__name">' + item.name + '</p>' +
+                    '<p class="ty-item__meta">Talla: ' + item.talla + ' &nbsp;|&nbsp; Color: ' + item.color + ' &nbsp;|&nbsp; Cant: ' + item.qty + '</p>' +
+                '</div>' +
+                '<span class="ty-item__price">S/ ' + line.toFixed(2) + '</span>' +
+            '</div>';
+        });
+        $items.innerHTML = html;
+    } else {
+        $items.innerHTML = '<p style="font-family:Montserrat,sans-serif;font-size:12px;color:#aaa;text-align:center;padding:10px 0;">Sin productos registrados</p>';
+    }
+
+    document.getElementById('ty-subtotal').textContent = 'S/ ' + subtotal.toFixed(2);
+    document.getElementById('ty-total').textContent    = 'S/ ' + subtotal.toFixed(2);
+
+    /* Limpiar carrito */
+    localStorage.removeItem('lv_cart');
+    sessionStorage.removeItem('lv_order');
+
+    /* Sticky + scroll */
+    (function(){var sb=document.getElementById('lv-sticky-bar');function s(){var y=window.scrollY>120;document.body.classList.toggle('body-scrolled',y);if(sb)sb.classList.toggle('visible',y);}window.addEventListener('scroll',s,{passive:true});s();})();
+    
+})();
+</script>
+    <script src="js/scrolltop.js"></script>
+</body>
+</html>
+
+
+
+

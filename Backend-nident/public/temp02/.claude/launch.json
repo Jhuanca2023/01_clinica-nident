@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "liam",
+      "runtimeExecutable": "C:/xampp/php/php.exe",
+      "runtimeArgs": ["-S", "localhost:8791", "-t", "C:/xampp/htdocs_pro/54-valento-textil/template"],
+      "port": 8791
+    },
+    {
+      "name": "liam-2",
+      "runtimeExecutable": "C:/xampp/php/php.exe",
+      "runtimeArgs": ["-S", "localhost:8792", "-t", "C:/xampp/htdocs_pro/54-valento-textil/template"],
+      "port": 8792
+    },
+    {
+      "name": "violet",
+      "runtimeExecutable": "C:/xampp/php/php.exe",
+      "runtimeArgs": ["-S", "localhost:8793", "-t", "D:/Lucdesoft/54-valento-textil/template/violet-liamverselli"],
+      "port": 8793
+    }
+  ]
+}

@@ -1,0 +1,548 @@
+/* =============================================
+   About Page — Valento
+   ============================================= */
+
+/* ── Hero ────────────────────────────────── */
+.ab-hero {
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ab-hero__bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1445205170230-053b83016050?w=1600&q=80') center/cover no-repeat;
+    transform: scale(1.08);
+    transition: transform 6s ease;
+}
+.ab-hero__bg.zoomed { transform: scale(1); }
+.ab-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,.72) 0%, rgba(20,20,20,.45) 100%);
+}
+.ab-hero__content {
+    position: relative;
+    text-align: center;
+    color: #fff;
+    padding: 0 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .9s ease .3s, transform .9s ease .3s;
+}
+.ab-hero__content.visible { opacity: 1; transform: translateY(0); }
+.ab-hero__tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.7);
+    margin-bottom: 16px;
+    display: block;
+}
+.ab-hero__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(32px, 5vw, 58px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 18px;
+    letter-spacing: 2px;
+}
+.ab-hero__title span { color: #e7b669; }
+.ab-hero__subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255,255,255,.8);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* ── Separador decorativo ────────────────── */
+.ab-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 50px 0 40px;
+}
+.ab-divider__line {
+    height: 1px;
+    width: 80px;
+    background: #e0e0e0;
+}
+.ab-divider__diamond {
+    width: 10px;
+    height: 10px;
+    background: #8C6B2E;
+    transform: rotate(45deg);
+}
+
+/* ── Sección genérica ────────────────────── */
+.ab-section { padding: 70px 0; }
+.ab-section--gray { background: #f8f8f8; }
+.ab-section--dark { background: #111; }
+
+.ab-section__label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #8C6B2E;
+    display: block;
+    margin-bottom: 10px;
+}
+.ab-section__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 800;
+    color: #1a1a1a;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+.ab-section--dark .ab-section__title { color: #fff; }
+.ab-section__text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.9;
+    max-width: 540px;
+}
+.ab-section--dark .ab-section__text { color: rgba(255,255,255,.65); }
+
+/* ── Historia / Story ────────────────────── */
+.ab-story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+.ab-story__img-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+.ab-story__img-wrap img {
+    width: 100%;
+    height: 440px;
+    object-fit: cover;
+    display: block;
+    transition: transform .6s ease;
+}
+.ab-story__img-wrap:hover img { transform: scale(1.04); }
+.ab-story__img-badge {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: #8C6B2E;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 10px 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.ab-story__list {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+}
+.ab-story__list li {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: #555;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.ab-story__list li i { color: #8C6B2E; font-size: 12px; }
+
+/* ── Contadores animados ─────────────────── */
+.ab-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+}
+.ab-stat {
+    text-align: center;
+    padding: 50px 20px;
+    border-right: 1px solid rgba(255,255,255,.08);
+    transition: background .3s;
+}
+.ab-stat:last-child { border-right: none; }
+.ab-stat:hover { background: rgba(255,255,255,.04); }
+.ab-stat__num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800;
+    color: #8C6B2E;
+    line-height: 1;
+    margin-bottom: 10px;
+    display: block;
+}
+.ab-stat__label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+}
+
+/* ── Valores ─────────────────────────────── */
+.ab-values {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 50px;
+}
+.ab-value-card {
+    background: #fff;
+    border: 1px solid #efefef;
+    border-radius: 8px;
+    padding: 36px 28px;
+    text-align: center;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    cursor: default;
+}
+.ab-value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.09);
+    border-color: #8C6B2E;
+}
+.ab-value-card__icon {
+    width: 62px;
+    height: 62px;
+    background: #fff0ee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #8C6B2E;
+    transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease;
+}
+.ab-value-card__icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: currentColor;
+    transition: stroke 0.35s ease, transform 0.35s ease;
+}
+.ab-value-card:hover .ab-value-card__icon {
+    background: #8C6B2E;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+.ab-value-card:hover .ab-value-card__icon svg {
+    stroke: #ffffff;
+}
+.ab-value-card__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+.ab-value-card__text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: #888;
+    line-height: 1.7;
+}
+
+/* ── Equipo ──────────────────────────────── */
+.ab-team {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 50px;
+}
+.ab-team-card {
+    text-align: center;
+    overflow: hidden;
+    border-radius: 6px;
+}
+.ab-team-card__img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+}
+.ab-team-card__img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
+    filter: grayscale(20%);
+}
+.ab-team-card:hover .ab-team-card__img-wrap img {
+    transform: scale(1.06);
+    filter: grayscale(0%);
+}
+.ab-team-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(192,57,43,.85) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity .4s;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 20px;
+    gap: 12px;
+}
+.ab-team-card:hover .ab-team-card__overlay { opacity: 1; }
+.ab-team-card__overlay a {
+    width: 34px;
+    height: 34px;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 13px;
+    text-decoration: none;
+    transition: background .2s;
+}
+.ab-team-card__overlay a:hover { background: #fff; color: #8C6B2E; }
+.ab-team-card__info { padding: 14px 8px 0; }
+.ab-team-card__name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+.ab-team-card__role {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: #8C6B2E;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ── Timeline ────────────────────────────── */
+.ab-timeline {
+    position: relative;
+    padding: 20px 0;
+    margin-top: 50px;
+}
+.ab-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e0e0e0;
+    transform: translateX(-50%);
+}
+.ab-timeline__item {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: calc(50% + 40px);
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity .6s ease, transform .6s ease;
+}
+.ab-timeline__item:nth-child(even) {
+    justify-content: flex-start;
+    padding-right: 0;
+    padding-left: calc(50% + 40px);
+    transform: translateX(30px);
+}
+.ab-timeline__item.visible { opacity: 1; transform: translateX(0); }
+.ab-timeline__dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: #8C6B2E;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px #8C6B2E;
+    top: 16px;
+}
+.ab-timeline__card {
+    background: #fff;
+    border: 1px solid #efefef;
+    border-radius: 6px;
+    padding: 20px 24px;
+    max-width: 360px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.06);
+}
+.ab-timeline__year {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #8C6B2E;
+    margin-bottom: 6px;
+}
+.ab-timeline__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+.ab-timeline__text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: #888;
+    line-height: 1.6;
+}
+
+/* ── CTA Banner ──────────────────────────── */
+.ab-cta {
+    --cta-navy: #121a36;
+    --cta-gold: #b8893a;
+    --cta-ivory: #f7f3ec;
+    position: relative;
+    padding: 64px 0;
+    text-align: center;
+    background:
+        radial-gradient(rgba(18, 26, 54, .05) 1px, transparent 1.2px) 0 0 / 16px 16px,
+        var(--cta-ivory);
+}
+
+/* Marco con doble línea dorada a lo ancho de toda la cinta */
+.ab-cta::before,
+.ab-cta::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+.ab-cta::before { inset: 16px; border: 1px solid rgba(184, 137, 58, .5); }
+.ab-cta::after  { inset: 23px; border: 1px solid rgba(184, 137, 58, .2); }
+
+.ab-cta__frame { position: relative; z-index: 1; }
+
+.ab-cta__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .38em;
+    text-transform: uppercase;
+    color: var(--cta-gold);
+}
+.ab-cta__eyebrow::before,
+.ab-cta__eyebrow::after {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--cta-gold);
+}
+
+/* Fuente: Cinzel Decorative, definida en css/fonts.css como el resto de títulos */
+.ab-cta__title {
+    margin: 0 0 14px;
+    font-size: clamp(22px, 2.5vw, 34px);
+    line-height: 1.25;
+    white-space: nowrap;
+    letter-spacing: .02em;
+    color: var(--cta-navy);
+}
+.ab-cta__title em { font-style: normal; color: var(--cta-gold); }
+
+.ab-cta__text {
+    margin: 0 auto 28px;
+    white-space: nowrap;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #5b6078;
+}
+
+.ab-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+}
+
+.ab-cta__btn {
+    display: inline-block;
+    padding: 15px 34px;
+    background: var(--cta-navy);
+    border: 1px solid var(--cta-navy);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background .3s, color .3s, border-color .3s, transform .3s;
+}
+.ab-cta__btn:hover {
+    background: var(--cta-gold);
+    border-color: var(--cta-gold);
+    color: #fff;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+.ab-cta__btn--ghost {
+    background: transparent;
+    border-color: var(--cta-gold);
+    color: var(--cta-navy);
+}
+.ab-cta__btn--ghost:hover { background: var(--cta-navy); border-color: var(--cta-navy); }
+
+/* La cinta mantiene una sola línea en escritorio; en pantallas chicas el texto baja de línea */
+@media (max-width: 991px) {
+    .ab-cta__title,
+    .ab-cta__text { white-space: normal; }
+    .ab-cta__text { max-width: 520px; }
+}
+
+@media (max-width: 575px) {
+    .ab-cta { padding: 52px 12px; }
+    .ab-cta::before { inset: 10px; }
+    .ab-cta::after  { inset: 15px; }
+    .ab-cta__btn { width: 100%; }
+}
+
+/* ── Responsive ──────────────────────────── */
+@media (max-width: 991px) {
+    .ab-story { grid-template-columns: 1fr; gap: 36px; }
+    .ab-stats  { grid-template-columns: repeat(2, 1fr); }
+    .ab-values { grid-template-columns: repeat(2, 1fr); }
+    .ab-team   { grid-template-columns: repeat(2, 1fr); }
+    .ab-timeline::before { left: 20px; }
+    .ab-timeline__item,
+    .ab-timeline__item:nth-child(even) {
+        padding-left: 60px;
+        padding-right: 0;
+        justify-content: flex-start;
+        transform: translateX(-20px);
+    }
+    .ab-timeline__dot { left: 20px; }
+}
+@media (max-width: 575px) {
+    .ab-hero { height: 380px; }
+    .ab-stats { grid-template-columns: repeat(2, 1fr); }
+    .ab-values { grid-template-columns: 1fr; }
+    .ab-team   { grid-template-columns: repeat(2, 1fr); }
+}

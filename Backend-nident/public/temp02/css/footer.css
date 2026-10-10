@@ -1,0 +1,419 @@
+/* =============================================
+   Footer Profesional - Valento
+   ============================================= */
+
+/* ---- Banner sobre el footer ---- */
+.lv-footer-banner {
+    margin-top: 5rem;
+    position: relative;
+    width: 100%;
+    height: 340px;
+    overflow: hidden;
+}
+
+.lv-footer-banner__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+    filter: brightness(0.55);
+}
+
+.lv-footer-banner__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 100%);
+    padding: 0 60px;
+}
+
+.lv-footer-banner__content {
+    text-align: center;
+}
+
+.lv-footer-banner__sub {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #e7b669;
+    margin-bottom: 14px;
+}
+
+.lv-footer-banner__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1.15;
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+}
+
+.lv-footer-banner__title span {
+    color: #e7b669;
+}
+
+.lv-footer-banner__btn {
+    display: inline-block;
+    padding: 13px 36px;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+.lv-footer-banner__btn:hover {
+    background: #e7b669;
+    border-color: #e7b669;
+    color: #fff;
+    text-decoration: none;
+}
+
+@media (max-width: 767px) {
+    .lv-footer-banner { height: 220px; }
+    .lv-footer-banner__title { font-size: 24px; }
+    .lv-footer-banner__overlay { padding: 0 20px; }
+}
+
+/* ---- Footer principal ---- */
+footer.footer-section.lv-footer,
+.footer-section.lv-footer {
+    background: #172144 !important;
+    color: #ccc;
+    padding: 0 !important;
+    font-family: 'Montserrat', sans-serif;
+    padding: 60px 0 0;
+}
+
+.lv-footer > .container {
+    padding-top: 3rem;
+}
+
+/* --- Bloque logo + descripción --- */
+.lv-footer__brand {}
+
+.lv-footer__logo {
+    display: block;
+    margin-bottom: 18px;
+    max-width: 240px;
+    height: auto;
+    padding: 8px 14px;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+.lv-footer__logo-text {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 14px;
+}
+
+.lv-footer__logo-text span { color: #e7b669; }
+
+.lv-footer__desc {
+    font-size: 12px;
+    line-height: 1.9;
+    color: #888;
+    margin-bottom: 22px;
+    max-width: 280px;
+}
+
+/* Redes sociales */
+.lv-footer__social {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lv-footer__social a {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.lv-footer__social a:hover {
+    background: #e7b669;
+    border-color: #e7b669;
+    color: #fff;
+}
+
+/* --- Columnas de links --- */
+.lv-footer__col-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e7b669;
+    display: inline-block;
+}
+
+.lv-footer__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lv-footer__links li {
+    margin-bottom: 10px;
+}
+
+.lv-footer__links a {
+    font-size: 12px;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s, padding-left 0.2s;
+    display: inline-block;
+}
+
+.lv-footer__links a:hover {
+    color: #e7b669;
+    padding-left: 4px;
+}
+
+/* --- Newsletter --- */
+.lv-footer__newsletter-text {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 16px;
+    line-height: 1.7;
+}
+
+.lv-footer__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.lv-footer__input {
+    background: #1e1e1e;
+    border: 1.5px solid #2e2e2e;
+    border-radius: 6px;
+    padding: 11px 14px;
+    font-size: 12px;
+    color: #ccc;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+}
+
+.lv-footer__input::placeholder { color: #555; }
+
+.lv-footer__input:focus { border-color: #e7b669; }
+
+.lv-footer__submit {
+    background: #172144;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.lv-footer__submit:hover { background: #e7b669; }
+
+/* Horarios */
+.lv-footer__schedule {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+.lv-footer__schedule li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid #1e1e1e;
+    gap: 10px;
+}
+
+.lv-schedule__day {
+    font-size: 12px;
+    color: #888;
+}
+
+.lv-schedule__time {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: #e7b669;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+/* Contacto */
+.lv-footer__contact-info {
+    margin-bottom: 18px;
+}
+
+.lv-footer__contact-info p {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lv-footer__contact-info i {
+    color: #e7b669;
+    font-size: 14px;
+    width: 16px;
+}
+
+/* Métodos de pago */
+.lv-footer__payment {
+    margin-top: 18px;
+}
+
+.lv-footer__payment p {
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.lv-footer__payment-icons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.lv-footer__payment-icons span {
+    background: #1e1e1e;
+    border: 1px solid #2e2e2e;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 1px;
+}
+
+/* --- Divisor --- */
+.lv-footer__divider {
+    border: none;
+    border-top: 1px solid #1e1e1e;
+    margin: 40px 0 0;
+}
+
+/* --- Barra inferior --- */
+.lv-footer__bottom {
+    background: #2e2e2e;
+    padding: 16px 0;
+}
+
+.lv-footer__bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.lv-footer__copy {
+    font-size: 11px;
+    color: #aaa;
+    margin: 0;
+}
+
+.lv-footer__copy span { color: #e7b669; }
+
+.lv-footer__badges {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.lv-footer__badges span {
+    font-size: 10px;
+    color: #aaa;
+    border: 1px solid #444;
+    border-radius: 3px;
+    padding: 3px 8px;
+    letter-spacing: 1px;
+}
+
+/* ---- Libro de Reclamaciones ---- */
+.lv-footer__libro {
+    display: inline-block;
+    margin-top: 14px;
+    text-decoration: none;
+}
+.lv-libro-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 10px 14px;
+    transition: border-color .2s, box-shadow .2s;
+    max-width: 160px;
+}
+.lv-footer__libro:hover .lv-libro-badge {
+    border-color: #8C6B2E;
+    box-shadow: 0 2px 10px rgba(192,57,43,.15);
+}
+.lv-libro-badge i {
+    font-size: 28px;
+    color: #1565c0;
+    flex-shrink: 0;
+}
+.lv-libro-badge span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 767px) {
+    .lv-footer { padding: 40px 0 0; }
+    .lv-footer__bottom-inner { flex-direction: column; text-align: center; }
+    .lv-footer__desc { max-width: 100%; }
+    .lv-footer__brand { margin-bottom: 30px; }
+}

@@ -1,0 +1,45 @@
+/* =============================================
+   Ticker - Valento
+   Barra de mensajes animada
+   ============================================= */
+
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+.ticker-track {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: ticker-scroll 30s linear infinite;
+}
+
+.ticker-item {
+    font-size: 13px;
+    color: #ffffff;
+    padding: 0 30px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.ticker-item img {
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.ticker-sep {
+    color: #aaa;
+    font-size: 10px;
+}
+
+@keyframes ticker-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.ticker-wrap:hover .ticker-track {
+    animation-play-state: paused;
+}

@@ -1,0 +1,1015 @@
+/* ================================================
+   CHECKOUT MODERNO - ESTILOS KRISTEC (aplicados a Valento)
+   ================================================ */
+
+@use "sass:color";
+
+// Variables - Color Valento
+$primary: #8C6B2E;
+$primary-dark: #172144;
+$primary-light: #b08d4a;
+$success: #28a745;
+$danger: #dc3545;
+$warning: #ffc107;
+$text-dark: #1a202c;
+$text-medium: #4a5568;
+$text-light: #718096;
+$bg-light: #f8f9fa;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 8px 16px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.12);
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+/* ================================================
+   CONTENEDOR PRINCIPAL
+   ================================================ */
+
+.checkout-container {
+    padding: 60px 0 80px;
+    background: linear-gradient(180deg, $bg-light 0%, $white 100%);
+    min-height: 100vh;
+
+    @media (max-width: 768px) {
+        padding: 40px 0;
+    }
+}
+
+/* ================================================
+   PROGRESS STEPS
+   ================================================ */
+
+.checkout-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    padding: 30px;
+    background: $white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-md;
+
+    @media (max-width: 768px) {
+        padding: 20px;
+        overflow-x: auto;
+    }
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    min-width: 80px;
+
+    .step-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: $bg-light;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: $text-light;
+        transition: $transition;
+        border: 3px solid $border-color;
+
+        @media (max-width: 768px) {
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+        }
+    }
+
+    .step-label {
+        font-size: 13px;
+        color: $text-light;
+        font-weight: 500;
+        text-align: center;
+        transition: $transition;
+
+        @media (max-width: 768px) {
+            font-size: 11px;
+        }
+    }
+
+    &.active {
+        .step-icon {
+            background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+            color: $white;
+            border-color: $primary;
+            box-shadow: 0 4px 12px rgba($primary, 0.3);
+        }
+
+        .step-label {
+            color: $primary;
+            font-weight: 600;
+        }
+    }
+}
+
+.progress-line {
+    flex: 1;
+    height: 3px;
+    background: $border-color;
+    margin: 0 10px;
+    position: relative;
+    top: -15px;
+    transition: $transition;
+
+    &.active {
+        background: linear-gradient(90deg, $primary 0%, $primary-dark 100%);
+    }
+
+    @media (max-width: 768px) {
+        min-width: 30px;
+        margin: 0 5px;
+    }
+}
+
+/* ================================================
+   CARDS MODERNOS
+   ================================================ */
+
+.checkout-card {
+    background: $white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-sm;
+    margin-bottom: 24px;
+    overflow: hidden;
+    border: 1px solid $border-color;
+    transition: $transition;
+
+    &:hover {
+        box-shadow: $shadow-md;
+        border-color: rgba($primary, 0.3);
+    }
+}
+
+.card-header-modern {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    background: linear-gradient(135deg, rgba($primary, 0.05) 0%, rgba($primary, 0.02) 100%);
+    border-bottom: 1px solid $border-color;
+
+    .header-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: $radius-md;
+        background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $white;
+        font-size: 22px;
+        box-shadow: 0 4px 12px rgba($primary, 0.3);
+    }
+
+    .header-content {
+        flex: 1;
+
+        h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: $text-dark;
+            margin: 0 0 4px 0;
+        }
+
+        p {
+            font-size: 14px;
+            color: $text-light;
+            margin: 0;
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 20px;
+
+        .header-icon {
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+        }
+
+        .header-content h3 {
+            font-size: 18px;
+        }
+    }
+}
+
+.card-body-modern {
+    padding: 28px;
+
+    @media (max-width: 768px) {
+        padding: 20px;
+    }
+}
+
+/* ================================================
+   FORM GROUPS MODERNOS
+   ================================================ */
+
+.form-group-modern {
+    margin-bottom: 0;
+
+    label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        color: $text-dark;
+        margin-bottom: 10px;
+
+        i {
+            color: $primary;
+            font-size: 16px;
+        }
+
+        .required {
+            color: $danger;
+        }
+    }
+}
+
+/* Permite que los dropdowns de Select2 se muestren sin recorte en dirección de envío */
+.shipping-address-card,
+.shipping-address-card .card-body-modern {
+    overflow: visible;
+}
+
+/* Select2 del checkout: asegurar que el dropdown quede por encima */
+.select2-container--open {
+    z-index: 9999;
+}
+
+.select2-dropdown {
+    z-index: 9999;
+}
+
+.shipping-address-card .select2-results > .select2-results__options {
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.form-control-modern {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 15px;
+    border: 2px solid $border-color;
+    border-radius: $radius-md;
+    background: $white;
+    color: $text-dark;
+    transition: $transition;
+
+    &:focus {
+        outline: none;
+        border-color: $primary;
+        box-shadow: 0 0 0 4px rgba($primary, 0.1);
+    }
+
+    &::placeholder {
+        color: $text-light;
+    }
+
+    &.is-valid {
+        border-color: $success;
+        background-image: none;
+        padding-right: 16px;
+
+        &:focus {
+            box-shadow: 0 0 0 4px rgba($success, 0.1);
+        }
+    }
+
+    &.is-invalid {
+        border-color: $danger;
+
+        &:focus {
+            box-shadow: 0 0 0 4px rgba($danger, 0.1);
+        }
+    }
+}
+
+.invalid-feedback {
+    display: none;
+    font-size: 13px;
+    color: $danger;
+    margin-top: 6px;
+}
+
+/* Solo mostrar mensaje de error cuando el campo hermano anterior está inválido (estilo Kristec) */
+.was-validated .form-control-modern:invalid ~ .invalid-feedback,
+.was-validated select.form-control-modern:invalid ~ .invalid-feedback,
+.form-control-modern.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Checkbox términos (invalid-feedback es hermano del label) */
+.was-validated label:has(input[type="checkbox"][required]:not(:checked)) + .invalid-feedback,
+.was-validated .terms-container.has-invalid-checkbox .invalid-feedback {
+    display: block;
+}
+
+.btn-share-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: $primary;
+    background: rgba($primary, 0.08);
+    border: 1.5px dashed rgba($primary, 0.4);
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: $transition;
+
+    i {
+        font-size: 15px;
+    }
+
+    &:hover {
+        background: rgba($primary, 0.15);
+        border-color: $primary;
+    }
+
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+}
+
+/* ================================================
+   MÉTODOS DE PAGO
+   ================================================ */
+
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    /* Dos columnas simétricas siempre (como en referencia) */
+    &.row {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 12px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    &.row .col-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        min-width: 0;
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    .col-6 .payment-option {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .col-6 .payment-card {
+        width: 100%;
+        min-height: 100%;
+        box-sizing: border-box;
+    }
+}
+
+.payment-option {
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+
+    input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+
+        &:checked + .payment-card {
+            border-color: $primary;
+            background: linear-gradient(135deg, rgba($primary, 0.08) 0%, rgba($primary, 0.02) 100%);
+            box-shadow: 0 4px 12px rgba($primary, 0.2);
+
+            .payment-badge {
+                opacity: 1;
+                transform: scale(1);
+
+                i {
+                    color: $primary;
+                }
+            }
+        }
+    }
+}
+
+.payment-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border: 2px solid $border-color;
+    border-radius: $radius-md;
+    background: $white;
+    transition: $transition;
+
+    &:hover {
+        border-color: rgba($primary, 0.4);
+        box-shadow: $shadow-sm;
+    }
+
+    .payment-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: $radius-md;
+        background: linear-gradient(135deg, rgba($primary, 0.1) 0%, rgba($primary, 0.05) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: $primary;
+    }
+
+    .payment-info {
+        flex: 1;
+
+        h5 {
+            font-size: 16px;
+            font-weight: 600;
+            color: $text-dark;
+            margin: 0 0 4px 0;
+        }
+
+        p {
+            font-size: 13px;
+            color: $text-light;
+            margin: 0;
+        }
+    }
+
+    .payment-badge {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: $transition;
+
+        i {
+            font-size: 28px;
+            color: $border-color;
+        }
+    }
+}
+
+/* ================================================
+   CHECKBOXES MODERNOS
+   ================================================ */
+
+.terms-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox-modern {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    padding: 16px;
+    border-radius: $radius-md;
+    background: $bg-light;
+    transition: $transition;
+    position: relative;
+
+    &:hover {
+        background: rgba($primary, 0.05);
+    }
+
+    input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+
+        &:checked + .checkmark {
+            background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+            border-color: $primary;
+
+            &::after {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    }
+
+    .checkmark {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        border: 2px solid $border-color;
+        border-radius: 6px;
+        background: $white;
+        transition: $transition;
+        position: relative;
+
+        &::after {
+            content: '\f00c';
+            font-family: 'FontAwesome';
+            font-weight: normal;
+            position: absolute;
+            top: 10%;
+            left: 30%;
+            transform: translate(-50%, -50%) scale(0);
+            color: $white;
+            font-size: 12px;
+            opacity: 0;
+            transition: $transition;
+        }
+    }
+
+    .label-text {
+        flex: 1;
+        font-size: 14px;
+        color: $text-medium;
+        line-height: 1.6;
+
+        a {
+            color: $primary;
+            text-decoration: none;
+            font-weight: 600;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .required {
+            color: $danger;
+        }
+    }
+}
+
+.info-alert {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba($primary, 0.08) 0%, rgba($primary, 0.02) 100%);
+    border-radius: $radius-md;
+    border-left: 4px solid $primary;
+
+    i {
+        font-size: 24px;
+        color: $primary;
+        flex-shrink: 0;
+    }
+
+    p {
+        font-size: 13px;
+        color: $text-medium;
+        line-height: 1.6;
+        margin: 0 0 8px 0;
+
+        &:last-child {
+            margin: 0;
+        }
+
+        strong {
+            color: $text-dark;
+        }
+    }
+}
+
+/* ================================================
+   RESUMEN DEL PEDIDO (estilo Kristec)
+   ================================================ */
+
+.order-summary {
+    position: sticky;
+    top: 100px;
+    background: $white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-lg;
+    border: 1px solid $border-color;
+    overflow: hidden;
+
+    @media (max-width: 992px) {
+        position: relative;
+        top: 0;
+        margin-top: 30px;
+    }
+}
+
+.summary-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 24px;
+    background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+    color: $white;
+
+    i {
+        font-size: 24px;
+        margin-right: 6px; // fallback visual por si gap no se aplica
+    }
+
+    h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0;
+    }
+}
+
+.summary-body {
+    padding: 24px;
+}
+
+/* Lista productos: diseño limpio (imagen, nombre, badge cantidad, precio derecha) */
+.products-list {
+    max-height: 320px;
+    overflow-y: auto;
+    margin-bottom: 0;
+    padding-right: 6px;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $bg-light;
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: color.adjust($border-color, $lightness: -8%);
+        border-radius: 3px;
+
+        &:hover {
+            background: $primary;
+        }
+    }
+}
+
+.product-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid $border-color;
+    background: $white;
+
+    &:last-child {
+        border-bottom: none;
+        padding-bottom: 16px;
+    }
+
+    &:first-child {
+        padding-top: 0;
+    }
+
+    .product-thumb {
+        flex-shrink: 0;
+        width: 64px;
+        height: 64px;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid $border-color;
+    }
+
+    .product-thumb img,
+    .product-thumb .product-thumb-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .product-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .product-info .product-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: $text-dark;
+        margin: 0;
+        line-height: 1.4;
+        display: block;
+    }
+
+    /* Badge cantidad: centrado vertical respecto al bloque del producto */
+    .product-qty-badge {
+        flex-shrink: 0;
+        align-self: center;
+        display: inline-block;
+        padding: 5px 12px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #4a6fa5;
+        background: rgba(74, 111, 165, 0.12);
+        border-radius: 20px;
+        line-height: 1.2;
+    }
+
+    .product-info .quantity {
+        font-size: 13px;
+        color: $text-light;
+    }
+
+    /* Precio: centrado vertical respecto al bloque del producto */
+    .product-price {
+        flex-shrink: 0;
+        align-self: center;
+        text-align: right;
+        font-weight: 700;
+        color: $text-dark;
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        gap: 4px;
+    }
+
+    .product-price .price-currency {
+        font-size: 13px;
+        color: $text-medium;
+    }
+
+    .product-price .price-amount {
+        font-size: 16px;
+        font-weight: 700;
+        color: $text-dark;
+    }
+}
+
+/* Cálculos: divisor fino, etiqueta izquierda, valor derecha */
+.summary-calculations {
+    padding: 0;
+    border-top: 1px solid $border-color;
+    margin-bottom: 0;
+}
+
+.calc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    font-size: 15px;
+    color: $text-dark;
+    border-bottom: 1px solid $border-color;
+
+    span:first-child {
+        font-weight: 500;
+    }
+
+    .value {
+        font-weight: 700;
+        color: $text-dark;
+    }
+
+    &.shipping {
+        span:first-child {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            i {
+                color: $primary;
+            }
+        }
+    }
+}
+
+.free-shipping-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba($success, 0.15) 0%, rgba($success, 0.05) 100%);
+    border-radius: $radius-md;
+    margin-top: 16px;
+    border: 2px dashed $success;
+
+    i {
+        font-size: 24px;
+        color: $success;
+    }
+
+    span {
+        font-size: 16px;
+        font-weight: 700;
+        color: $success;
+    }
+}
+
+.shipping-progress {
+    margin-top: 16px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba($warning, 0.1) 0%, rgba($warning, 0.05) 100%);
+    border-radius: $radius-md;
+
+    p {
+        font-size: 14px;
+        color: $text-medium;
+        margin: 0 0 12px 0;
+        text-align: center;
+
+        strong {
+            color: $warning;
+        }
+    }
+}
+
+.progress-bar-custom {
+    height: 8px;
+    background: rgba($warning, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, $warning 0%, color.adjust($warning, $lightness: -10%) 100%);
+        border-radius: 4px;
+        transition: width 0.5s ease;
+    }
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0 24px;
+    margin-top: 0;
+    font-size: 18px;
+    font-weight: 700;
+    border-top: 1px solid $border-color;
+
+    span:first-child {
+        color: $text-dark;
+    }
+
+    .total-amount {
+        font-size: 28px;
+        color: $primary;
+        font-weight: 800;
+    }
+}
+
+.btn-submit-order {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+    color: $white;
+    border: none;
+    border-radius: $radius-md;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: $transition;
+    box-shadow: 0 4px 16px rgba($primary, 0.3);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba($primary, 0.4);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    i {
+        font-size: 18px;
+        margin-right: 8px;
+    }
+}
+
+.security-badges {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid $border-color;
+}
+
+.badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    i {
+        font-size: 24px;
+        color: $primary;
+    }
+
+    span {
+        font-size: 11px;
+        color: $text-light;
+        font-weight: 600;
+        text-align: center;
+    }
+}
+
+/* ================================================
+   RESPONSIVE (estilo Kristec)
+   ================================================ */
+
+@media (max-width: 992px) {
+    .checkout-container {
+        padding: 40px 0;
+    }
+
+    .order-summary {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .checkout-progress {
+        padding: 15px;
+    }
+
+    .card-header-modern {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 12px;
+
+        .header-icon {
+            width: 45px;
+            height: 45px;
+            flex-shrink: 0;
+        }
+        
+        .header-content {
+            min-width: 0; 
+        }
+    }
+
+    .card-body-modern {
+        padding: 16px;
+    }
+
+    .payment-card {
+        flex-direction: column;
+        text-align: center;
+
+        .payment-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .payment-info {
+            text-align: center;
+        }
+    }
+
+    .summary-total .total-amount {
+        font-size: 24px;
+    }
+
+    .btn-submit-order {
+        padding: 16px;
+        font-size: 15px;
+    }
+
+    .form-control-modern,
+    select.form-control-modern,
+    .select2-container {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .select2-container {
+        width: 100% !important;
+    }
+}
+
+/* Simetría y contención en móvil (sin desbordes) */
+@media (max-width: 991px) {
+    .checkout-container .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .checkout-container [class*="col-"] {
+        min-width: 0;
+        max-width: 100%;
+    }
+    /* Excepción: métodos de pago siempre en dos columnas simétricas */
+    .payment-methods.row .col-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}

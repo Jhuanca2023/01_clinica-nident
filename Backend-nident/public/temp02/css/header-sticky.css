@@ -1,0 +1,16 @@
+/* =============================================
+   Header Sticky - Valento
+   El sticky ahora lo maneja lv-sticky-bar en
+   header-custom.css + el script en index.html.
+   Este archivo solo gestiona el topbar hide.
+   ============================================= */
+
+/* Topbar: se oculta al hacer scroll */
+.lv-topbar {
+    transition: transform .35s ease, opacity .35s ease;
+}
+body.body-scrolled .lv-topbar {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}

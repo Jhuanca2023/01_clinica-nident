@@ -1,0 +1,640 @@
+/* ════════════════════════════════════════════════
+   ORDER CONFIRMATION — COMPACT PRO 2025
+   Namespace: ocp-*  (order-confirmation-page)
+   ════════════════════════════════════════════════ */
+
+// ── Tokens
+$c-primary:    #0d6efd;
+$c-primary-dk: #0a58ca;
+$c-success:    #16a34a;
+$c-warn:       #d97706;
+$c-danger:     #dc2626;
+$c-txt:        #111827;
+$c-txt-md:     #374151;
+$c-txt-sm:     #6b7280;
+$c-border:     #e5e7eb;
+$c-bg:         #f9fafb;
+$c-white:      #fff;
+$yape:         #6d28d9;
+$bcp:          #003087;
+$itb:          #0076be;
+$bbva:         #004481;
+
+$r-sm:  6px;
+$r-md:  8px;
+$r-lg:  12px;
+$ease:  all .2s ease;
+$shadow: 0 1px 4px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.06);
+
+/* ── Page ──────────────────────────────────────── */
+.ocp-page {
+  background: $c-bg;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* ── Top Banner ────────────────────────────────── */
+.ocp-topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  background: $c-white;
+  border-radius: $r-lg;
+  border: 1px solid $c-border;
+  box-shadow: $shadow;
+  margin-bottom: 16px;
+  border-left: 4px solid $c-success;
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+
+    strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: $c-txt;
+      line-height: 1.2;
+    }
+  }
+
+  &__sub {
+    font-size: 12px;
+    color: $c-txt-sm;
+  }
+
+  &__icon {
+    font-size: 22px;
+    color: $c-success;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  &__order {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-size: 11px;
+    color: $c-txt-sm;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-weight: 600;
+  }
+
+  &__code {
+    font-size: 14px;
+    font-weight: 700;
+    color: $c-primary;
+    font-family: 'Courier New', monospace;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+
+    &--paid {
+      background: rgba($c-success, .1);
+      color: $c-success;
+    }
+
+    &--cod {
+      background: rgba($c-warn, .12);
+      color: $c-warn;
+    }
+  }
+
+  @media (max-width: 640px) {
+    flex-wrap: wrap;
+    gap: 10px;
+
+    &__status { width: 100%; }
+    &__order  { align-items: flex-start; }
+  }
+}
+
+/* ── Main Grid ─────────────────────────────────── */
+.ocp-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 16px;
+  align-items: start;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Card ──────────────────────────────────────── */
+.ocp-card {
+  background: $c-white;
+  border-radius: $r-lg;
+  border: 1px solid $c-border;
+  box-shadow: $shadow;
+  margin-bottom: 14px;
+  overflow: hidden;
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-bottom: 1px solid $c-border;
+    background: $c-bg;
+    font-size: 13px;
+    font-weight: 700;
+    color: $c-txt;
+
+    i {
+      color: $c-primary;
+      font-size: 14px;
+    }
+
+    &--warn {
+      background: rgba($c-warn, .06);
+      i { color: $c-warn; }
+    }
+
+    .ocp-count {
+      font-style: normal;
+      font-size: 11px;
+      background: $c-primary;
+      color: $c-white;
+      padding: 1px 7px;
+      border-radius: 50px;
+      font-weight: 600;
+      margin-left: 4px;
+    }
+  }
+
+  &__body {
+    padding: 14px 16px;
+
+    &--flush { padding: 0; }
+  }
+
+  &--paid {
+    border-color: rgba($c-success, .3);
+    border-left: 4px solid $c-success;
+  }
+}
+
+/* ── Table: Detalles ───────────────────────────── */
+.ocp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+
+  tbody tr {
+    border-bottom: 1px solid $c-border;
+
+    &:last-child { border-bottom: none; }
+
+    td {
+      padding: 9px 6px;
+      color: $c-txt-md;
+      vertical-align: middle;
+    }
+  }
+
+  &__label {
+    width: 140px;
+    color: $c-txt-sm;
+    font-weight: 600;
+    white-space: nowrap;
+
+    i {
+      width: 14px;
+      margin-right: 5px;
+      color: $c-primary;
+    }
+  }
+
+  &__total td {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+.ocp-total-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: $c-primary;
+
+  & + small {
+    display: block;
+    font-size: 11px;
+    color: $c-txt-sm;
+    margin-top: 2px;
+  }
+}
+
+/* ── Badge ─────────────────────────────────────── */
+.ocp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+
+  &--success {
+    background: rgba($c-success, .1);
+    color: $c-success;
+  }
+
+  &--warn {
+    background: rgba($c-warn, .12);
+    color: $c-warn;
+  }
+}
+
+/* ── Alert (info banner) ───────────────────────── */
+.ocp-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: rgba($c-primary, .06);
+  border-left: 3px solid $c-primary;
+  border-radius: $r-sm;
+  font-size: 12px;
+  color: $c-txt-md;
+  line-height: 1.5;
+
+  i {
+    color: $c-primary;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+}
+
+/* ── Products ──────────────────────────────────── */
+.ocp-products {
+  display: flex;
+  flex-direction: column;
+}
+
+.ocp-product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 16px;
+  gap: 12px;
+  border-bottom: 1px solid $c-border;
+  transition: background .15s;
+
+  &:last-child { border-bottom: none; }
+
+  &:hover { background: rgba($c-primary, .03); }
+
+  &__name {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: $c-txt;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    font-size: 12px;
+  }
+
+  &__qty  { color: $c-txt-sm; }
+  &__unit { color: $c-txt-sm; }
+  &__sub  {
+    font-size: 14px;
+    font-weight: 700;
+    color: $c-primary;
+    min-width: 70px;
+    text-align: right;
+  }
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    &__meta { flex-wrap: wrap; }
+    &__sub  { text-align: left; }
+  }
+}
+
+/* ── Summary Totals ────────────────────────────── */
+.ocp-summary {
+  border-top: 1px solid $c-border;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: $c-txt-md;
+
+    &--free span:last-child {
+      color: $c-success;
+      font-weight: 600;
+    }
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 2px dashed $c-border;
+
+    span { font-size: 13px; font-weight: 600; color: $c-txt; }
+    strong { font-size: 18px; font-weight: 800; color: $c-primary; }
+  }
+}
+
+/* ── Paid Card ─────────────────────────────────── */
+.ocp-paid {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+
+  &__icon {
+    font-size: 26px;
+    color: $c-success;
+    flex-shrink: 0;
+  }
+
+  strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: $c-success;
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 12px;
+    color: $c-txt-sm;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+/* ── Amount Display ────────────────────────────── */
+.ocp-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 14px;
+  background: rgba($c-warn, .07);
+  border: 1px dashed rgba($c-warn, .4);
+  border-radius: $r-md;
+  margin-bottom: 14px;
+  gap: 2px;
+
+  &__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: $c-txt-sm;
+    font-weight: 600;
+  }
+
+  &__val {
+    font-size: 28px;
+    font-weight: 800;
+    color: $c-warn;
+    line-height: 1.15;
+  }
+
+  &__breakdown {
+    font-size: 11px;
+    color: $c-txt-sm;
+  }
+}
+
+/* ── Payment Methods ───────────────────────────── */
+.ocp-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ocp-method {
+  border-radius: $r-md;
+  border: 1px solid $c-border;
+  overflow: hidden;
+  font-size: 12px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 12px;
+    font-weight: 700;
+    font-size: 12px;
+
+    i { font-size: 13px; }
+  }
+
+  &__rows {
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    color: $c-txt-md;
+
+    span { color: $c-txt-sm; }
+    strong { font-family: 'Courier New', monospace; font-size: 12px; color: $c-txt; }
+  }
+
+  // Colores por banco
+  &--yape {
+    .ocp-method__header {
+      background: rgba($yape, .08);
+      color: $yape;
+    }
+  }
+
+  &--bcp {
+    .ocp-method__header {
+      background: rgba($bcp, .08);
+      color: $bcp;
+    }
+  }
+
+  &--interbank {
+    .ocp-method__header {
+      background: rgba($itb, .08);
+      color: $itb;
+    }
+  }
+
+  &--bbva {
+    .ocp-method__header {
+      background: rgba($bbva, .08);
+      color: $bbva;
+    }
+  }
+}
+
+/* ── Action Buttons ────────────────────────────── */
+.ocp-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.ocp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: $r-md;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: $ease;
+  border: 1.5px solid transparent;
+
+  i { font-size: 14px; }
+
+  &--primary {
+    background: $c-primary;
+    color: $c-white;
+
+    &:hover {
+      background: $c-primary-dk;
+      color: $c-white;
+    }
+  }
+
+  &--secondary {
+    background: $c-txt;
+    color: $c-white;
+
+    &:hover {
+      background: #000;
+      color: $c-white;
+    }
+  }
+
+  &--outline {
+    background: $c-white;
+    color: $c-primary;
+    border-color: $c-primary;
+
+    &:hover {
+      background: $c-primary;
+      color: $c-white;
+    }
+  }
+}
+
+/* ── Registration CTA ──────────────────────────── */
+.ocp-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: $c-white;
+  border-radius: $r-lg;
+  border: 1px dashed rgba($c-primary, .35);
+  box-shadow: $shadow;
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $c-primary 0%, $c-primary-dk 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $c-white;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  &__body {
+    flex: 1;
+    min-width: 0;
+
+    strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: $c-txt;
+      margin-bottom: 2px;
+    }
+
+    p {
+      font-size: 11px;
+      color: $c-txt-sm;
+      margin: 0 0 8px;
+      line-height: 1.4;
+    }
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: $c-primary;
+    color: $c-white;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: $ease;
+
+    &:hover {
+      background: $c-primary-dk;
+      color: $c-white;
+      gap: 10px;
+    }
+
+    i { font-size: 11px; }
+  }
+}
+
+/* ── Page header (breadcrumb area) ─────────────── */
+.page-header {
+  background-color: transparent;
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+}

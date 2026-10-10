@@ -1,0 +1,811 @@
+/* =============================================
+   Header - Valento (estilo Violet)
+   1. Header principal: Logo | Menú | Acceso | Iconos
+   2. Barra informativa (3 mensajes)
+   3. Sticky bar (aparece al hacer scroll)
+   4. Menú móvil (drawer)
+   ============================================= */
+
+:root {
+    --lv-ink: #1e1e1e;
+    --lv-muted: #838383;
+    --lv-info-bg: #172144;
+    --lv-line: #D0D7DB;
+    --lv-gutter: 45px;
+    --lv-font: 'Montserrat', sans-serif;
+}
+
+body { padding-top: 0 !important; }
+
+/* ── 1. Header principal ─────────────────── */
+.lv-header {
+    position: relative;
+    z-index: 9000;
+    background: var(--lv-info-bg);
+    box-shadow: inset 0 -1px 0 rgba(196,163,90,.35);
+}
+/* Iconos PNG oscuros → blancos sobre el fondo azul */
+.lv-header .lv-icon-btn img,
+.lv-header .lv-cart-link img { filter: brightness(0) invert(1); }
+.lv-header .lv-icon-btn svg,
+.lv-header .lv-cart-link svg { color: #ffffff; }
+
+/* Iconos */
+.lv-header__icons {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-left: 60px;
+    flex-shrink: 0;
+}
+.lv-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    color: #ffffff;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+.lv-icon-btn:hover {
+    color: #e7b669;
+    transform: translateY(-1px);
+}
+.lv-icon-btn img { height: 24px; width: auto; }
+.lv-icon-btn svg { width: 22px; height: 22px; stroke: currentColor; display: block; }
+.lv-icon-btn:focus-visible,
+.lv-cart-link:focus-visible,
+.lv-burger:focus-visible { outline: 2px solid #e7b669; outline-offset: 4px; }
+
+/* Carrito + badge (circular, estilo Violet) */
+.lv-cart-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding-left: 6px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+.lv-cart-link:hover {
+    color: #e7b669;
+    transform: translateY(-1px);
+}
+.lv-cart-link img { height: 24px; width: auto; }
+.lv-cart-link svg { width: 22px; height: 22px; stroke: currentColor; display: block; }
+.lv-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    min-height: 104px;
+    padding: 14px var(--lv-gutter);
+}
+
+/* Logo */
+.lv-header__logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+.lv-header__logo:hover,
+.lv-header__logo:focus { text-decoration: none; }
+.lv-header__logo img {
+    display: block;
+    height: 74px;
+    width: auto;
+    max-width: min(420px, 46vw);
+    object-fit: contain;
+    object-position: left center;
+}
+.lv-header__brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+.lv-header__brand-name {
+    font-family: var(--lv-font);
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--lv-ink);
+    text-transform: uppercase;
+}
+.lv-header__brand-tag {
+    margin-top: 8px;
+    font-family: var(--lv-font);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 5.5px;
+    color: var(--lv-muted);
+    text-transform: uppercase;
+}
+
+/* Menú */
+.lv-header__nav { margin-left: 60px; }
+.lv-header__nav-list {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.lv-header__nav-list > li { position: relative; }
+.lv-header__nav-list > li > a {
+    position: relative;
+    display: inline-block;
+    font-family: var(--lv-font);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 42px;
+    color: #fff;
+    text-decoration: none;
+    transition: color .25s;
+}
+.lv-header__nav-list > li > a:hover,
+.lv-header__nav-list > li > a.active { color: #e7b669; }
+.lv-header__nav-list > li > a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 7px;
+    width: 100%;
+    height: 2px;
+    background: #C4A35A;
+    opacity: 0;
+    transition: opacity .3s;
+}
+.lv-header__nav-list > li > a:hover::after,
+.lv-header__nav-list > li > a.active::after { opacity: 1; }
+
+/* Submenú */
+.lv-sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 99;
+    width: 220px;
+    margin: 30px 0 0;
+    padding: 20px 0;
+    list-style: none;
+    background: #fff;
+    box-shadow: 2px 7px 20px rgba(0,0,0,.2);
+    visibility: hidden;
+    opacity: 0;
+    transition: all .35s;
+}
+.lv-header__nav-list > li.has-sub:hover .lv-sub-menu,
+.lv-header__nav-list > li.has-sub:focus-within .lv-sub-menu {
+    visibility: visible;
+    opacity: 1;
+    margin-top: 0;
+}
+.lv-sub-menu li a {
+    display: block;
+    padding: 0 20px;
+    font-family: var(--lv-font);
+    font-size: 14px;
+    line-height: 2.3;
+    color: #000;
+    text-decoration: none;
+}
+.lv-sub-menu li a:hover { color: var(--lv-muted); }
+
+/* Registrarse / Iniciar sesión */
+.lv-header__access {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    flex-shrink: 0;
+    font-family: var(--lv-font);
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+}
+.lv-header__access a {
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    padding: 2px 0;
+    text-decoration: none;
+    transition: color .25s ease;
+}
+.lv-header__access a.in {
+    color: rgba(255, 255, 255, 0.9);
+}
+.lv-header__access a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: #e7b669;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.25s ease;
+}
+.lv-header__access a:hover {
+    color: #e7b669;
+    text-decoration: none;
+}
+.lv-header__access a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+.lv-header__access span {
+    margin: 0 12px;
+    color: rgba(196, 163, 90, 0.55);
+    font-size: 12px;
+    font-weight: 300;
+    user-select: none;
+}
+
+/* Iconos */
+.lv-header__icons {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-left: 60px;
+    flex-shrink: 0;
+}
+.lv-icon-btn,
+.lv-cart-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    color: #ffffff;
+    transition: color 0.25s ease, transform 0.25s ease;
+    text-decoration: none;
+}
+.lv-icon-btn:hover,
+.lv-cart-link:hover {
+    color: #e7b669;
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+.lv-icon-btn svg,
+.lv-cart-link svg {
+    stroke: currentColor;
+    display: block;
+    transition: stroke 0.25s ease;
+}
+.lv-icon-btn img,
+.lv-cart-link img { height: 24px; width: auto; }
+.lv-icon-btn:focus-visible,
+.lv-cart-link:focus-visible,
+.lv-burger:focus-visible { outline: 2px solid #e7b669; outline-offset: 4px; }
+
+/* Carrito + badge (diseño refinado, estilo de lujo) */
+.lv-cart-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.lv-cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    left: auto;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--lv-font);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    color: #0E1530;
+    background: #e7b669;
+    border: 1.5px solid #0E1530;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    pointer-events: none;
+}
+
+/* ── 2. Barra informativa ────────────────── */
+.lv-header-info {
+    background: #fff;
+    padding: 10px var(--lv-gutter);
+    border-bottom: 1px solid #ececec;
+}
+/* Iconos PNG blancos → azul de marca sobre fondo blanco */
+.lv-header-info__item img {
+    filter: brightness(0) saturate(100%) invert(11%) sepia(33%) saturate(2400%) hue-rotate(208deg) brightness(92%);
+}
+.lv-header-info__inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 20px;
+}
+.lv-header-info__item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 44px;
+}
+.lv-header-info__item:nth-child(2) { justify-content: center; }
+.lv-header-info__item:nth-child(3) { justify-content: flex-end; }
+.lv-header-info__item img { flex-shrink: 0; }
+.lv-header-info__item p {
+    margin: 0;
+    font-family: var(--lv-font);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--lv-ink);
+}
+
+/* ── 3. Sticky bar ───────────────────────── */
+.lv-sticky-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9100;
+    /* Mismo tema que el header principal */
+    background: var(--lv-info-bg);
+    box-shadow: inset 0 -1px 0 rgba(196,163,90,.35), 0 4px 16px rgba(0,0,0,.18);
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease-out;
+}
+.lv-sticky-bar.visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+.lv-sticky-bar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px var(--lv-gutter);
+}
+.lv-sticky-bar__logo {
+    flex-shrink: 0;
+    margin-right: 30px;
+    font-family: var(--lv-font);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--lv-ink);
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.lv-sticky-bar__logo:hover { color: var(--lv-ink); text-decoration: none; }
+.lv-sticky-bar__logo img {
+    display: block;
+    height: 44px;
+    width: auto;
+    max-width: 210px;
+    object-fit: contain;
+}
+.lv-sticky-bar__nav ul {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.lv-sticky-bar__nav ul li a {
+    position: relative;
+    display: block;
+    font-family: var(--lv-font);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 36px;
+    color: #fff;
+    text-decoration: none;
+    transition: color .25s;
+}
+.lv-sticky-bar__nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 4px;
+    width: 100%;
+    height: 2px;
+    background: #C4A35A;
+    opacity: 0;
+    transition: opacity .3s;
+}
+.lv-sticky-bar__nav ul li a:hover,
+.lv-sticky-bar__nav ul li a.active { color: #e7b669; }
+.lv-sticky-bar__nav ul li a:hover::after,
+.lv-sticky-bar__nav ul li a.active::after { opacity: 1; }
+.lv-sticky-bar__icons {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+.lv-sticky-bar__icons .lv-icon-btn,
+.lv-sticky-bar__icons .lv-cart-link {
+    color: #ffffff;
+}
+.lv-sticky-bar__icons .lv-icon-btn:hover,
+.lv-sticky-bar__icons .lv-cart-link:hover {
+    color: #e7b669;
+}
+
+/* ── 4. Menú móvil ───────────────────────── */
+.lv-burger {
+    display: none;
+    position: relative;
+    width: 28px;
+    height: 24px;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+.lv-burger span,
+.lv-burger span::before,
+.lv-burger span::after {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transition: transform .3s, opacity .3s;
+}
+.lv-burger span { top: 11px; }
+.lv-burger span::before,
+.lv-burger span::after { content: ""; }
+.lv-burger span::before { top: -8px; }
+.lv-burger span::after  { top: 8px; }
+.lv-nav-open .lv-burger span { background: transparent; }
+.lv-nav-open .lv-burger span::before { transform: translateY(8px) rotate(45deg); }
+.lv-nav-open .lv-burger span::after  { transform: translateY(-8px) rotate(-45deg); }
+
+.lv-nav-access { display: none; }
+
+/* ── Responsive ──────────────────────────── */
+@media (min-width: 1500px) {
+    .lv-header__nav-list { gap: 70px; }
+}
+@media (max-width: 1340px) {
+    .lv-header__inner { gap: 30px; }
+    .lv-header__nav { margin-left: 20px; }
+    .lv-header__nav-list { gap: 32px; }
+    .lv-header__icons { margin-left: 30px; }
+}
+@media (max-width: 1199px) {
+    /* Igual que Violet: el acceso se oculta en pantallas medianas */
+    .lv-header__access { display: none; }
+    .lv-header__nav { margin-left: auto; }
+    .lv-header__icons { margin-left: 40px; }
+    .lv-header-info__item p { font-size: 13px; }
+}
+
+@media (max-width: 991px) {
+    :root { --lv-gutter: 20px; }
+    .lv-header__inner { min-height: 80px; gap: 16px; }
+    .lv-header__logo img { height: 52px; max-width: 46vw; }
+    .lv-header__brand-name { font-size: 22px; }
+    .lv-header__brand-tag { font-size: 9px; letter-spacing: 4px; }
+    .lv-header__icons { margin-left: auto; gap: 20px; }
+    .lv-burger { display: inline-block; }
+
+    /* Drawer de navegación */
+    .lv-header__nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin: 0;
+        background: #fff;
+        box-shadow: 0 12px 24px rgba(0,0,0,.12);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .35s ease;
+    }
+    .lv-nav-open .lv-header__nav { max-height: 80vh; overflow-y: auto; }
+    .lv-header__nav-list {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px var(--lv-gutter) 16px;
+    }
+    .lv-header__nav-list > li { border-bottom: 1px solid #eee; }
+    .lv-header__nav-list > li > a { display: block; line-height: 50px; color: var(--lv-ink); }
+    .lv-header__nav-list > li > a::after { display: none; }
+    .lv-header__nav-list > li > a:hover,
+    .lv-header__nav-list > li > a.active { color: #8C6B2E; }
+    .lv-sub-menu {
+        position: static;
+        width: auto;
+        margin: 0;
+        padding: 0 0 10px 16px;
+        box-shadow: none;
+        visibility: visible;
+        opacity: 1;
+    }
+    .lv-nav-access {
+        display: flex;
+        gap: 8px;
+        border-bottom: 0 !important;
+        font-family: var(--lv-font);
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 50px;
+    }
+    .lv-nav-access a { color: var(--lv-ink); }
+    .lv-nav-access a.in { color: var(--lv-muted); }
+
+    .lv-sticky-bar__nav { display: none; }
+
+    .lv-header-info__item { gap: 10px; }
+    .lv-header-info__item img { height: 26px; width: auto; }
+    .lv-header-info__item p { font-size: 12px; }
+}
+
+@media (max-width: 767px) {
+    .lv-header-info__inner { grid-template-columns: 1fr; gap: 0; }
+    .lv-header-info__item,
+    .lv-header-info__item:nth-child(2),
+    .lv-header-info__item:nth-child(3) { justify-content: flex-start; min-height: 36px; }
+}
+
+@media (max-width: 575px) {
+    :root { --lv-gutter: 16px; }
+    .lv-header__inner { min-height: 70px; }
+    .lv-header__logo { gap: 10px; }
+    .lv-header__logo img { height: 44px; max-width: 52vw; }
+    .lv-header__brand-name { font-size: 18px; letter-spacing: 1px; }
+    .lv-header__brand-tag { font-size: 8px; letter-spacing: 3px; margin-top: 6px; }
+    .lv-header__icons { gap: 16px; }
+    .lv-header__icons .lv-account-btn { display: none; }
+    .lv-header-info { padding-top: 6px; padding-bottom: 6px; }
+    .lv-header-info__item { gap: 10px; min-height: 30px; }
+    .lv-header-info__item img { height: 22px; width: auto; }
+    .lv-header-info__item p { font-size: 12px; }
+    .lv-sticky-bar__logo { font-size: 16px; }
+}
+
+@media (max-width: 400px) {
+    .lv-header__inner { gap: 10px; }
+    .lv-header__logo { gap: 8px; min-width: 0; }
+    .lv-header__logo img { height: 38px; max-width: 48vw; }
+    .lv-header__brand-name { font-size: 15px; letter-spacing: .5px; white-space: nowrap; }
+    .lv-header__brand-tag { font-size: 7px; letter-spacing: 2px; }
+    .lv-header__icons { gap: 14px; }
+    .lv-icon-btn img,
+    .lv-cart-link img { height: 21px; }
+}
+
+/* ── 5. Topbar (sobre el header) ─────────── */
+.vl-topbar {
+    position: relative;
+    z-index: 9001;
+    background: #0E1530;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    font-family: var(--lv-font);
+    font-size: 12.5px;
+    color: rgba(255,255,255,.75);
+}
+.vl-topbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 40px;
+    padding: 0 var(--lv-gutter);
+}
+.vl-topbar__info,
+.vl-topbar__social {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.vl-topbar__info { gap: 26px; }
+.vl-topbar__info li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+.vl-topbar__info i { color: #C4A35A; font-size: 13px; }
+.vl-topbar a {
+    color: inherit;
+    text-decoration: none;
+    transition: color .25s;
+}
+.vl-topbar a:hover { color: #e7b669; text-decoration: none; }
+.vl-topbar__right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+.vl-topbar__label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+}
+.vl-topbar__social { gap: 6px; }
+.vl-topbar__social a {
+    width: 26px;
+    height: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    border-radius: 50%;
+    transition: color .25s, background .25s;
+}
+.vl-topbar__social a:hover { color: #0E1530; background: #C4A35A; }
+.vl-topbar__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 14px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    color: #0E1530 !important;
+    background: #C4A35A;
+    border-radius: 2px;
+    transition: background .25s !important;
+}
+.vl-topbar__cta:hover { background: #e7b669; }
+.vl-topbar a:focus-visible { outline: 2px solid #e7b669; outline-offset: 2px; }
+
+@media (max-width: 1199px) {
+    .vl-topbar__info .vl-topbar__hours { display: none; }
+}
+@media (max-width: 991px) {
+    .vl-topbar__label { display: none; }
+}
+@media (max-width: 767px) {
+    .vl-topbar__info .vl-topbar__mail,
+    .vl-topbar__social { display: none; }
+    .vl-topbar__inner { min-height: 36px; }
+}
+@media (max-width: 400px) {
+    .vl-topbar { font-size: 11.5px; }
+    .vl-topbar__cta span { display: none; }
+}
+
+/* ── 6. Barra informativa: desplazamiento a la izquierda ──
+   js/main.js arma la pista (.lv-info-track) duplicando los
+   mensajes; sin JS se mantiene la versión estática en 3 columnas. */
+.lv-header-info.is-marquee {
+    padding-left: 0;
+    padding-right: 0;
+    overflow: hidden;
+    /* Desvanecido en los bordes */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+}
+.lv-header-info.is-marquee .lv-header-info__inner { display: block; }
+.lv-info-track {
+    display: flex;
+    width: max-content;
+    animation: lv-info-marquee var(--lv-marquee-time, 40s) linear infinite;
+}
+.lv-header-info.is-marquee:hover .lv-info-track { animation-play-state: paused; }
+.lv-info-group { display: flex; }
+.lv-header-info.is-marquee .lv-header-info__item,
+.lv-header-info.is-marquee .lv-header-info__item:nth-child(n) {
+    justify-content: flex-start;
+    flex-shrink: 0;
+    min-height: 44px;
+    padding: 0 60px;
+    white-space: nowrap;
+}
+/* Separador dorado entre mensajes */
+.lv-header-info.is-marquee .lv-header-info__item { position: relative; }
+.lv-header-info.is-marquee .lv-header-info__item::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    margin-top: -2.5px;
+    background: #C4A35A;
+    transform: rotate(45deg);
+}
+@keyframes lv-info-marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+}
+@media (max-width: 767px) {
+    .lv-header-info.is-marquee .lv-header-info__item,
+    .lv-header-info.is-marquee .lv-header-info__item:nth-child(n) { padding: 0 32px; min-height: 36px; }
+}
+
+/* ── Buscador en vivo del header (lupa → panel con pls-live-search) ── */
+.vl-search { position: relative; display: flex; align-items: center; }
+.vl-search__panel {
+    position: absolute;
+    top: calc(100% + 22px);
+    right: -8px;
+    width: 420px;
+    padding: 12px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, .28);
+    border-top: 3px solid #8C6B2E;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity .18s ease, transform .18s ease, visibility .18s;
+    z-index: 9500;
+}
+.vl-search__panel::before {
+    content: "";
+    position: absolute;
+    top: -9px;
+    right: 22px;
+    border: 6px solid transparent;
+    border-bottom-color: #8C6B2E;
+}
+.vl-search.is-open .vl-search__panel { opacity: 1; visibility: visible; transform: none; }
+.vl-search .lv-header__search-form {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid #d8dee9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+.vl-search .lv-header__search-form:focus-within { border-color: #8C6B2E; box-shadow: 0 0 0 3px rgba(140, 107, 46, .15); }
+.vl-search #lv-search-input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    padding: 11px 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: #172144;
+    background: transparent;
+}
+.vl-search #lv-search-input::placeholder { color: #94a3b8; }
+.vl-search .lv-search-trigger {
+    width: 48px;
+    border: 0;
+    background: #172144;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background .2s;
+}
+.vl-search .lv-search-trigger:hover { background: #8C6B2E; }
+.vl-search.is-open .vl-search-toggle svg { color: #c9a24d; }
+/* pls-live-search.css fuerza position:relative en .lv-header__search (layout Liam); aquí el panel flota */
+.vl-search .vl-search__panel.lv-header__search { position: absolute !important; }
+/* El dropdown del widget va por encima del header y del panel */
+#pls-search-results { z-index: 9600; }
+
+@media (max-width: 767.98px) {
+    .vl-search { position: static; }
+    .vl-search .vl-search__panel.lv-header__search,
+    .vl-search__panel {
+        position: fixed !important;
+        top: 76px;
+        left: 12px;
+        right: 12px;
+        width: auto;
+    }
+    .vl-search__panel::before { display: none; }
+}

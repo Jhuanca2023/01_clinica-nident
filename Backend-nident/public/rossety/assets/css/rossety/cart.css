@@ -1,0 +1,52 @@
+/* Detalles Rossety · Carrito: panel lateral, selector de cantidad e icono del header */
+
+/* Icono del header convertido en botón */
+button.rs-icon-btn { background: none; border: 0; padding: 0; color: inherit; }
+.rs-icon-btn__count--empty { opacity: .55; }
+
+/* Selector de cantidad (compartido: panel, carrito, producto) */
+.rs-qty { display: inline-flex; align-items: center; border: 1.5px solid var(--rs-line); border-radius: 999px; background: #fff; overflow: hidden; }
+.rs-qty__btn { width: 32px; height: 32px; border: 0; background: transparent; font-size: 16px; line-height: 1; color: var(--rs-ink); transition: background .2s, color .2s; }
+.rs-qty__btn:hover { background: var(--rs-red); color: #fff; }
+.rs-qty__val { min-width: 30px; text-align: center; font-weight: 600; font-size: 14px; }
+
+/* Panel lateral */
+.rs-cart { position: fixed; inset: 0; z-index: 400; visibility: hidden; }
+.rs-cart--open { visibility: visible; }
+.rs-cart__overlay { position: absolute; inset: 0; background: rgba(43, 26, 29, .55); opacity: 0; transition: opacity .3s; }
+.rs-cart--open .rs-cart__overlay { opacity: 1; }
+.rs-cart__panel { position: absolute; top: 0; right: 0; width: 380px; max-width: 100vw; height: 100%; background: #fff; display: flex; flex-direction: column; box-shadow: -4px 0 28px rgba(43, 26, 29, .18); transform: translateX(100%); transition: transform .35s cubic-bezier(.4, 0, .2, 1); }
+.rs-cart--open .rs-cart__panel { transform: none; }
+
+.rs-cart__head { display: flex; align-items: center; gap: 12px; padding: 22px 24px; border-bottom: 1px solid var(--rs-line); flex-shrink: 0; }
+.rs-cart__head > i { font-size: 22px; color: var(--rs-red); }
+.rs-cart__title { flex: 1; text-align: center; font-family: var(--rs-font); font-size: 15px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+.rs-cart__close { width: 34px; height: 34px; border: 0; background: transparent; font-size: 20px; color: var(--rs-ink); border-radius: 50%; transition: background .2s, color .2s; }
+.rs-cart__close:hover { background: var(--rs-red-soft); color: var(--rs-red); }
+
+.rs-cart__body { flex: 1; overflow-y: auto; padding: 6px 24px 16px; }
+.rs-cart__body::-webkit-scrollbar { width: 4px; }
+.rs-cart__body::-webkit-scrollbar-thumb { background: var(--rs-line); border-radius: 2px; }
+.rs-cart__empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; height: 280px; color: var(--rs-muted); }
+.rs-cart__empty > i { font-size: 54px; color: var(--rs-line); }
+
+.rs-cart__item { display: grid; grid-template-columns: 76px 1fr auto; gap: 14px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--rs-line); }
+.rs-cart__img { width: 76px; height: 76px; border-radius: 12px; overflow: hidden; background: var(--rs-cream); }
+.rs-cart__img img { width: 100%; height: 100%; object-fit: cover; }
+.rs-cart__info { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.rs-cart__name { font-size: 14px; font-weight: 600; line-height: 1.3; }
+.rs-cart__name:hover { color: var(--rs-red); }
+.rs-cart__meta { font-size: 14px; font-weight: 700; color: var(--rs-red-dark); }
+.rs-cart__del { width: 34px; height: 34px; border: 0; background: transparent; font-size: 18px; color: var(--rs-muted); border-radius: 50%; transition: background .2s, color .2s; }
+.rs-cart__del:hover { background: var(--rs-red-soft); color: var(--rs-red); }
+.rs-cart__notes { padding: 16px 0 4px; font-size: 12px; color: var(--rs-muted); display: grid; gap: 6px; }
+
+.rs-cart__foot { padding: 18px 24px 24px; border-top: 1px solid var(--rs-line); display: grid; gap: 10px; flex-shrink: 0; background: var(--rs-cream); }
+.rs-cart__row { display: flex; justify-content: space-between; align-items: center; font-size: 15px; margin-bottom: 4px; }
+.rs-cart__row strong { font-size: 20px; color: var(--rs-red-dark); }
+.rs-cart__btn { width: 100%; }
+
+@media (max-width: 480px) {
+    .rs-cart__panel { width: 100vw; }
+    .rs-cart__head, .rs-cart__body, .rs-cart__foot { padding-left: 16px; padding-right: 16px; }
+}

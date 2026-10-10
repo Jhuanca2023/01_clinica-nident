@@ -1,0 +1,830 @@
+// ========================================
+// LISTA DE PRODUCTOS - CARRITO MINIMARKET
+// ========================================
+
+// Variables
+$primary: #922b21;
+$primary-dark: #a82024;
+$primary-light: #e04347;
+$success: #28a745;
+$warning: #ffc107;
+$danger: #dc3545;
+$text-dark: #2c2c2c;
+$text-medium: #555555;
+$text-light: #888888;
+$bg-light: #f8f9fa;
+$bg-white: #ffffff;
+$border-color: #e8e8e8;
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+
+// ========================================
+// CONTENEDOR PRINCIPAL
+// ========================================
+.cart {
+    padding: 40px 0 60px;
+    min-height: 60vh;
+}
+
+.page-wrapper {
+    background: $bg-light;
+}
+
+// ========================================
+// TABLA DE PRODUCTOS
+// ========================================
+.table-cart {
+    width: 100%;
+    background: $bg-white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-md;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid $border-color;
+
+    thead {
+       background:  $primary !important;
+
+        tr {
+            th {
+                padding: 18px 20px;
+                font-size: 14px;
+                font-weight: 700;
+                color: $bg-white;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                border: none;
+                text-align: left;
+
+                &:first-child {
+                    padding-left: 24px;
+                    border-radius: $radius-lg 0 0 0;
+                }
+
+                &:last-child {
+                    border-radius: 0 $radius-lg 0 0;
+                    text-align: center;
+                    width: 60px;
+                }
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            transition: all 0.3s ease;
+            border-bottom: 1px solid $border-color;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            &:hover {
+                background: linear-gradient(135deg, rgba($primary, 0.03) 0%, rgba($primary, 0.01) 100%);
+            }
+
+            td {
+                padding: 20px;
+                vertical-align: middle;
+                border: none;
+
+                &:first-child {
+                    padding-left: 24px;
+                }
+            }
+        }
+    }
+}
+
+// ========================================
+// COLUMNA DE PRODUCTO
+// ========================================
+.product-col {
+    min-width: 300px;
+
+    .product {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .product-media {
+        flex-shrink: 0;
+        width: 100px;
+        height: 100px;
+        border-radius: $radius-md;
+        background: $bg-light;
+        border: 2px solid $border-color;
+        transition: all 0.3s ease;
+        margin: 0;
+
+        &:hover {
+            border-color: $primary;
+            box-shadow: 0 4px 12px rgba($primary, 0.2);
+        }
+
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: inherit;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+    }
+
+    .product-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: $text-dark;
+        margin: 0;
+        line-height: 1.5;
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: $primary;
+            }
+        }
+    }
+}
+
+// ========================================
+// COLUMNA DE PRECIO
+// ========================================
+.price-col {
+    font-size: 16px;
+    font-weight: 600;
+    color: $text-dark;
+    white-space: nowrap;
+}
+
+.pc-mayorista-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #1e5a2b;
+    background: #d4edda;
+    border: 1px solid #a8d5b5;
+    border-radius: 4px;
+    padding: 1px 6px;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+// ========================================
+// COLUMNA DE CANTIDAD
+// ========================================
+.quantity-col {
+    .cart-product-quantity {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .qty-spinner {
+        display: flex;
+        align-items: center;
+        border: 1.5px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+        height: 42px;
+    }
+
+    .qty-btn {
+        background: #f5f5f5;
+        border: none;
+        width: 34px;
+        height: 100%;
+        font-size: 18px;
+        font-weight: 600;
+        color: #555;
+        cursor: pointer;
+        line-height: 1;
+        padding: 0;
+        flex-shrink: 0;
+        transition: background 0.2s;
+
+        &:hover {
+            background: #e0e0e0;
+            color: $primary;
+        }
+
+        &:active {
+            transform: scale(0.92);
+        }
+    }
+
+    .form-control.clsChangeLista {
+        border: none;
+        border-left: 1px solid #e0e0e0;
+        border-right: 1px solid #e0e0e0;
+        border-radius: 0;
+        text-align: center;
+        font-weight: 700;
+        color: #222;
+        width: 52px;
+        min-width: 52px;
+        height: 100%;
+        padding: 0;
+        box-shadow: none;
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        // Ocultar spinner nativo del browser
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        -moz-appearance: textfield;
+    }
+
+    .form-control {
+        width: 80px;
+        height: 48px;
+        padding: 10px 12px;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        border: 2px solid $border-color;
+        border-radius: $radius-sm;
+        background: $bg-white;
+        color: $text-dark;
+        transition: all 0.3s ease;
+
+        &:focus {
+            outline: none;
+            border-color: $primary;
+            box-shadow: 0 0 0 4px rgba($primary, 0.1);
+        }
+
+        &:hover {
+            border-color: rgba($primary, 0.5);
+        }
+
+        // Ocultar flechas del input number
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        &[type=number] {
+            -moz-appearance: textfield;
+        }
+    }
+}
+
+// ========================================
+// COLUMNA DE TOTAL
+// ========================================
+.total-col {
+    font-size: 18px;
+    font-weight: 700;
+    color: $primary;
+    white-space: nowrap;
+}
+
+// ========================================
+// COLUMNA DE ELIMINAR
+// ========================================
+.remove-col {
+    text-align: center;
+    vertical-align: middle;
+
+    .btn-remove,
+    .btn-remove-lista {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background: rgba($danger, 0.08);
+        border-radius: 50%;
+        color: $danger;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        border: 1px solid rgba($danger, 0.2);
+
+        &:hover {
+            background: $danger;
+            color: $bg-white;
+            transform: scale(1.1);
+            border-color: $danger;
+            box-shadow: 0 3px 10px rgba($danger, 0.3);
+        }
+
+        i {
+            line-height: 1;
+        }
+    }
+}
+
+// ========================================
+// RESUMEN DEL CARRITO (SIDEBAR)
+// ========================================
+.summary-cart {
+    background: $bg-white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-md;
+    overflow: hidden;
+    border: 1px solid $border-color;
+    position: sticky;
+    top: 150px;
+    max-width: 320px;
+    
+    .summary-title {
+        margin: 0;
+        padding: 17px 24px;
+        font-size: 20px;
+        font-weight: 700;
+        color: $bg-white;
+        margin-top: -24px;
+        background: $primary !important;
+        display: flex;
+        align-items: center;
+        gap: 12px; 
+        overflow: hidden;
+         margin: -25px -28px 20px -29px;
+        border-radius: 12px 12px 0 0;
+
+       
+        &::before {
+            content: '\f07a';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 18px;
+        }
+    }
+
+    .table-summary {
+        width: 100%;
+        margin: 0;
+        border-collapse: collapse;
+        width: calc(100% + 58px);
+        margin-left: -29px;
+        margin-right: -20px;
+        
+
+        tbody {
+            tr {
+                border-bottom: 1px solid $border-color;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                td {
+                    padding: 16px 24px;
+                    font-size: 15px;
+                    color: $text-medium;
+
+                    &:first-child {
+                        font-weight: 500;
+                    }
+                }
+
+                &.summary-subtotal {
+                    td {
+                        font-size: 14px;
+                        color: $text-light;
+                    }
+
+                    .summary-table-values {
+                        text-align: right;
+                        font-weight: 600;
+                        color: $text-dark;
+                    }
+                }
+
+                &.summary-total {
+                    background: linear-gradient(135deg, rgba($primary, 0.05) 0%, rgba($primary, 0.02) 100%);
+
+                    td {
+                        padding: 20px 24px;
+                        font-size: 18px;
+                        font-weight: 700;
+                        color: $text-dark;
+                    }
+
+                    .summary-table-values {
+                        text-align: right;
+                        font-size: 24px;
+                        font-weight: 800;
+                        color: $primary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ========================================
+// BOTÓN DE FINALIZAR COMPRA
+// ========================================
+.summary-cart {
+    .btn-primary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: calc(100% + 58px);
+        margin-left: -29px;
+        margin-right: -20px;
+        padding: 16px 24px;
+        font-size: 16px;
+        font-weight: 700;
+        color: $bg-white !important;
+        background: $primary !important;
+        border: none !important;
+        border-radius: 0 0 $radius-lg $radius-lg !important;
+        text-decoration: none;
+        box-shadow: none !important;
+        transition: opacity 0.2s ease;
+        margin-bottom: -29px;
+    
+
+        &:hover {
+            background: $primary !important;
+            box-shadow: none !important;
+            opacity: 0.88;
+        }
+
+        svg {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+    }
+}
+
+// ========================================
+// MENSAJE DE ENVÍO GRATIS
+// ========================================
+#mensajeEnvioGratis {
+    td {
+        padding: 12px 24px !important;
+        background: linear-gradient(135deg, rgba($success, 0.05) 0%, rgba($success, 0.02) 100%);
+    }
+}
+
+// ========================================
+// BADGES Y ALERTAS
+// ========================================
+.free-shipping-alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba($success, 0.1) 0%, rgba($success, 0.05) 100%);
+    border-radius: $radius-md;
+    margin: 16px 24px;
+    border: 2px dashed $success;
+
+    i {
+        font-size: 24px;
+        color: $success;
+    }
+
+    span {
+        font-size: 14px;
+        font-weight: 600;
+        color: $success;
+    }
+}
+
+// ========================================
+// CARRITO VACÍO
+// ========================================
+.empty-cart {
+    text-align: center;
+    padding: 60px 20px;
+    background: $bg-white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-md;
+
+    i {
+        font-size: 80px;
+        color: $border-color;
+        margin-bottom: 24px;
+    }
+
+    h3 {
+        font-size: 24px;
+        font-weight: 700;
+        color: $text-dark;
+        margin-bottom: 12px;
+    }
+
+    p {
+        font-size: 16px;
+        color: $text-light;
+        margin-bottom: 24px;
+    }
+
+    .btn-continue {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+        color: $bg-white;
+        border-radius: $radius-md;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba($primary, 0.3);
+        }
+    }
+}
+
+// ========================================
+// RESPONSIVE - TABLET
+// ========================================
+@media (max-width: 992px) {
+    .cart {
+        padding: 30px 0 40px;
+    }
+
+    .summary-cart {
+        position: relative;
+        top: 0;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .table-cart {
+        thead tr th {
+            padding: 14px 16px;
+            font-size: 13px;
+        }
+
+        tbody tr td {
+            padding: 16px;
+        }
+    }
+
+    .product-col {
+        min-width: 250px;
+
+        .product-media {
+            width: 80px;
+            height: 80px;
+        }
+
+        .product-title {
+            font-size: 15px;
+        }
+    }
+}
+
+// ========================================
+// RESPONSIVE - MÓVIL (TARJETAS)
+// ========================================
+@media (max-width: 768px) {
+    .cart {
+        padding: 20px 0 30px;
+    }
+
+    .table-cart {
+        display: block;
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        overflow: visible;
+
+        thead {
+            display: none;
+        }
+
+        tbody {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            tr {
+                display: grid !important;
+                grid-template-columns: auto 1fr auto auto;
+                grid-template-areas: 
+                    "prod prod prod prod"
+                    "price qty total remove";
+                background: $bg-white;
+                border-radius: $radius-md;
+                box-shadow: $shadow-sm;
+                padding: 10px 10px !important;
+                border: 1px solid $border-color;
+                position: relative;
+                gap: 5px;
+                align-items: center;
+                margin-bottom: 12px;
+
+                &:hover {
+                    background: $bg-white;
+                }
+
+                td {
+                    padding: 0 !important;
+                    display: flex !important;
+                    align-items: center;
+                    justify-content: flex-start !important;
+                    border: none !important;
+
+                    &::before {
+                        display: none !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .product-col {
+        grid-area: prod;
+        min-width: auto;
+        justify-content: flex-start !important;
+        border-bottom: 1px solid $border-color;
+        padding-bottom: 8px !important;
+        margin-bottom: 4px;
+
+        .product {
+            width: 100%;
+            gap: 12px;
+            padding-left: 0;
+            justify-content: flex-start !important;
+            display: flex !important;
+        }
+
+        .product-media {
+            width: 50px !important;
+            height: 50px !important;
+            margin: 0;
+            border-width: 1px;
+            flex-shrink: 0;
+        }
+
+        .product-title {
+            font-size: 14px;
+            line-height: 1.25;
+            font-weight: 700;
+            margin: 0;
+            text-align: left !important;
+        }
+    }
+
+    .price-col {
+        grid-area: price;
+        font-size: 14px;
+        color: $text-dark;
+        justify-content: flex-start;
+    }
+
+    .quantity-col {
+        grid-area: qty;
+        justify-content: center;
+        
+        .qty-spinner {
+            height: 32px !important;
+            border-width: 1px;
+            
+            .qty-btn {
+                width: 28px !important;
+                font-size: 16px;
+            }
+            
+            .form-control.clsChangeLista {
+                width: 38px !important;
+                min-width: 38px !important;
+                font-size: 13px;
+            }
+        }
+    }
+
+    .total-col {
+        grid-area: total;
+        font-size: 15px;
+        font-weight: 700;
+        color: $primary;
+        justify-content: center;
+        padding: 0 !important;
+        border: none !important;
+        margin: 0 !important;
+    }
+
+    .remove-col {
+        grid-area: remove;
+        justify-content: flex-end;
+        position: static !important;
+        padding: 0 !important;
+
+        .btn-remove-lista {
+            width: 28px !important;
+            height: 28px !important;
+            font-size: 12px !important;
+            background: rgba($danger, 0.05);
+            
+            &:hover {
+                transform: none;
+            }
+        }
+    }
+
+    .summary-cart {
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+
+        .summary-title {
+            padding: 16px 20px;
+            font-size: 18px;
+        }
+
+        .table-summary tbody tr td {
+            padding: 14px 20px;
+        }
+
+        .table-summary tbody tr.summary-total {
+            td {
+                padding: 16px 20px;
+            }
+
+            .summary-table-values {
+                font-size: 20px;
+            }
+        }
+    }
+
+    .btn-primary {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+}
+
+// ========================================
+// RESPONSIVE - MÓVIL PEQUEÑO
+// ========================================
+@media (max-width: 480px) {
+    .summary-cart {
+        .summary-title {
+            font-size: 16px;
+            padding: 14px 16px;
+        }
+
+        .table-summary tbody tr td {
+            padding: 12px 16px;
+            font-size: 14px;
+        }
+
+        .table-summary tbody tr.summary-total .summary-table-values {
+            font-size: 18px;
+        }
+    }
+}
+
+// ========================================
+// ANIMACIONES
+// ========================================
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.table-cart tbody tr {
+    animation: fadeIn 0.3s ease forwards;
+
+    @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+            animation-delay: #{$i * 0.05}s;
+        }
+    }
+}

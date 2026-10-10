@@ -1,0 +1,1073 @@
+// ══════════════════════════════════════════════════════════
+//  Gallery Page — web_gallery.scss  •  Valento
+// ══════════════════════════════════════════════════════════
+
+// ── Design Tokens ─────────────────────────────────────────
+$red: #922b21;
+$red-dark: #c00303;
+$red-light: #fff0f0;
+$red-border: #fbbcbc;
+
+$gray-50: #f8f9fa;
+$gray-100: #f1f3f5;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+
+$white: #ffffff;
+
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, .08);
+$shadow-md: 0 6px 20px rgba(0, 0, 0, .12);
+$shadow-lg: 0 12px 32px rgba(0, 0, 0, .16);
+
+$radius-sm: 6px;
+$radius: 10px;
+$radius-lg: 14px;
+
+$transition: .22s ease;
+
+
+// ══════════════════════════════════════════════════════════
+//  ROOT
+// ══════════════════════════════════════════════════════════
+.gal-root {
+    padding: 28px 0 64px;
+    background: $gray-100;
+    min-height: 60vh;
+}
+
+
+// ══════════════════════════════════════════════════════════
+//  LAYOUT
+// ══════════════════════════════════════════════════════════
+.gal-layout {
+    align-items: flex-start;
+}
+
+
+// ══════════════════════════════════════════════════════════
+//  SIDEBAR
+// ══════════════════════════════════════════════════════════
+.gal-sidebar-toggle {
+    display: flex;
+    width: 100%;
+    background: linear-gradient(135deg, $red, $red-dark);
+    color: $white;
+    border: none;
+    border-radius: $radius;
+    padding: 11px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 14px;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    box-shadow: 0 3px 12px rgba($red, .35);
+    transition: opacity $transition, transform $transition;
+
+    &:hover {
+        opacity: .9;
+    }
+
+    &:active {
+        transform: scale(.98);
+    }
+
+    &.active {
+        background: linear-gradient(135deg, $red-dark, #8f0101);
+    }
+
+    .gal-active-count {
+        background: $white;
+        color: $red;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+}
+
+.gal-sidebar {
+    background: $white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-sm;
+    overflow: hidden;
+    position: sticky;
+    top: 84px;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        background: linear-gradient(135deg, $red, $red-dark);
+    }
+
+    &__title {
+        font-size: 13.5px;
+        font-weight: 700;
+        letter-spacing: .4px;
+        color: $white;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+
+        i {
+            font-size: 13px;
+        }
+    }
+
+    &__clear {
+        font-size: 12px;
+        color: rgba(255, 255, 255, .82);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 8px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, .35);
+        transition: background $transition, color $transition;
+
+        &:hover {
+            background: rgba(255, 255, 255, .18);
+            color: $white;
+            text-decoration: none;
+        }
+
+        i {
+            font-size: 10px;
+        }
+    }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//  FILTER WIDGETS
+// ══════════════════════════════════════════════════════════
+.widget {
+    border-bottom: 1px solid $gray-200;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &.widget-active>.widget-title>a {
+        color: $red;
+    }
+}
+
+.widget-title {
+    margin: 0;
+
+    a.filtro-titulo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 11px 18px;
+        color: $gray-800;
+        font-size: 13.5px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background $transition, color $transition;
+        cursor: pointer;
+        line-height: 1.3;
+
+        &:hover {
+            background: $gray-50;
+            color: $red;
+            text-decoration: none;
+        }
+
+        &.active {
+            background: $red-light;
+            color: $red;
+        }
+
+        >span:first-child {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        >span:last-child {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .widget-icon {
+            font-size: 10px;
+            color: $gray-500;
+            transition: transform $transition;
+            flex-shrink: 0;
+        }
+
+        &[aria-expanded="false"] .widget-icon {
+            transform: rotate(-90deg);
+        }
+
+        .badge-pill {
+            font-size: 10px;
+            font-weight: 700;
+            background: $red;
+            color: $white;
+            border-radius: 20px;
+        }
+
+        .fa-check-circle {
+            color: #22c55e;
+            font-size: 13px;
+        }
+    }
+}
+
+.widget-body {
+    padding: 4px 0 12px;
+}
+
+.filter-items {
+    padding: 0;
+}
+
+.filter-item {
+    padding: 0px 18px 0px 35px;
+    transition: background $transition;
+
+    &:hover {
+        background: $gray-50;
+    }
+
+    &.filter-item-active {
+        background: $red-light;
+        border-left: 3px solid $red;
+        padding-left: 19px;
+    }
+
+    .custom-control {
+        padding-left: 0;
+
+        >div:first-child {
+            flex: 1;
+            min-width: 0;
+            padding-left: 1.5rem;
+        }
+    }
+
+    .custom-control-label {
+        font-size: 13px;
+        color: $gray-700;
+        cursor: pointer;
+        line-height: 1.5;
+
+        &::before {
+            border-color: $gray-400;
+            border-radius: 3px;
+            top: .15rem;
+            left: -1.5rem;
+        }
+
+        &::after {
+            top: .15rem;
+            left: -1.5rem;
+        }
+    }
+
+    .custom-control-input:checked~.custom-control-label {
+        color: $red;
+        font-weight: 600;
+
+        &::before {
+            background-color: $red;
+            border-color: $red;
+        }
+    }
+
+    .badge-light {
+        background: $gray-200;
+        color: $gray-600;
+        font-size: 10px;
+        font-weight: 600;
+        border-radius: 20px;
+        padding: 2px 7px;
+        flex-shrink: 0;
+    }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//  TOOLBAR
+// ══════════════════════════════════════════════════════════
+.gal-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $white;
+    border-radius: $radius;
+    padding: 10px 16px;
+    margin-bottom: 18px;
+    box-shadow: $shadow-sm;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    &__views {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
+
+    &__count {
+        font-size: 14px;
+        color: $gray-600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        i {
+            color: $red;
+            font-size: 15px;
+        }
+
+        .cantidadTxt {
+            font-weight: 700;
+            color: $gray-800;
+        }
+    }
+
+    &__sort {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        label {
+            margin: 0;
+            color: $red;
+            font-size: 16px;
+            cursor: default;
+        }
+
+        select#orden {
+            padding: 6px 32px 6px 12px;
+            border: 1.5px solid $gray-300;
+            border-radius: $radius-sm;
+            font-size: 13px;
+            color: $gray-800;
+            background: $white;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%236c757d' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            transition: border-color $transition, box-shadow $transition;
+
+            &:focus {
+                border-color: $red;
+                box-shadow: 0 0 0 3px rgba($red, .1);
+            }
+        }
+    }
+}
+
+.gal-view-btn {
+    background: none;
+    border: 1.5px solid $gray-300;
+    border-radius: $radius-sm;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: $gray-500;
+    font-size: 13px;
+    transition: background $transition, border-color $transition, color $transition;
+
+    &:hover {
+        background: $gray-100;
+        border-color: $gray-500;
+        color: $gray-800;
+    }
+
+    &.active {
+        background: $red;
+        border-color: $red;
+        color: $white;
+    }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//  ACTIVE FILTERS BAR
+// ══════════════════════════════════════════════════════════
+.gal-active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: $red-light;
+    border: 1px solid $red-border;
+    border-radius: $radius-sm;
+    margin-bottom: 16px;
+
+    .gal-af-label {
+        font-size: 11px;
+        font-weight: 800;
+        color: $red-dark;
+        text-transform: uppercase;
+        letter-spacing: .6px;
+        flex-shrink: 0;
+    }
+}
+
+.gal-af-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: $white;
+    border: 1px solid $red-border;
+    color: $red;
+    border-radius: 20px;
+    padding: 3px 10px 3px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+    transition: background $transition;
+
+    &:hover {
+        background: $red-light;
+    }
+
+    .gal-af-remove {
+        cursor: pointer;
+        font-size: 10px;
+        color: $red;
+        opacity: .65;
+        transition: opacity $transition;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//  LOADING SPINNER
+// ══════════════════════════════════════════════════════════
+.gal-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 48px 0;
+    color: $gray-600;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.gal-spinner {
+    width: 42px;
+    height: 42px;
+    border: 3px solid $gray-200;
+    border-top-color: $red;
+    border-radius: 50%;
+    animation: gal-spin .75s linear infinite;
+}
+
+@keyframes gal-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//  PRODUCTS GRID  (equal-height cards)
+// ══════════════════════════════════════════════════════════
+.gal-products {
+    transition: opacity .18s;
+
+    .products {
+        margin-bottom: 0 !important;
+    }
+
+    .gal-cards-row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .gal-cards-col {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 22px;
+
+        >.product-layout-1 {
+            flex: 1;
+            width: 100%;
+        }
+    }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//  PRODUCT CARD  (product-layout-1)
+// ══════════════════════════════════════════════════════════
+.product-layout-1 {
+    display: flex;
+    flex-direction: column;
+    background: $white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-sm;
+    overflow: hidden;
+    transition: box-shadow $transition, transform $transition;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+
+    &:hover {
+        box-shadow: $shadow-md;
+        transform: translateY(-4px);
+    }
+}
+
+.pc-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: $gray-50;
+    overflow: hidden;
+    border-bottom: 1px solid $gray-200;
+
+    a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 5px;
+        transition: transform .35s ease;
+    }
+}
+
+.product-layout-1:hover .pc-image-wrapper img {
+    transform: scale(0.97);
+}
+
+.pc-delivery-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+
+    p {
+        margin: 0;
+        padding: 3px 9px;
+        border-radius: 20px;
+        font-size: 11px !important;
+        font-weight: 600;
+        line-height: 1.5;
+        white-space: nowrap;
+    }
+
+    .clsLlegaHoy {
+        background: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffc107;
+    }
+
+    .clsLlegaManana {
+        background: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #17a2b8;
+    }
+
+    .clsLlegaLunes {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #28a745;
+    }
+}
+
+.pc-favorite {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: $white;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .15);
+        color: $gray-500;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color $transition, background $transition;
+
+        i {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &:hover,
+        &.clsBotonEliminarFavorito {
+            color: $red;
+        }
+    }
+}
+
+.pc-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 12px 14px 14px;
+}
+
+.pc-rating {
+    margin-bottom: 6px;
+}
+
+.pc-title {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: $gray-800;
+    line-height: 1.4;
+    min-height: 38px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-decoration: none;
+    margin-bottom: 8px;
+
+    &:hover {
+        color: $red;
+    }
+}
+
+.pc-prices {
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
+.pc-price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.pc-price-old {
+    font-size: 12px;
+    color: $gray-500;
+    text-decoration: line-through;
+}
+
+.pc-price-current {
+    font-size: 17px;
+    font-weight: 700;
+    color: $red;
+}
+
+.pc-price-only {
+    font-size: 17px;
+    font-weight: 700;
+    color: $red;
+}
+
+.pc-mayorista-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    // text-transform: uppercase;
+    color: #1e5a2b;
+    background: #d4edda;
+    border: 1px solid #a8d5b5;
+    border-radius: 4px;
+    padding: 1px 6px;
+}
+
+.pc-discount-badge {
+    font-size: 11px;
+    font-weight: 600;
+    background: $red-light;
+    color: $red;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.pc-yape-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #f3e8ff;
+    border: 1px solid #c4b5fd;
+    border-radius: 20px;
+    padding: 0 7px;
+    width: fit-content;
+
+    span {
+        font-size: 11px;
+        font-weight: 600;
+        color: #6d28d9;
+        white-space: nowrap;
+    }
+
+    img {
+        height: 26px;
+        width: auto;
+    }
+}
+
+.pc-btn-cart {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 9px 0;
+    border-radius: $radius-sm;
+    background: $red;
+    color: $white !important;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity .2s;
+    margin-top: 4px;
+
+    &:hover {
+        opacity: .85;
+        color: $white !important;
+        text-decoration: none;
+    }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//  CARD LISTA  (grid1)
+// ══════════════════════════════════════════════════════════
+.gal-list-card {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    background: $white;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+    margin-bottom: 14px;
+    transition: box-shadow .25s, transform .2s;
+
+    &:hover {
+        box-shadow: $shadow-md;
+        transform: translateY(-2px);
+    }
+
+    &__img {
+        position: relative;
+        width: 180px;
+        min-width: 180px;
+        flex-shrink: 0;
+        background: $gray-50;
+        overflow: hidden;
+
+        >a {
+            display: block;
+            height: 100%;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+            transition: transform .3s;
+        }
+
+        &:hover img {
+            transform: scale(1.06);
+        }
+    }
+
+    &__info {
+        flex: 1;
+        padding: 16px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    &__title {
+        font-size: 15px;
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.4;
+
+        a {
+            color: $gray-800;
+            text-decoration: none;
+
+            &:hover {
+                color: $red;
+            }
+        }
+    }
+
+    &__desc {
+        font-size: 13px;
+        color: $gray-600;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    &__action {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 16px 20px;
+        min-width: 180px;
+        border-left: 1px solid $gray-200;
+        gap: 10px;
+
+        .pc-btn-cart {
+            padding: 9px 16px;
+            white-space: nowrap;
+        }
+    }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//  NO RESULTS
+// ══════════════════════════════════════════════════════════
+.gal-no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px 20px;
+    color: $gray-600;
+    text-align: center;
+
+    i {
+        font-size: 52px;
+        color: $gray-300;
+        margin-bottom: 18px;
+    }
+
+    p {
+        font-size: 15px;
+        font-weight: 500;
+        margin: 0;
+    }
+}
+
+.gal-products .alert-warning {
+    border-left: 4px solid #ffc107;
+    border-radius: $radius-sm;
+    font-size: 14px;
+}
+
+
+// ══════════════════════════════════════════════════════════
+//  PAGINATION
+// ══════════════════════════════════════════════════════════
+.gal-pagination {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+
+    .pagination {
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+
+    .page-item {
+        &.active .page-link {
+            background: $red;
+            border-color: $red;
+            color: $white;
+        }
+
+        &.disabled .page-link {
+            opacity: .5;
+        }
+    }
+
+    .page-link {
+        border-radius: $radius-sm !important;
+        color: $gray-700;
+        border-color: $gray-300;
+        font-size: 14px;
+        padding: 6px 14px;
+        transition: background $transition, color $transition, border-color $transition;
+
+        &:hover {
+            background: $gray-100;
+            color: $red;
+            border-color: $red;
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 3px rgba($red, .18);
+        }
+    }
+
+    ul.pagination>li>a,
+    ul.pagination>li>span {
+        border-radius: $radius-sm !important;
+        color: $gray-700;
+        font-size: 14px;
+        padding: 6px 14px;
+        transition: background $transition, color $transition;
+
+        &:hover {
+            background: $gray-100;
+            color: $red;
+        }
+    }
+
+    ul.pagination>.active>a,
+    ul.pagination>.active>span {
+        background: $red;
+        border-color: $red;
+        color: $white;
+
+        &:hover {
+            background: $red-dark;
+            color: $white;
+        }
+    }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//  RESPONSIVE
+// ══════════════════════════════════════════════════════════
+@media (max-width: 991px) {
+    .gal-sidebar {
+        position: static;
+        top: auto;
+        display: none;
+
+        &.gal-sidebar--open {
+            display: block;
+        }
+    }
+
+    .gal-sidebar-toggle {
+        display: flex !important;
+    }
+
+    .gal-toolbar {
+        gap: 8px;
+
+        &__count {
+            font-size: 13px;
+        }
+
+        &__sort select#orden {
+            font-size: 13px;
+        }
+    }
+
+    .gal-products .gal-cards-col.col-md-3 {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+
+    .gal-list-card {
+        flex-direction: column;
+
+        &__img {
+            width: 100%;
+            min-width: unset;
+            height: 200px;
+        }
+
+        &__action {
+            border-left: none;
+            border-top: 1px solid $gray-200;
+            min-width: unset;
+            flex-direction: row;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+    }
+}
+
+@media (max-width: 575px) {
+    .gal-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+
+        &__views {
+            gap: 3px;
+        }
+
+        &__sort {
+            width: 100%;
+        }
+
+        &__sort select#orden {
+            width: 100%;
+        }
+    }
+
+    .gal-products .gal-cards-col.col-6 {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+
+    .gal-active-filters {
+        gap: 6px;
+        padding: 8px 10px;
+    }
+
+    .pc-image-wrapper {
+        height: 145px;
+    }
+
+    .pc-body {
+        padding: 8px 10px 10px;
+    }
+
+    .pc-btn-cart {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    .pc-title {
+        font-size: 13px;
+    }
+}

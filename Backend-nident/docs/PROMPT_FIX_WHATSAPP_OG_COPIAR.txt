@@ -1,0 +1,82 @@
+Eres un desarrollador Laravel senior. Corrige la vista previa al compartir el sitio
+en WhatsApp y Facebook (Open Graph). El proyecto es copia de otro y muestra logo
+incorrecto (favicon viejo, marca anterior, fondo negro, etc.).
+
+## DATOS (completar antes de enviar)
+- [ADJUNTO] Logo principal — preferir fondo BLANCO (ej. logo-principal-v02.png)
+- Ruta logo en repo: «RUTA_LOGO»
+- Marca: «NOMBRE_MARCA»
+- Dominio producción: «URL_PRODUCCION»
+- Slug corto de marca: «SLUG_MARCA» (ej. "Liam Vercceli" → liam)
+- Nombre archivo OG: «SLUG_MARCA»-«NOMBRE_MARCA_SLUG» (ej. liam-vercceli)
+- Layout Blade activo: «LAYOUT_BLADE» (ej. web.base_shop)
+- Proyecto copiado / restos a eliminar: «PROYECTO_COPIADO»
+- (Opcional) Título OG: «TITULO_OG»
+- (Opcional) Descripción OG: «DESCRIPCION_OG»
+- Metadatos BD: metadatos_paginas slug «home» (MetadatosPagina::metaVigente)
+
+## IMPLEMENTAR TODO (no solo explicar)
+
+### 1. Logo fuente
+- Guardar/adaptar en public/imagenes/logo-principal-v02.png (o logo-principal.jpg)
+- Si el JPG tiene fondo oscuro, generar versión PNG fondo BLANCO RGB(255,255,255)
+
+### 2. Script scripts/generate_«SLUG_MARCA»_brand_icons.php
+- Fuente: logo-principal-v02.png (fallback logo-principal.jpg)
+- Fondo BLANCO RGB(255,255,255) en todas las imágenes OG y favicons
+- Generar:
+  - public/wa-og/«SLUG_MARCA»-«NOMBRE_MARCA_SLUG»-square.jpg — 1200×1200 (PRINCIPAL WhatsApp)
+  - public/wa-og/«SLUG_MARCA»-«NOMBRE_MARCA_SLUG»-wide.jpg — 1200×630
+  - public/og-share.jpg (copia del square)
+  - public/favicon.ico, public/apple-touch-icon.png
+  - public/imagenes/«SLUG_MARCA»-favicon-32.png
+  - public/icon/«SLUG_MARCA»-icon-512.png
+- Ejecutar el script
+
+### 3. Código Laravel
+- Crear app/Http/Middleware/SocialSharePreview.php (detectar facebookexternalhit / WhatsApp)
+- Crear app/Support/SocialSharePreviewData.php:
+  - siteName = «NOMBRE_MARCA»
+  - canonicalUrlForRequest() — home sin barra final
+  - imageWidth/Height = 1200
+- Helper o Support: SITE_OG_IMAGE = 'wa-og/«SLUG_MARCA»-«NOMBRE_MARCA_SLUG»-square.jpg'
+- Crear resources/views/web/social_preview.blade.php — meta OG completo; SIN favicon ni apple-touch-icon
+- Crear resources/views/web/partials/og_meta.blade.php — og:site_name, og:image, dimensiones 1200×1200
+- Incluir og_meta en «LAYOUT_BLADE».blade.php
+- Actualizar resources/views/web/partials/favicon.blade.php — «NOMBRE_MARCA», iconos nuevos
+- Registrar middleware SocialSharePreview en app/Http/Kernel.php (grupo web, al inicio)
+- public/compartir/index.html — HTML estático OG apuntando a wa-og square
+- public/.htaccess — redirect 301 imágenes OG viejas del proyecto «PROYECTO_COPIADO» → wa-og square
+- public/robots.txt — Allow: /wa-og/ y Allow: /compartir/
+- public/icon/site.webmanifest — nombre e iconos «NOMBRE_MARCA»
+- public/artisan-clear.php — sección diagnóstico OG (archivos + curl facebookexternalhit)
+- Eliminar referencias de «PROYECTO_COPIADO» en OG, favicon y meta application-name
+
+### 4. Verificar
+- curl -A "facebookexternalhit/1.1" «URL_PRODUCCION» | grep og:image
+- og:image debe apuntar a wa-og/«SLUG_MARCA»-«NOMBRE_MARCA_SLUG»-square.jpg
+- Tamaño JPG ≈ 80–85 KB (blanco), no ≈ 93 KB (negro viejo)
+- Listar archivos creados y modificados
+
+### 5. Instrucciones al usuario
+- Subir wa-og/, compartir/, .htaccess, favicons a cPanel
+- «URL_PRODUCCION»/artisan-clear.php?key=TU_CLAVE → limpiar caché Laravel
+- Facebook Debugger: depurar «URL_PRODUCCION», «URL_PRODUCCION»/, «URL_PRODUCCION»/compartir
+- WhatsApp: compartir «URL_PRODUCCION»/compartir en chat nuevo
+- Borrar caché WhatsApp (móvil) y navegador (laptop) si sigue viejo
+- NO esperar días si se hace Debugger correctamente
+
+## RESTRICCIONES
+- Imagen OG NO en BD (solo título/descripción en metadatos_paginas)
+- Sin query string en og:image si robots.txt bloquea ?
+- No favicon/apple-touch en HTML para crawlers (social_preview.blade.php)
+- og:url home siempre sin barra final
+- Cambios mínimos; implementar y ejecutar script
+- Documentación de referencia: docs/PROMPT_FIX_WHATSAPP_OG_PREVIEW.md
+
+## REFERENCIA (Liam Vercceli — proyecto guía)
+- Backend: liamverceli-Backend
+- Marca: Liam Vercceli | Dominio: https://rossety.pe | Slug: liam
+- Layout: web.base_shop | Logo: public/imagenes/logo-principal.jpg
+- OG: public/wa-og/liam-vercceli-square.jpg
+- Compartir: https://rossety.pe/compartir

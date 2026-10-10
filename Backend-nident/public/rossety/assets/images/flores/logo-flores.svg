@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 70" width="260" height="70">
+  <!-- Rose petals -->
+  <g transform="translate(32,35)">
+    <circle cx="0" cy="0" r="6" fill="#e63946"/>
+    <ellipse cx="0" cy="-13" rx="5.5" ry="9" fill="#e63946" opacity="0.92"/>
+    <ellipse cx="0" cy="13" rx="5.5" ry="9" fill="#e63946" opacity="0.92"/>
+    <ellipse cx="-13" cy="0" rx="9" ry="5.5" fill="#e63946" opacity="0.92"/>
+    <ellipse cx="13" cy="0" rx="9" ry="5.5" fill="#e63946" opacity="0.92"/>
+    <ellipse cx="-9" cy="-9" rx="5" ry="8" fill="#c1121f" opacity="0.82" transform="rotate(-45,-9,-9)"/>
+    <ellipse cx="9" cy="-9" rx="5" ry="8" fill="#c1121f" opacity="0.82" transform="rotate(45,9,-9)"/>
+    <ellipse cx="-9" cy="9" rx="5" ry="8" fill="#c1121f" opacity="0.82" transform="rotate(45,-9,9)"/>
+    <ellipse cx="9" cy="9" rx="5" ry="8" fill="#c1121f" opacity="0.82" transform="rotate(-45,9,9)"/>
+    <!-- Stem -->
+    <path d="M3,18 Q4,30 2,40" stroke="#2d6a4f" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <!-- Leaf -->
+    <ellipse cx="11" cy="30" rx="9" ry="4" fill="#40916c" transform="rotate(-35,11,30)"/>
+  </g>
+  <!-- Brand -->
+  <text x="62" y="26" font-family="Cormorant Garamond,Georgia,serif" font-size="24" font-weight="700" fill="#1c2433" letter-spacing="1.5">FLORELLA</text>
+  <line x1="62" y1="32" x2="235" y2="32" stroke="#ffc8c8" stroke-width="0.8"/>
+  <text x="63" y="47" font-family="Montserrat,Arial,sans-serif" font-size="9.5" font-weight="500" fill="#e63946" letter-spacing="4.5">ROSAS &amp; PRESENTES</text>
+</svg>

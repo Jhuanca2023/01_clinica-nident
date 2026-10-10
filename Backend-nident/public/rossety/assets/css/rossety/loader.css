@@ -1,0 +1,45 @@
+/* Detalles Rossety · Pantalla de carga (preloader) */
+.rs-loader { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; overflow: hidden; color: #fff; animation: rs-loader-failsafe .01s linear 8s forwards; }
+.rs-loader__panel { position: absolute; top: 0; bottom: 0; width: 50.2%; background: linear-gradient(160deg, #d62839 0%, #a3131f 60%, #7c0d17 100%); transition: transform .55s cubic-bezier(.77, 0, .18, 1); }
+.rs-loader__panel--l { left: 0; }
+.rs-loader__panel--r { right: 0; background: linear-gradient(200deg, #d62839 0%, #a3131f 60%, #7c0d17 100%); }
+.rs-loader__bg { position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, rgba(242, 193, 64, .22), transparent 55%); pointer-events: none; transition: opacity .5s; }
+
+.rs-loader__heart { position: absolute; bottom: -40px; color: rgba(255, 255, 255, .28); pointer-events: none; animation: rs-loader-rise linear infinite; }
+@keyframes rs-loader-rise { 0% { transform: translateY(0) rotate(0deg) scale(.7); opacity: 0; } 12% { opacity: 1; } 100% { transform: translateY(-115vh) rotate(var(--rot, 25deg)) scale(1.1); opacity: 0; } }
+
+.rs-loader__box { position: relative; z-index: 2; width: min(86vw, 380px); text-align: center; transition: opacity .25s, transform .3s; }
+.rs-loader__logo-wrap { position: relative; width: 170px; height: 170px; margin: 0 auto 26px; display: flex; align-items: center; justify-content: center; }
+.rs-loader__ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .25); }
+.rs-loader__ring::before { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 3px solid transparent; border-top-color: var(--rs-gold); border-right-color: var(--rs-gold); animation: rs-loader-spin 1.3s cubic-bezier(.5, .1, .5, .9) infinite; }
+.rs-loader__ring::after { content: ''; position: absolute; inset: 14px; border-radius: 50%; border: 2px dashed rgba(255, 255, 255, .35); animation: rs-loader-spin 9s linear infinite reverse; }
+@keyframes rs-loader-spin { to { transform: rotate(360deg); } }
+.rs-loader__logo { position: relative; width: 118px; height: auto; filter: brightness(0) invert(1) drop-shadow(0 4px 14px rgba(0, 0, 0, .25)); animation: rs-loader-float 2.4s ease-in-out infinite; }
+@keyframes rs-loader-float { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-6px) scale(1.04); } }
+
+.rs-loader__title { font-family: var(--rs-font-display); font-size: 30px; font-weight: 600; line-height: 1.1; }
+.rs-loader__msg { height: 24px; margin-top: 8px; font-size: 14px; letter-spacing: .4px; color: rgba(255, 255, 255, .9); transition: opacity .25s, transform .25s; }
+.rs-loader__msg--swap { opacity: 0; transform: translateY(6px); }
+
+.rs-loader__bar { position: relative; height: 8px; margin-top: 26px; border-radius: 999px; background: rgba(255, 255, 255, .22); }
+.rs-loader__fill { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p, 0) * 1%); border-radius: 999px; background: linear-gradient(90deg, var(--rs-gold), #fff0b3); box-shadow: 0 0 14px rgba(242, 193, 64, .7); transition: width .25s ease-out; }
+.rs-loader__runner { position: absolute; top: 50%; left: calc(var(--p, 0) * 1%); width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%; background: #fff; color: #1fb58f; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 4px 12px rgba(0, 0, 0, .25); transition: left .25s ease-out; animation: rs-loader-beat .9s ease-in-out infinite; }
+@keyframes rs-loader-beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.22); } }
+.rs-loader__count { margin-top: 16px; font-size: 13px; font-weight: 600; letter-spacing: 3px; color: var(--rs-gold); }
+
+/* Salida: el contenido se desvanece y las dos cortinas se abren */
+.rs-loader--done .rs-loader__box, .rs-loader--done .rs-loader__bg { opacity: 0; transform: scale(.94); }
+.rs-loader--done .rs-loader__panel--l { transform: translateX(-101%); transition-delay: .2s; }
+.rs-loader--done .rs-loader__panel--r { transform: translateX(101%); transition-delay: .2s; }
+.rs-loader--done .rs-loader__heart { opacity: 0; transition: opacity .3s; }
+.rs-loader--gone { display: none; }
+@keyframes rs-loader-failsafe { to { opacity: 0; visibility: hidden; } }
+
+@media (max-width: 480px) {
+    .rs-loader__logo-wrap { width: 140px; height: 140px; }
+    .rs-loader__logo { width: 96px; }
+    .rs-loader__title { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .rs-loader__ring::before, .rs-loader__ring::after, .rs-loader__logo, .rs-loader__runner, .rs-loader__heart { animation: none; }
+}

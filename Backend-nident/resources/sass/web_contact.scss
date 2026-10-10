@@ -1,0 +1,601 @@
+// ========================================
+// PÁGINA DE CONTACTO - ESTILO MINIMARKET
+// ========================================
+
+// Variables de colores minimarket
+$primary-red: #922b21;
+$primary-red-dark: #a82024;
+$primary-red-light: #e04347;
+$accent-yellow: #ffc107;
+$accent-orange: #ff9800;
+$bg-light: #fdf5f5;
+$bg-white: #ffffff;
+$text-dark: #2c2c2c;
+$text-gray: #555555;
+$text-light: #888888;
+
+// ========================================
+// SECCIÓN PRINCIPAL
+// ========================================
+.contact-section {
+  padding: 4rem 0;
+  background: linear-gradient(180deg, $bg-light 0%, darken($bg-light, 2%) 100%);
+  position: relative;
+  overflow: hidden;
+
+  // Patrón decorativo de fondo
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba($primary-red, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba($primary-red-light, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba($accent-yellow, 0.03) 0%, transparent 30%);
+    pointer-events: none;
+  }
+}
+
+// ========================================
+// TARJETA DE INFORMACIÓN DE CONTACTO
+// ========================================
+.contact-card {
+  background: $bg-white;
+  border-radius: 20px;
+  box-shadow:
+    0 10px 40px rgba($primary-red-dark, 0.08),
+    0 2px 10px rgba(0, 0, 0, 0.04);
+  padding: 2.5rem;
+  height: 100%;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba($primary-red, 0.08);
+
+  // Decoración superior
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, $primary-red, $primary-red-light, $accent-yellow);
+  }
+
+  // Icono decorativo de fondo
+  &::after {
+    content: '\f291'; // fa-shopping-basket
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    bottom: -20px;
+    right: -10px;
+    font-size: 120px;
+    color: rgba($primary-red, 0.03);
+    transform: rotate(-15deg);
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow:
+      0 20px 50px rgba($primary-red-dark, 0.12),
+      0 5px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  h5 {
+    color: $primary-red-dark;
+    font-weight: 700;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+
+    &::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background: $accent-yellow;
+      border-radius: 50%;
+    }
+  }
+}
+
+// ========================================
+// ICONOS DE INFORMACIÓN
+// ========================================
+.contact-info-icon {
+  width: 55px;
+  height: 55px;
+  background: linear-gradient(135deg, rgba($primary-red, 0.1), rgba($primary-red-light, 0.15));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: $primary-red;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+  border: 2px solid rgba($primary-red, 0.1);
+
+  &:hover {
+    background: $primary-red;
+    color: white;
+    transform: rotate(10deg) scale(1.1);
+  }
+}
+
+// ========================================
+// LISTA DE CONTACTO
+// ========================================
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    padding: 1.2rem 1rem;
+    background: linear-gradient(135deg, rgba($primary-red, 0.03), rgba($primary-red-light, 0.05));
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+
+    &:hover {
+      background: linear-gradient(135deg, rgba($primary-red, 0.06), rgba($primary-red-light, 0.08));
+      border-left-color: $primary-red;
+      transform: translateX(5px);
+    }
+  }
+
+  i {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    background: linear-gradient(135deg, $primary-red, $primary-red-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.2rem;
+    color: white;
+    font-size: 14px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba($primary-red, 0.25);
+  }
+
+  span, a {
+    color: $text-dark;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+
+    &:hover {
+      color: $primary-red;
+    }
+  }
+}
+
+.contact-time li {
+  line-height: 1.8;
+  align-items: flex-start;
+
+  span {
+    font-size: 1.05rem;
+    color: $text-gray;
+  }
+
+  i {
+    margin-top: 0;
+  }
+}
+
+// ========================================
+// FORMULARIO DE CONTACTO
+// ========================================
+.contact-form-wrapper {
+  background: $bg-white;
+  border-radius: 20px;
+  box-shadow:
+    0 10px 40px rgba($primary-red-dark, 0.08),
+    0 2px 10px rgba(0, 0, 0, 0.04);
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba($primary-red, 0.08);
+
+  // Decoración superior
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, $accent-yellow, $accent-orange, $primary-red);
+  }
+
+  // Decoración de esquina
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, rgba($primary-red, 0.05), transparent);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  p {
+    color: $text-gray;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+}
+
+// ========================================
+// TÍTULOS DE SECCIÓN
+// ========================================
+.section-title {
+  position: relative;
+  padding-bottom: 1.2rem;
+  margin-bottom: 2rem;
+  color: $primary-red-dark;
+  font-weight: 700;
+  font-size: 1.8rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, $primary-red, $primary-red-light);
+    border-radius: 4px;
+  }
+
+  // Icono decorativo
+  &::before {
+    content: '🛒';
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.8rem;
+    opacity: 0.3;
+  }
+}
+
+// ========================================
+// CAMPOS DEL FORMULARIO
+// ========================================
+.form-label {
+  color: $text-dark;
+  // font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 0.6rem;
+
+  &::after {
+    content: '';
+  }
+}
+
+.form-control {
+  border: 2px solid rgba($primary-red, 0.15);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  font-size: 1.05rem;
+  color: $text-dark;
+  background: rgba($bg-light, 0.5);
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: $text-light;
+    font-size: 1rem;
+  }
+
+  &:focus {
+    border-color: $primary-red;
+    box-shadow:
+      0 0 0 4px rgba($primary-red, 0.1),
+      0 4px 12px rgba($primary-red, 0.08);
+    background: $bg-white;
+    outline: none;
+  }
+
+  &:hover:not(:focus) {
+    border-color: rgba($primary-red, 0.3);
+    background: $bg-white;
+  }
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 140px;
+}
+
+// ========================================
+// BOTÓN DE ENVÍO
+// ========================================
+.btn-primary-custom {
+  background: linear-gradient(135deg, $primary-red, $primary-red-light);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 2.5rem;
+  // font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba($primary-red, 0.3);
+
+  // Efecto de brillo
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba($primary-red, 0.4);
+    background: linear-gradient(135deg, $primary-red-dark, $primary-red);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  i {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover i {
+    transform: translateX(5px);
+  }
+}
+
+// ========================================
+// ALERTAS
+// ========================================
+.alert-success {
+  background: linear-gradient(135deg, rgba(#28a745, 0.1), rgba(#28a745, 0.05));
+  color: darken(#28a745, 15%);
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(#28a745, 0.2);
+  border-left: 4px solid #28a745;
+  display: flex;
+  align-items: center;
+  animation: slideInDown 0.5s ease;
+  font-size: 1.05rem;
+
+  i {
+    font-size: 1.4rem;
+    margin-right: 0.8rem;
+  }
+}
+
+.alert-error {
+  background: linear-gradient(135deg, rgba(#dc3545, 0.1), rgba(#dc3545, 0.05));
+  color: darken(#dc3545, 15%);
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(#dc3545, 0.2);
+  border-left: 4px solid #dc3545;
+  animation: shake 0.5s ease;
+  font-size: 1.05rem;
+
+  ul {
+    padding-left: 1.2rem;
+    margin-top: 0.5rem;
+
+    li {
+      margin-bottom: 0.3rem;
+    }
+  }
+}
+
+// ========================================
+// ANIMACIONES
+// ========================================
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-10px); }
+  80% { transform: translateX(10px); }
+}
+
+// ========================================
+// RESPONSIVE
+// ========================================
+@media (max-width: 1199px) {
+  .contact-form-wrapper {
+    padding: 2.5rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .contact-section {
+    padding: 3rem 0;
+  }
+
+  .contact-info-col {
+    margin-bottom: 2rem;
+  }
+
+  .contact-card,
+  .contact-form-wrapper {
+    padding: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .contact-list {
+    span, a {
+      font-size: 1.05rem;
+    }
+
+    i {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 2rem 0;
+  }
+
+  .contact-card,
+  .contact-form-wrapper {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .contact-list li {
+    padding: 1rem;
+  }
+
+  .contact-list i {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    font-size: 1rem;
+    margin-right: 1rem;
+  }
+
+  .contact-list span,
+  .contact-list a {
+    font-size: 1rem;
+  }
+
+  .form-control {
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+  }
+
+
+  .btn-primary-custom {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+
+    &::after {
+      width: 60px;
+      height: 3px;
+    }
+  }
+
+  .contact-card h5 {
+    font-size: 1.2rem;
+  }
+
+  .contact-form-wrapper p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-section {
+    padding: 1.5rem 0;
+  }
+
+  .contact-card::after {
+    font-size: 80px;
+    bottom: -10px;
+    right: -5px;
+  }
+
+  .contact-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .contact-list i {
+    margin-right: 0;
+  }
+
+  .row > [class*="col-md-6"] {
+    margin-bottom: 0;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .contact-card h5 {
+    font-size: 1.15rem;
+  }
+
+  .form-label {
+    font-size: 1rem;
+  }
+}
+
+.clsMarginBottom-0{
+  &>input{
+    margin-bottom: 0 !important;
+
+  }
+}

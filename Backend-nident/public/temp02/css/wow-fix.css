@@ -1,0 +1,13 @@
+/* Safety net: WOW must never leave content permanently invisible */
+.wow.wow--revealed,
+.wow.animated {
+    visibility: visible !important;
+}
+
+/* Reduced motion: show content immediately without waiting for scroll */
+@media (prefers-reduced-motion: reduce) {
+    .wow {
+        visibility: visible !important;
+        animation: none !important;
+    }
+}

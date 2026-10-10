@@ -1,0 +1,10 @@
+const fs = require('fs');
+const path = require('path');
+const html = fs.readFileSync(path.join(__dirname, '../../../public/temp02/cotizador/index.html'), 'utf8');
+const start = html.indexOf('<section class="cot-hero">');
+const end = html.indexOf('<p class="cot-footer-note">');
+const chunk = html.slice(start, end);
+const dest = path.join(__dirname, '../../../resources/views/web/pages/cotizador/partials/content.blade.php');
+fs.mkdirSync(path.dirname(dest), { recursive: true });
+fs.writeFileSync(dest, chunk);
+console.log('ok', chunk.length);

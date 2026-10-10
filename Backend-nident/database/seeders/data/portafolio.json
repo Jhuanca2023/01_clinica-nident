@@ -1,0 +1,462 @@
+[
+  {
+    "cat": "sistemas",
+    "type": "Sistema",
+    "title": "Morgan y asociados - Intranet",
+    "desc": "Sistema interno para la gestión de pólizas de seguros, cartera de clientes, reportes y dashboard. Soporte y mantenimiento de servidores en la nube AWS.",
+    "tech": "AWS + POSTGRESQL + LARAVEL + NODE.JS",
+    "url": "http://morgan.vertyl.com",
+    "linkText": "Sistema",
+    "img": "img/portafolio/morgan-intranet.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "App móvil",
+    "title": "Kusikuy - App móvil",
+    "desc": "Aplicación móvil de productos peruanos disponible en Google Play. Comercialización de productos del Perú para mercado local e internacional.",
+    "tech": "ANDROID + KOTLIN",
+    "url": "https://apkpure.com/es/kusikuy-productos-del-per%C3%BA/com.kusikuy/",
+    "linkText": "App móvil",
+    "img": "img/portafolio/02-kusikuy.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "App móvil",
+    "title": "WhiteLion / 2PersonnelPlus - App móvil",
+    "desc": "App Android para gestión IPERC (Identificación de Peligros, Evaluación y Control de Riesgos). Disponible en Google Play Store.",
+    "tech": "KOTLIN + JETPACK COMPOSE",
+    "url": "https://play.google.com/store/apps/details?id=com.lvl.wlp.iperc",
+    "linkText": "App móvil",
+    "img": "img/portafolio/03-whitelion.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sitio web",
+    "title": "Agrovet Latina - Tienda online",
+    "desc": "Plataforma e-commerce de productos veterinarios y agropecuarios con sistema de login, galería de productos y descuentos promocionales.",
+    "tech": "MYSQL + PHP + LARAVEL",
+    "url": "https://agrovetlatina.com/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/04-agrovet-latina.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sitio web",
+    "title": "Capre Perú - Tienda online",
+    "desc": "Tienda online de sillas ergonómicas y productos de calidad. Sistema con cookies de sesión, panel de ubicación y catálogo de productos.",
+    "tech": "MYSQL + PHP + LARAVEL",
+    "url": "https://www.capre.pe/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/05-capre.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sitio web",
+    "title": "Asesoría Grupo Villa - Aplicación Web",
+    "desc": "Sistema de gestión con autenticación para empresa de asesorías empresariales.",
+    "tech": "PHP + LARAVEL + REACT",
+    "url": "https://asesoriagrupovilla.com/session/signin/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/06-asesoria-grupo-villa.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sitio web",
+    "title": "2PersonnelPlus - Aplicación Web",
+    "desc": "Sistema web empresarial de gestión de personal y seguridad, integrado con la app biométrica IPERC.",
+    "tech": "PHP + LARAVEL + REACT",
+    "url": "https://2personnelplus.whitelion.pe:8080/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/07-2personnelplus.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sitio web",
+    "title": "Yarousgroup - Aplicación web",
+    "desc": "Sistema de reportes y consultas para los clientes registrados. Proporciona información de certificados emitidos por la empresa.",
+    "tech": "MYSQL + LARAVEL + NODE.JS + AWS",
+    "url": "https://certificados.yarosgroup.com",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/08-yarousgroup.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sitio web",
+    "title": "Corp Life - Aplicación web",
+    "desc": "Red social y de gestión de la comunicación para los empleados y el área de recursos humanos de la empresa.",
+    "tech": "MYSQL + PHP + LARAVEL + NODE.JS + AWS",
+    "url": "https://www.lifecorp.pe",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/09-corp-life.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sitio web",
+    "title": "MotorSUV - Aplicación web",
+    "desc": "Sistema web con login de seguridad para administración de flota vehicular y control de accesos.",
+    "tech": "MYSQL + PHP + LARAVEL",
+    "url": "https://www.motorsuv.com/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/10-motorsuv.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sitio web",
+    "title": "Lima Car Auto - Tienda online",
+    "desc": "Sistema integral de concesionaria vehicular con CRUD avanzado, DataGrid DevExtreme, importación Excel y gestión de clientes.",
+    "tech": "PHP + LARAVEL + REACT + DEVEXTREME",
+    "url": "https://limacar.com.pe/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/11-lima-car-auto.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sitio web",
+    "title": "Residencia JN Bizkaia - Reservas online",
+    "desc": "Sistema de presentación y reservas hoteleras. Versión adaptada para residencia en Bizkaia, España.",
+    "tech": "PHP + LARAVEL + REACT",
+    "url": "https://residenciajnbizkaia.es/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/12-residencia-jn-bizkaia.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sitio web",
+    "title": "Youroutlet - Tienda online",
+    "desc": "Tienda online de venta de diversos productos, catálogo de productos, pasarelas de pago, gestión de ventas.",
+    "tech": "MYSQL + PHP + WORDPRESS + WOOCOMMERCE + AWS",
+    "url": "https://www.youroutlet.pe/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/13-youroutlet.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sistema",
+    "title": "Sistema de pedidos SEGRIMSA",
+    "desc": "Aplicación web interna para gestión operativa, registro y consulta de información, seguimiento de procesos y acceso seguro para optimizar el control administrativo empresarial.",
+    "tech": "",
+    "url": "http://fabriqadigital.work/segrimsa/app/",
+    "linkText": "Sistema",
+    "img": "img/portafolio/14-segrimsa-pedidos.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sitio web",
+    "title": "Karina Huertas - Tienda online",
+    "desc": "Tienda online con catálogo de productos, pasarela de pago, gestión de venta y pagos personalizados.",
+    "tech": "MYSQL + PHP + WORDPRESS + WOOCOMMERCE",
+    "url": "https://karinahuertas.com",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/15-karina-huertas.png"
+  },
+  {
+    "cat": "sistemas",
+    "type": "Sitio web",
+    "title": "Cámara Peruano suiza - Aplicación web",
+    "desc": "Sistema de gestión de tarjetas de presentación virtuales con QR para uso en eventos de la empresa.",
+    "tech": "MYSQL + LARAVEL + NODE.JS + AWS",
+    "url": "https://swisschamperu.org",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Style clean",
+    "desc": "Landing page orientado a las ventas efectivas.",
+    "tech": "MYSQL + WORDPRESS",
+    "url": "https://styleclean.pe",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Soy tesista",
+    "desc": "Sitio web para servicio de asesoría y elaboración de tesis universitarias. Incluye formulario de contacto, sección de servicios y evidencias.",
+    "tech": "HTML + CSS + MYSQL + LARAVEL",
+    "url": "https://soytesista.com/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "MAESC SAC",
+    "desc": "Sitio corporativo para empresa de ingeniería y construcción. Secciones de supervisión, movimiento de tierras, transporte y proyectos.",
+    "tech": "HTML + CSS + MYSQL + LARAVEL",
+    "url": "https://maescperu.com/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/maesc-sac-app.png"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Casas y Casas Perú",
+    "desc": "Portal inmobiliario peruano con listado de inmuebles, anunciantes y búsqueda de propiedades en venta y alquiler.",
+    "tech": "MYSQL + PHP + CodeIgniter",
+    "url": "https://casasycasas.pe/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/casas-y-casas.png"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Jorge Cerdán",
+    "desc": "Sitio web y portafolio fotográfico.",
+    "tech": "MYSQL + PHP + WORDPRESS",
+    "url": "https://jorgelcerdan.com",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/jorge-cerdan.png"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "MR io game",
+    "desc": "Sitio web de información corporativa y catálogo de juegos online.",
+    "tech": "MYSQL + PHP + WORDPRESS",
+    "url": "https://www.mriogames.com",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/mr-io-game.png"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Travel bus",
+    "desc": "Sitio web de información corporativa y catálogo de servicios.",
+    "tech": "MYSQL + WORDPRESS",
+    "url": "https://www.travelbus.com.pe",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/travel-bus.png"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Legalhelp",
+    "desc": "Sitio web informativo orientado a las ventas.",
+    "tech": "MYSQL + PHP + WORDPRESS + WOOCOMMERCE",
+    "url": "https://legalhelp.pe",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/legalhelp.png"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Faster del Perú",
+    "desc": "Sitio web con catálogo de productos y gestión de correos corporativos.",
+    "tech": "MYSQL + WORDPRESS + WOOCOMMERCE",
+    "url": "https://fasterdelperu.com.pe",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/faster-del-peru.png"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Hapago",
+    "desc": "Sitio web informativo con gestión de contenidos CMS.",
+    "tech": "MYSQL + WORDPRESS",
+    "url": "https://hapago.com.pe",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/hapago.png"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Sifuentes",
+    "desc": "Sitio web de información corporativa, catálogo de productos y gestión de cotizaciones online.",
+    "tech": "MYSQL + PHP + WORDPRESS + WOOCOMMERCE",
+    "url": "https://sifuentes.com.pe",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "SRF capacitación",
+    "desc": "Landing page de información corporativa.",
+    "tech": "MYSQL + PHP",
+    "url": "https://srf.pe",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "MINED",
+    "desc": "Sitio web con administrador de contenidos.",
+    "tech": "MYSQL + PHP + WORDPRESS",
+    "url": "https://mined.world",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Impulse World",
+    "desc": "Sitio web informativo con presentación de servicios, contenido dinámico, formularios de contacto y diseño responsive orientado a conversión, visibilidad de marca y captación de clientes.",
+    "tech": "",
+    "url": "https://impulseworld.pro/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Gianvictor Cueva",
+    "desc": "Sitio web personal que muestra portafolio profesional, experiencia, proyectos destacados, información de contacto y diseño responsive para fortalecer marca personal y presencia digital.",
+    "tech": "",
+    "url": "https://gianvictorcueva.com/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Yaros Group Peru",
+    "desc": "Sitio web corporativo con presentación de servicios empresariales, secciones informativas, formularios de contacto, diseño responsive y estructura optimizada para generación de clientes potenciales.",
+    "tech": "",
+    "url": "https://www.yarosgroup.com/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Equipo Gen",
+    "desc": "Sitio web corporativo con catálogo de equipos médicos, fichas técnicas, formularios de contacto y cotización, diseño responsive y enfoque en información comercial y captación de clientes.",
+    "tech": "",
+    "url": "https://equipogen.com/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "FWP",
+    "desc": "Sitio web con catálogo de productos, fichas informativas, formularios de contacto y diseño responsive para mostrar soluciones, fortalecer marca y facilitar consultas comerciales.",
+    "tech": "",
+    "url": "https://futureworldproducts.com/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "VA y VEN",
+    "desc": "Sitio web corporativo con información de servicios de transporte, formularios de contacto y cotización, diseño responsive y estructura enfocada en captación de clientes empresariales.",
+    "tech": "",
+    "url": "https://vayventransportes.pe/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Triple Certificacion",
+    "desc": "Sitio web informativo que presenta programas de certificación, contenidos explicativos, formularios de inscripción y contacto, diseño responsive y estructura orientada a captación de interesados.",
+    "tech": "",
+    "url": "https://triplecertificacion.com/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Impulse World Broker",
+    "desc": "Sitio web corporativo con información de servicios financieros, formularios de contacto, secciones informativas y diseño responsive orientado a generación de leads y confianza comercial.",
+    "tech": "",
+    "url": "https://worldtradersbroker.com/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Segrimsa",
+    "desc": "Sitio web corporativo con información institucional, servicios empresariales, formularios de contacto y cotización, diseño responsive y estructura enfocada en comunicación comercial y captación de clientes.",
+    "tech": "",
+    "url": "https://segrimsa.pe/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "PENSA",
+    "desc": "Sitio web corporativo con presentación de servicios, información institucional, formularios de contacto y diseño responsive orientado a comunicación empresarial y generación de oportunidades comerciales.",
+    "tech": "",
+    "url": "https://pensaperu.com/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Miradas Que Cuidan",
+    "desc": "Sitio web informativo de campaña social con contenidos educativos, secciones de concientización, recursos visuales y formularios de contacto para promover prevención, cuidado y participación ciudadana.",
+    "tech": "",
+    "url": "https://miradasquecuidan.com/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "Solucion Inmuebles",
+    "desc": "Sitio web inmobiliario con listado de propiedades, fichas detalladas, filtros de búsqueda, formularios de contacto y diseño responsive para facilitar consultas y captación de clientes.",
+    "tech": "",
+    "url": "https://solucioninmuebles.fabriqadigital.com/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "sitios",
+    "type": "Sitio web",
+    "title": "AC Concretos",
+    "desc": "Sitio web corporativo con información de productos de concreto, fichas técnicas, secciones de servicios, formularios de contacto y diseño responsive orientado a consultas comerciales.",
+    "tech": "",
+    "url": "https://acconcretos.com.pe/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/ac-concretos.png"
+  },
+  {
+    "cat": "desarrollo",
+    "type": "Sitio web",
+    "title": "Kalvirs Education - Elearning",
+    "desc": "Plataforma educativa para preparación de exámenes GMAT, GRE y TOEFL. Con login, registro, tienda, blog, directorio de docentes y sedes.",
+    "tech": "MYSQL + LARAVEL + REACT",
+    "url": "https://www.kalvirs.com/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/kalvirs-education.png"
+  },
+  {
+    "cat": "desarrollo",
+    "type": "Sitio web",
+    "title": "Kristec Autoparts - Tienda online",
+    "desc": "Plataforma de comercio electrónico estilo marketplace con gestión de productos, carrito y gestión de pedidos para el mercado de autopartes.",
+    "tech": "MYSQL + LARAVEL + REACT",
+    "url": "https://kristecautoparts.com/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/kristec-autoparts.png"
+  },
+  {
+    "cat": "desarrollo",
+    "type": "Sitio web",
+    "title": "MAESC SAC - Aplicación web",
+    "desc": "Plataforma para la gestión de cotizaciones y proyectos del sector construcción. Lleva registro de materiales de obra, costos, presupuestos y compras.",
+    "tech": "MYSQL + LARAVEL + REACT",
+    "url": "https://test.maescperu.com/admin/auth/login",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/maesc-sac-app.png"
+  },
+  {
+    "cat": "desarrollo",
+    "type": "Sitio web",
+    "title": "AC Concretos - Aplicación web",
+    "desc": "Plataforma para la gestión de compras en proyectos del sector construcción.",
+    "tech": "MYSQL + LARAVEL + REACT",
+    "url": "https://test.acconcretos.com.pe/",
+    "linkText": "Sitio web",
+    "img": "img/portafolio/ac-concretos-app.png"
+  },
+  {
+    "cat": "desarrollo",
+    "type": "Sitio web",
+    "title": "Prestomart - Aplicación web",
+    "desc": "Minimarket y plataforma para la gestión de compras para empresas mayoristas.",
+    "tech": "MYSQL + LARAVEL + REACT",
+    "url": "https://prestomart.com/admin/",
+    "linkText": "Sitio web"
+  },
+  {
+    "cat": "desarrollo",
+    "type": "Sitio web",
+    "title": "Shaca Perú - Sitio web y reservas",
+    "desc": "Sitio web corporativo de nutrición y entrenamiento con un sistema de reservas de citas online.",
+    "tech": "MYSQL + WORDPRESS + WOOCOMMERCE",
+    "url": "https://shacaperu.org/inicio/",
+    "linkText": "Sitio web"
+  }
+]

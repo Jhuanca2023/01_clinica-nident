@@ -1,0 +1,259 @@
+/* =============================================
+   Botón WhatsApp Flotante - Valento
+   ============================================= */
+
+/* ── 1. Contenedor fijo */
+.lv-wa-wrap {
+  position: fixed;
+  bottom: 30px;
+  left: 26px;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ── 2. Ondas de pulso verde */
+.lv-wa-pulse {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.30);
+  animation: lv-wa-ring 2.4s ease-out infinite;
+  pointer-events: none;
+}
+.lv-wa-pulse--2 {
+  animation-delay: 0.8s;
+  background: rgba(37, 211, 102, 0.18);
+}
+@keyframes lv-wa-ring {
+  0%   { transform: scale(1);   opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* ── 3. Botón principal */
+.lv-wa-btn {
+  position: relative;
+  z-index: 2;
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #25d366, #128c7e);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow:
+    0 6px 24px rgba(37, 211, 102, 0.45),
+    0 2px  8px rgba(0, 0, 0, 0.20);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, width 0.35s ease, border-radius 0.35s ease;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ── 4. Ícono */
+.lv-wa-icon {
+  font-size: 30px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+/* ── 5. Label oculto */
+.lv-wa-label {
+  max-width: 0;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: max-width 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+  white-space: nowrap;
+}
+
+/* ── Hover: botón se expande en píldora */
+.lv-wa-wrap:hover .lv-wa-btn {
+  width: 168px;
+  border-radius: 32px;
+  box-shadow:
+    0 10px 32px rgba(37, 211, 102, 0.60),
+    0  4px 12px rgba(0, 0, 0, 0.25);
+  transform: translateY(-3px);
+}
+.lv-wa-wrap:hover .lv-wa-label {
+  max-width: 120px;
+  opacity: 1;
+  margin-left: 10px;
+}
+.lv-wa-wrap:hover .lv-wa-icon {
+  transform: rotate(-10deg) scale(1.1);
+}
+.lv-wa-wrap:hover .lv-wa-pulse {
+  animation-play-state: paused;
+  opacity: 0;
+}
+
+/* ── 6. Burbuja de chat */
+.lv-wa-bubble {
+  position: absolute;
+  bottom: 78px;
+  left: 0;
+  width: 300px;
+  background: #fff;
+  border-radius: 16px 16px 16px 4px;
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.18),
+    0  4px 16px rgba(0, 0, 0, 0.10);
+  padding: 18px 18px 16px;
+  opacity: 0;
+  transform: translateY(14px) scale(0.95);
+  transform-origin: bottom right;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+/* Cola de burbuja */
+.lv-wa-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; left: 20px;
+  width: 0; height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 9px solid #fff;
+}
+
+/* Burbuja visible solo cuando está anclada por JS */
+.lv-wa-wrap.lv-wa-open .lv-wa-bubble {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Botón cerrar burbuja */
+.lv-wa-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: #efefef;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 17px;
+  line-height: 1;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.lv-wa-close-btn:hover {
+  background: #ddd;
+  color: #333;
+}
+
+/* Header de la burbuja */
+.lv-wa-bubble-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.lv-wa-bubble-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.lv-wa-bubble-header strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: #111;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.lv-wa-bubble-header span {
+  font-size: 11px;
+  color: #25d366;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Punto verde parpadeante */
+.lv-wa-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #25d366;
+  animation: lv-wa-blink 1.4s ease-in-out infinite;
+}
+@keyframes lv-wa-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* Mensaje */
+.lv-wa-bubble-msg {
+  background: #f0fdf4;
+  border-radius: 10px 10px 10px 3px;
+  padding: 10px 13px;
+  margin-bottom: 14px;
+}
+.lv-wa-bubble-msg p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #2d3748;
+  margin: 0;
+}
+
+/* Botón de la burbuja */
+.lv-wa-bubble-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+.lv-wa-bubble-btn:hover {
+  background: linear-gradient(135deg, #128c7e, #075e54);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.50);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ── 7. Responsive */
+@media (max-width: 767px) {
+  .lv-wa-wrap   { bottom: 20px; left: 16px; }
+  .lv-wa-btn    { width: 54px; height: 54px; }
+  .lv-wa-icon   { font-size: 26px; }
+  .lv-wa-pulse  { width: 54px; height: 54px; }
+  .lv-wa-bubble { width: 270px; }
+  .lv-wa-wrap:hover .lv-wa-btn { width: 148px; }
+}

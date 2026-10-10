@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Carrito de Compras - Valento">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>Valento | Mi Carrito</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <!-- CSS Base -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- CSS Header / Footer compartidos -->
+    <link rel="stylesheet" href="css/header-custom.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/footer-luxe.css">
+    <link rel="stylesheet" href="css/scrolltop.css">
+    <link rel="stylesheet" href="css/whatsapp.css">
+
+    <!-- CSS Carrito modal -->
+    <link rel="stylesheet" href="css/cart-modal.css">
+
+    <!-- CSS propio de esta página -->
+    <link rel="stylesheet" href="css/shopping-cart.css">
+    <link rel="stylesheet" href="css/fonts.css" type="text/css">
+</head>
+
+<body>
+
+    <!-- ===== PRELOADER ===== -->
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader">
+            <img src="img/inicio/logo-principal.png" alt="Valento" class="loader-logo">
+            <div class="loader-ring"></div>
+            <span class="loader-tag">Semplicemente Valento</span>
+        </div>
+    </div>
+
+    <!-- ===== SEARCH MODEL ===== -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Buscar uniforme, polo, talla…">
+            </form>
+        </div>
+    </div>
+
+    <!-- Topbar Begin -->
+    <div class="vl-topbar">
+        <div class="vl-topbar__inner">
+            <ul class="vl-topbar__info">
+                <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+51964381275">+51 964 381 275</a></li>
+                <li class="vl-topbar__mail"><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:ventas@rossety.pe">ventas@rossety.pe</a></li>
+                <li class="vl-topbar__hours"><i class="fa fa-clock-o" aria-hidden="true"></i>Lun – Sáb: 9:00 – 18:00</li>
+            </ul>
+            <div class="vl-topbar__right">
+                <span class="vl-topbar__label">Síguenos</span>
+                <ul class="vl-topbar__social">
+                    <li><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa fa-music" aria-hidden="true"></i></a></li>
+                    <li><a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                </ul>
+                <a class="vl-topbar__cta" href="https://wa.me/51964381275" target="_blank" rel="noopener"><i class="fa fa-whatsapp" aria-hidden="true"></i><span>Cotiza por WhatsApp</span></a>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Header Section Begin -->
+    <header class="lv-header" id="lv-header">
+        <div class="lv-header__inner">
+            <a href="index.html" class="lv-header__logo" aria-label="Valento - Inicio">
+                <img src="img/inicio/logo-principal.png" alt="Valento — Semplicemente Valento">
+                
+            </a>
+
+            <nav class="lv-header__nav" id="lv-main-nav" aria-label="Navegación principal">
+                <ul class="lv-header__nav-list">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li class="has-sub">
+                        <a class="active" aria-current="page" href="categories.html">Tienda</a>
+                        <ul class="lv-sub-menu">
+                            <li><a href="shop-detail.html">Productos</a></li>
+                            <li><a href="shopping-cart.html">Carrito</a></li>
+                            <li><a href="check-out.html">Pagar</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html">Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                    <li class="lv-nav-access"><a href="login.html">Registrarse</a> / <a href="login.html" class="in">Iniciar sesión</a></li>
+                </ul>
+            </nav>
+
+            <div class="lv-header__access">
+                <a href="login.html">Registrarse</a><span>/</span><a href="login.html" class="in">Iniciar sesión</a>
+            </div>
+
+            <div class="lv-header__icons">
+                <button type="button" class="lv-icon-btn lv-search-trigger" aria-label="Buscar">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </button>
+                <a href="login.html" class="lv-icon-btn lv-account-btn" aria-label="Mi cuenta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </a>
+                <a href="#" class="lv-cart-link" id="lv-cart-icon" aria-label="Carrito de compras">
+                    <span class="lv-cart-badge" id="lv-cart-count" style="display:none;">0</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                </a>
+                <button type="button" class="lv-burger" id="lv-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="lv-main-nav">
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Info Begin -->
+    <div class="lv-header-info">
+        <div class="lv-header-info__inner">
+            <div class="lv-header-info__item">
+                <img src="img/icons/delivery.png" alt="">
+                <p>Venta mayorista para profesionales</p>
+            </div>
+            <div class="lv-header-info__item">
+                <img src="img/icons/voucher.png" alt="">
+                <p>Stock permanente y despacho ágil</p>
+            </div>
+            <div class="lv-header-info__item">
+                <img src="img/icons/sales.png" alt="">
+                <p>Personaliza con el logo de tu empresa</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header Info End -->
+    <!-- Header End -->
+
+    <!-- ===== STICKY BAR ===== -->
+    <div class="lv-sticky-bar" id="lv-sticky-bar">
+        <div class="lv-sticky-bar__inner">
+            <a href="index.html" class="lv-sticky-bar__logo" aria-label="Valento"><img src="img/inicio/logo-principal.png" alt="Valento"></a>
+            <nav class="lv-sticky-bar__nav">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="categories.html">Tienda</a></li>
+                    <li><a href="about.html">Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="lv-sticky-bar__icons">
+                <a href="login.html" class="lv-icon-btn lv-account-btn" aria-label="Mi cuenta">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </a>
+                <a href="#" class="lv-cart-link" id="lv-cart-icon-sticky" aria-label="Carrito de compras">
+                    <span class="lv-cart-badge lv-cart-badge-sticky" id="lv-cart-count-sticky" style="display:none;">0</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <main class="sc-page">
+        <div class="container">
+
+            <h1 class="sc-page__title">Mi Carrito</h1>
+
+            <div class="sc-layout">
+
+                <!--   Columna principal: tabla   -->
+                <div class="sc-layout__main">
+
+                    <!-- Estado vacío -->
+                    <div id="sc-empty" class="sc-empty" style="display:none;">
+                        <i class="fa fa-shopping-bag"></i>
+                        Tu carrito está vacío.<br>
+                        <a href="categories.html" style="color:#8C6B2E;font-weight:700;margin-top:12px;display:inline-block;">
+                            Volver a la tienda &rarr;
+                        </a>
+                    </div>
+
+                    <!-- Tabla de productos -->
+                    <div id="sc-table-wrap">
+                        <table class="sc-table" id="sc-table">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th class="th-price">Precio</th>
+                                    <th class="th-qty">Cantidad</th>
+                                    <th class="th-total">Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="sc-tbody">
+                                <!-- JS renderiza aquí -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <!-- fin columna principal -->
+
+                <!--   Columna lateral: resumen   -->
+                <div class="sc-layout__aside">
+                    <div class="sc-aside-card">
+
+                        <!-- Cupón -->
+                        <button class="sc-coupon-btn" id="sc-coupon-btn">
+                            Añadir cupón de descuento
+                        </button>
+                        <div class="sc-coupon-wrap" id="sc-coupon-wrap">
+                            <input type="text" class="sc-coupon-input" placeholder="Código de cupón">
+                            <button class="sc-coupon-apply">Aplicar</button>
+                        </div>
+
+                        <hr class="sc-aside-divider">
+
+                        <p class="sc-summary-title">Resumen de su compra</p>
+
+                        <div class="sc-summary-row">
+                            <span class="label">Subtotal</span>
+                            <span class="value" id="sc-subtotal">S/ 0.00</span>
+                        </div>
+                        <div class="sc-summary-row total-row">
+                            <span class="label">Total</span>
+                            <span class="value" id="sc-total">S/ 0.00</span>
+                        </div>
+
+                        <p class="sc-important-note">
+                            <strong>IMPORTANTE:</strong> Asegúrese que su carrito incluye
+                            TERNO + CAMISA + CORBATA en la promoción de ARMA TU PACK
+                        </p>
+
+                        <a href="check-out.html" class="sc-continue-btn">Continuar</a>
+
+                        <a href="categories.html" class="sc-keep-shopping">
+                            <i class="fa fa-share"></i> Seguir comprando
+                        </a>
+
+                    </div>
+                </div>
+                <!-- fin columna lateral -->
+
+            </div>
+            <!-- fin sc-layout -->
+
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <!-- FOOTER -->
+    <footer class="vf" aria-label="Pie de página Valento">
+
+        <!-- Línea dorada superior con monograma -->
+        <div class="vf-rule" aria-hidden="true"><span class="vf-rule__mark">V</span></div>
+
+        <div class="vf-wrap">
+
+            <!-- Marca centrada -->
+            <div class="vf-brand">
+                <a href="index.html" class="vf-brand__logo"><img src="img/inicio/logo-principal.png" alt="Valento"></a>
+                <p class="vf-brand__desc">Ropa laboral, textil promocional y vestuario deportivo para empresas y colectividades. Stock permanente y prendas listas para personalizar.</p>
+                <ul class="vf-social" aria-label="Redes sociales">
+                    <li><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg></a></li>
+                    <li><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V10H6.5v3.5H9V21h3.5v-7.5H15l.5-3.5h-3V7a1 1 0 0 1 1-1H15z"/></svg></a></li>
+                    <li><a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.2 4.4 5 4.7"/></svg></a></li>
+                    <li><a href="https://wa.me/51964381275" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M4 20l1.2-4A8 8 0 1 1 8 18.8z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2z"/></svg></a></li>
+                    <li><a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.5 9.5v5l4-2.5z"/></svg></a></li>
+                </ul>
+            </div>
+
+            <!-- Columnas con divisores verticales -->
+            <div class="vf-grid">
+
+                <nav class="vf-col" aria-label="Tienda">
+                    <h5 class="vf-col__title"><span>01</span>Tienda</h5>
+                    <ul class="vf-links">
+                        <li><a href="categories.html">Ropa laboral</a></li>
+                        <li><a href="categories.html">Textil promocional</a></li>
+                        <li><a href="categories.html">Vestuario deportivo</a></li>
+                        <li><a href="categories.html">Protección personal</a></li>
+                        <li><a href="categories.html">Uniformes</a></li>
+                        <li><a href="shop-detail.html">Guía de tallas</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="vf-col" aria-label="Legales">
+                    <h5 class="vf-col__title"><span>02</span>Legales</h5>
+                    <ul class="vf-links">
+                        <li><a href="terminos.html">Términos y condiciones</a></li>
+                        <li><a href="privacidad.html">Políticas de privacidad</a></li>
+                        <li><a href="reclamaciones.html">Libro de reclamaciones</a></li>
+                    </ul>
+                    <a href="reclamaciones.html" class="vf-libro">
+                        <img src="img/icons/libro-reclamaciones.png" alt="" width="40" height="15">
+                        <span>Libro de<br>Reclamaciones</span>
+                    </a>
+                </nav>
+
+                <div class="vf-col">
+                    <h5 class="vf-col__title"><span>03</span>Contacto</h5>
+                    <ul class="vf-contact">
+                        <li>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.2-4A8 8 0 1 1 8 18.8z"/></svg>
+                            <a href="https://wa.me/51964381275" target="_blank" rel="noopener">+51 964 381 275</a>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6l8.5 7 8.5-7"/></svg>
+                            <a href="mailto:ventas@rossety.pe">ventas@rossety.pe</a>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>
+                            <span>La Victoria, Lima</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="vf-col">
+                    <h5 class="vf-col__title"><span>04</span>Horarios</h5>
+                    <dl class="vf-hours">
+                        <div><dt>Lunes — Viernes</dt><dd>8:30 am – 6:30 pm</dd></div>
+                        <div><dt>Sábado</dt><dd>9:00 am – 1:00 pm</dd></div>
+                        <div><dt>Domingo</dt><dd class="is-closed">Cerrado</dd></div>
+                    </dl>
+                </div>
+
+            </div>
+
+            <!-- Separador V + barra inferior -->
+            <div class="vf-bottom">
+                <div class="vf-sep" aria-hidden="true">
+                    <span class="vf-sep__line"></span>
+                    <svg class="vf-sep__v" viewBox="0 0 40 24"><path d="M4 2l16 20L36 2"/><path d="M11 2l9 11"/></svg>
+                    <span class="vf-sep__line"></span>
+                </div>
+                <div class="vf-bottom__row">
+                    <p class="vf-copy">&copy; <span class="vf-year">2026</span> <strong>Valento</strong>. Todos los derechos reservados.</p>
+                    <div class="vf-pay" aria-label="Métodos de pago">
+                        <span>Visa</span><span>Mastercard</span><span>Yape</span><span>Plin</span><span>BCP</span>
+                    </div>
+                    <p class="vf-bottom__tag">Semplicemente Valento <span>·</span> Zaragoza 1994</p>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+        (function () {
+            var y = document.querySelector('.vf-year');
+            if (y) y.textContent = new Date().getFullYear();
+        })();
+        </script>
+    </footer>
+    <!-- Footer Section End -->
+    
+    
+
+    <!-- ===== SCROLL TO TOP ===== -->
+    <button type="button" class="lv-scrolltop" id="lv-scrolltop" aria-label="Volver arriba">
+        <svg class="lv-scrolltop__ring" viewBox="0 0 48 48" aria-hidden="true">
+            <circle class="lv-scrolltop__track" cx="24" cy="24" r="21" pathLength="100"/>
+            <circle class="lv-scrolltop__bar" cx="24" cy="24" r="21" pathLength="100"/>
+        </svg>
+        <span class="lv-scrolltop__pct" aria-hidden="true">0%</span>
+        <i class="fa fa-arrow-up lv-scrolltop__arrow" aria-hidden="true"></i>
+    </button>
+
+    <!-- ===== CART OVERLAY + SIDEBAR ===== -->
+    <div class="lv-cart-overlay" id="lv-cart-overlay"></div>
+    <div class="lv-cart-sidebar" id="lv-cart-sidebar">
+        <div class="lv-cart-sidebar__head">
+            <i class="fa fa-shopping-bag"></i>
+            <h3>Carrito</h3>
+            <button class="lv-cart-sidebar__close" id="lv-cart-close">&times;</button>
+        </div>
+        <div class="lv-cart-sidebar__body" id="lv-cart-body">
+            <div class="lv-cart-empty">
+                <i class="fa fa-shopping-bag"></i>
+                <span>Tu carrito está vacío</span>
+            </div>
+        </div>
+        <div class="lv-cart-sidebar__foot" id="lv-cart-foot" style="display:none;">
+            <div class="lv-cart-subtotal-row">
+                <span class="lv-subtotal-label">Subtotal</span>
+                <span class="lv-subtotal-value" id="lv-cart-subtotal">S/ 0.00</span>
+            </div>
+            <a href="shopping-cart.html" class="lv-cart-btn-primary">Ir Al Carrito</a>
+        </div>
+    </div>
+
+    <!-- ===== WHATSAPP ===== -->
+    <div class="lv-wa-wrap">
+        <span class="lv-wa-pulse lv-wa-pulse--1"></span>
+        <span class="lv-wa-pulse lv-wa-pulse--2"></span>
+        <div class="lv-wa-bubble">
+            <button class="lv-wa-close-btn" aria-label="Cerrar">&times;</button>
+            <div class="lv-wa-bubble-header">
+                <div class="lv-wa-bubble-avatar"><i class="fa fa-whatsapp"></i></div>
+                <div><strong>Valento</strong><span><i class="lv-wa-dot"></i> En línea ahora</span></div>
+            </div>
+            <div class="lv-wa-bubble-msg"><p> Hola! ðŸ‘‹  En qué podemos ayudarte?</p></div>
+            <a href="https://wa.me/51964381275" target="_blank" rel="noopener" class="lv-wa-bubble-btn">Iniciar conversación <i class="fa fa-arrow-right"></i></a>
+        </div>
+        <a href="https://wa.me/51964381275" target="_blank" rel="noopener" class="lv-wa-btn" aria-label="WhatsApp">
+            <i class="fa fa-whatsapp lv-wa-icon"></i>
+            <span class="lv-wa-label">WhatsApp</span>
+        </a>
+    </div>
+
+    <!-- ===== JS ===== -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/shopping-cart.js"></script>
+
+    <!-- Scroll to Top -->
+    <script src="js/scrolltop.js"></script>
+
+    <!-- Sticky bar scroll -->
+    <script>
+    (function() {
+        var stickyBar = document.getElementById('lv-sticky-bar');
+        function onScroll() {
+            if (window.scrollY > 120) {
+                document.body.classList.add('body-scrolled');
+                if (stickyBar) stickyBar.classList.add('visible');
+            } else {
+                document.body.classList.remove('body-scrolled');
+                if (stickyBar) stickyBar.classList.remove('visible');
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    })();
+    </script>
+
+</body>
+</html>
+
+
+
+
+
